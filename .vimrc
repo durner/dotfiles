@@ -81,7 +81,7 @@ let g:syntastic_cpp_check_header = 1
 let g:syntastic_enable_signs = 1
 let g:syntastic_cpp_auto_refresh_includes = 1
 let g:syntastic_cpp_config_file = '.syntastic'
-let g:syntastic_quiet_messages={'level':'warnings'}
+let g:syntastic_quiet_messages={'regex': ['\mpossible unwanted space at "{"'], 'level':'warnings'}
 let g:syntastic_enable_highlighting = 0
 
 function! ToggleHighlight()
@@ -122,7 +122,7 @@ vnoremap p "_dP
 " normal copy/paste
 vmap <C-c> "+yi
 vmap <C-x> "+c
-vmap <C-v> c<ESC>"+p
+vmap <C-v> "_dP
 imap <C-v> <C-r><C-o>+
 
 " seach and delete results
@@ -138,6 +138,9 @@ vnoremap // y/<C-R>"<CR>
 "map <silent> <F4> g<C-]>
 
 "GENERAL
+
+inoremap jk <Esc>
+
 " Automatic syntax highlight "
 syntax on
 set enc=utf-8 " Set UTF-8 encoding
@@ -178,6 +181,7 @@ set smartcase
 
 " Highlight column 101 to help keep lines of code 100 characters or less "
 set colorcolumn=121
+autocmd Filetype csv,tex,txt set colorcolumn=0
 
 set nocompatible  " Disable vi compatibility (emulation of old bugs)
 set noequalalways " Do not maintain window-size ratio (when having multiple window splits I don't find it desirable)
