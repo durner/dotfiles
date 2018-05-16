@@ -1,5 +1,5 @@
 " Vim colorscheme
-" Author:  Gary Willoughby 
+" Author:  Gary Willoughby
 " Version: 1.3
 " Date:    24th September 2012
 
@@ -8,7 +8,7 @@ hi clear
 if exists("syntax_on")
     syntax reset
 endif
-let colors_name = "EditPlus"
+let colors_name = "editplus"
 
 " GUI
 hi Blank                           guibg=white   guifg=white   gui=none

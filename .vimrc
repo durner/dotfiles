@@ -62,9 +62,9 @@ set hlsearch
 set ignorecase
 set smartcase
 
-" Highlight column 101 to help keep lines of code 100 characters or less "
-set colorcolumn=121
-autocmd Filetype csv,tex,txt set colorcolumn=0
+" Highlight column 121 to help keep lines of code 121 characters or less "
+set colorcolumn=0
+autocmd Filetype java,python,c,cpp set colorcolumn=121
 
 set nocompatible  " Disable vi compatibility (emulation of old bugs)
 set noequalalways " Do not maintain window-size ratio (when having multiple window splits I don't find it desirable)
@@ -79,8 +79,8 @@ set t_Co=256
 
 " Colorsheme
 " colorscheme molokai
-"colorscheme editplus
-colorscheme summerfruit256
+colorscheme editplus
+"colorscheme summerfruit256
 hi CursorLine cterm=none
 hi CursorLine gui=none
 " set background=light
@@ -96,21 +96,24 @@ if has('unnamedplus')
 endif
 
 if has('gui')
+  set guioptions-=m  "menu bar
+  set guioptions-=T  "toolbar
+  set guioptions-=r  "scrollbar
+  set guioptions-=L  "scrollbar
   set guifont=DejaVuSansMonoNerdFont\ 12
 endif
 
 set mouse=a
 
 "YouCompleteMe
-let g:ycm_global_ycm_extra_conf = "~/.vim/config/.ycm_extra_conf.py"
 set completeopt-=preview
-let g:ycm_collect_identifiers_from_tags_files = 1
 let g:ycm_add_preview_to_completeopt = 0
+let g:ycm_global_ycm_extra_conf = "~/.vim/config/.ycm_extra_conf.py"
 let g:ycm_confirm_extra_conf = 0
 let g:ycm_enable_diagnostic_signs = 1
 let g:ycm_enable_diagnostic_highlighting = 0
-let g:ycm_always_populate_location_list = 0 "default 0
 let g:ycm_auto_trigger = 0
+let g:ycm_autoclose_preview_window_after_insertion=1
 map <F3> :YcmCompleter GoTo<CR>
 imap <F3> <C-\><C-O>:YcmCompleter GoTo<CR>
 
@@ -123,7 +126,8 @@ imap <F4> <C-\><C-O>:FSHere<CR>
 map <F8> :TagbarToggle<CR>
 imap <F8> <C-\><C-O>:TagbarToggle<CR>
 let g:tagbar_indent = 1
-autocmd BufEnter * nested :call tagbar#autoopen(0)
+autocmd FileType c,cpp nested :TagbarOpen
+"autocmd BufEnter * nested :call tagbar#autoopen(0)
 
 "spellcheck
 map <F2> :setlocal spell! spelllang=en_us<CR>
@@ -134,7 +138,7 @@ imap <F2> <C-\><C-O>:setlocal spell! spelllang=en_us<CR>
 set laststatus=2
 let g:airline#extensions#tabline#enabled = 1
 let g:airline#extensions#tagbar#enabled = 1
-let g:airline_theme='light'
+let g:airline_theme='luna'
 let g:airline_powerline_fonts = 1
 set fillchars+=stl:\ ,stlnc:\
 
@@ -142,10 +146,7 @@ set fillchars+=stl:\ ,stlnc:\
 map <F7> :NERDTreeToggle<CR>
 imap <F7> <C-\><C-O>:NERDTreeToggle<CR>
 let g:NERDTreeShowHidden = 1
-let g:nerdtree_tabs_open_on_console_startup = 1
-let NERDTreeQuitOnOpen= 0
-let NERDTreeMinimalUI = 1
-let NERDTreeDirArrows = 1
+let NERDTreeQuitOnOpen= 1
 
 "Autoformater
 map <silent> <F12> mzgg=G`z<CR>
