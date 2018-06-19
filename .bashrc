@@ -71,7 +71,7 @@ alias l='ls -CF'
 
 source /usr/share/bash-completion/bash_completion
 source ~/.git_completion.bash
-source ~/.shell_prompt.sh
+source ~/.shell_prompt_nord.sh
 
 alias open="xdg-open 2>/dev/null"
 alias [="open"

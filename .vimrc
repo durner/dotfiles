@@ -9,7 +9,7 @@ Plug 'ctrlpvim/ctrlp.vim'                   " fuzzy file finder
 Plug 'majutsushi/tagbar'                    " tagbar
 Plug 'tpope/vim-fugitive'                   " git support
 Plug 'vim-airline/vim-airline'              " fancy statusline
-Plug 'godlygeek/csapprox'                   " approximate gvim plugin
+"Plug 'godlygeek/csapprox'                   " approximate gvim plugin (only for editplus)
 Plug 'lervag/vimtex'                        " latex support
 Plug 'edkolev/promptline.vim'
 Plug 'bronson/vim-trailing-whitespace'
@@ -18,6 +18,9 @@ Plug 'octol/vim-cpp-enhanced-highlight'
 Plug 'vim-airline/vim-airline-themes'
 Plug 'lervag/vimtex'
 Plug 'jalvesaq/Nvim-R'
+
+"colors
+Plug 'arcticicestudio/nord-vim'
 
 call plug#end()
 
@@ -78,8 +81,12 @@ set backspace=indent,eol,start
 set t_Co=256
 
 " Colorsheme
-" colorscheme molokai
-colorscheme editplus
+set termguicolors
+let g:nord_comment_brightness = 12
+let g:nord_italic = 1
+let g:nord_italic_comments = 1
+colorscheme nord
+"colorscheme editplus
 "colorscheme summerfruit256
 hi CursorLine cterm=none
 hi CursorLine gui=none
@@ -132,6 +139,7 @@ autocmd FileType c,cpp nested :TagbarOpen
 "spellcheck
 map <F2> :setlocal spell! spelllang=en_us<CR>
 imap <F2> <C-\><C-O>:setlocal spell! spelllang=en_us<CR>
+hi SpellBad ctermfg=red guifg=red
 
 
 "AIRLINE
