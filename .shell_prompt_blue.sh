@@ -85,6 +85,9 @@ function __promptline_cwd {
   while [[ "$cwd" == */* && "$cwd" != "/" ]]; do
     # pop off last part of cwd
     local part="${cwd##*/}"
+    if [ ${#part} -ge 20 ]; then
+      part="${part:0:17}⋯"
+    fi
     cwd="${cwd%/*}"
 
     formatted_cwd="$dir_sep$part$formatted_cwd"

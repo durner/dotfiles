@@ -66,7 +66,7 @@ function __promptline_vcs_branch {
   return 1
 }
 function __promptline_cwd {
-  local dir_limit="3"
+  local dir_limit="2"
   local truncation="⋯"
   local first_char
   local part_count=0
@@ -85,8 +85,10 @@ function __promptline_cwd {
   while [[ "$cwd" == */* && "$cwd" != "/" ]]; do
     # pop off last part of cwd
     local part="${cwd##*/}"
+    if [ ${#part} -ge 20 ]; then
+      part="${part:0:17}⋯"
+    fi
     cwd="${cwd%/*}"
-
     formatted_cwd="$dir_sep$part$formatted_cwd"
     part_count=$((part_count+1))
 
