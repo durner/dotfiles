@@ -81,10 +81,10 @@ set backspace=indent,eol,start
 set t_Co=256
 
 " Colorsheme
-set termguicolors
-let g:nord_comment_brightness = 12
-let g:nord_italic = 1
-let g:nord_italic_comments = 1
+augroup nord-overrides
+  autocmd!
+  autocmd ColorScheme nord highlight Comment ctermfg=13 guifg='#EBCB8B'
+augroup END
 colorscheme nord
 "colorscheme editplus
 "colorscheme summerfruit256
@@ -146,7 +146,7 @@ hi SpellBad ctermfg=red guifg=red
 set laststatus=2
 let g:airline#extensions#tabline#enabled = 1
 let g:airline#extensions#tagbar#enabled = 1
-let g:airline_theme='luna'
+let g:airline_theme='nord'
 let g:airline_powerline_fonts = 1
 set fillchars+=stl:\ ,stlnc:\
 
