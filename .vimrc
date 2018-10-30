@@ -5,7 +5,8 @@ Plug 'valloric/youcompleteme'               " autocompletion
 Plug 'rdnetto/ycm-generator', { 'branch': 'stable'} " ycm generator
 Plug 'scrooloose/nerdtree'
 Plug 'ryanoasis/vim-devicons'
-Plug 'ctrlpvim/ctrlp.vim'                   " fuzzy file finder
+Plug '~/.fzf'
+Plug 'junegunn/fzf.vim'
 Plug 'majutsushi/tagbar'                    " tagbar
 Plug 'tpope/vim-fugitive'                   " git support
 Plug 'vim-airline/vim-airline'              " fancy statusline
@@ -148,16 +149,7 @@ nnoremap <leader>gy :YcmCompleter GetType<CR>
 map <F4> :FSHere<CR>
 imap <F4> <C-\><C-O>:FSHere<CR>
 
-"CTRLP
 set wildignore+=*/tmp/*,*.so,*.swp,*.zip     " MacOSX/Linux
-
-let g:ctrlp_custom_ignore = '\v[\/]\.(git|hg|svn)$'
-let g:ctrlp_custom_ignore = {
-  \ 'dir':  '\v[\/](bin|\.git|\.hg|\.svn)$',
-  \ 'file': '\v\.(exe|so|dll|o|d)$',
-  \ 'link': 'some_bad_symbolic_links',
-  \ }
-
 
 "TAGBAR
 map <F8> :TagbarToggle<CR>
@@ -242,3 +234,6 @@ nnoremap <leader>lh i//<ESC>75a-<ESC>i<CR> Umbra<CR> (c) 2018 Dominik Durner<CR>
 
 "RTags
 autocmd Filetype c,cpp silent! execute "!rc -w $(pwd) >/dev/null 2>&1" | redraw!
+
+"fzf
+nnoremap <C-P> :Files<CR>
