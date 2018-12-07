@@ -1,44 +1,41 @@
 call plug#begin('~/.vim/plugged')
 
-Plug 'embear/vim-localvimrc'                " local vim configurations
-Plug 'valloric/youcompleteme'               " autocompletion
-Plug 'rdnetto/ycm-generator', { 'branch': 'stable'} " ycm generator
+Plug 'embear/vim-localvimrc'
 Plug 'scrooloose/nerdtree'
 Plug 'ryanoasis/vim-devicons'
-Plug '~/.fzf'
+Plug '~/.repos/fzf'
 Plug 'junegunn/fzf.vim'
-Plug 'majutsushi/tagbar'                    " tagbar
-Plug 'tpope/vim-fugitive'                   " git support
-Plug 'vim-airline/vim-airline'              " fancy statusline
-Plug 'lervag/vimtex'                        " latex support
+Plug 'majutsushi/tagbar'
+Plug 'tpope/vim-fugitive'
+Plug 'vim-airline/vim-airline'
+Plug 'lervag/vimtex'
 Plug 'edkolev/promptline.vim'
 Plug 'bronson/vim-trailing-whitespace'
 Plug 'derekwyatt/vim-fswitch'
 Plug 'octol/vim-cpp-enhanced-highlight'
 Plug 'vim-airline/vim-airline-themes'
 Plug 'jalvesaq/Nvim-R'
-Plug 'lyuts/vim-rtags'
+"Language Server
+Plug 'Shougo/deoplete.nvim'
+Plug 'roxma/nvim-yarp'
+Plug 'roxma/vim-hug-neovim-rpc'
+Plug 'autozimu/LanguageClient-neovim', { 'branch': 'next', 'do': 'bash install.sh' }
 
 "nord-template colors
-Plug 'arcticicestudio/nord-vim'
-
+"Plug 'arcticicestudio/nord-vim'
 "editplus
-"Plug 'godlygeek/csapprox'                   " approximate gvim plugin (editplus)
-
+Plug 'godlygeek/csapprox'
 
 call plug#end()
 " Colorsheme
-augroup nord-overrides
-    autocmd!
-    autocmd ColorScheme nord highlight Comment ctermfg=13 guifg='#EBCB8B'
-augroup END
-"colorscheme editplus
-colorscheme nord
-"colorscheme summerfruit256
-"hi CursorLine cterm=none
-"hi CursorLine gui=none
-"set background=light
-
+"augroup nord-overrides
+"    autocmd!
+"    autocmd ColorScheme nord highlight Comment ctermfg=13 guifg='#EBCB8B'
+"augroup END
+set t_Co=256
+set background=light
+"colorscheme nord
+colorscheme editplus
 
 " Learn it the hard way
 " noremap <Up> <NOP>
@@ -53,7 +50,7 @@ let g:mapleader = ','
 " Automatic syntax highlight "
 syntax on
 set encoding=utf8
-set enc=utf-8 " Set UTF-8 encoding
+set enc=utf-8
 "set termencoding=utf-8
 "let g:cpp_class_scope_highlight = 1
 
@@ -90,21 +87,16 @@ set hlsearch
 " search case insensitive if term is all lowercase "
 set ignorecase
 set smartcase
-
-" Highlight column 121 to help keep lines of code 121 characters or less "
 set colorcolumn=0
-"autocmd Filetypedd java,python,c,cpp set colorcolumn=121
 
-set nocompatible  " Disable vi compatibility (emulation of old bugs)
-set noequalalways " Do not maintain window-size ratio (when having multiple window splits I don't find it desirable)
-set showmatch " highlight matching braces
-set wildmode=longest:full " Use intelligent file completion like in the bash
+set nocompatible
+set noequalalways
+set showmatch
+set wildmode=longest:full
 set wildmenu
-set hidden " Allow changing buffers without saving them
-" set cul " Highlight the current line
-set backspace=2 " Backspace tweaks
+set hidden
+set backspace=2
 set backspace=indent,eol,start
-set t_Co=256
 
 " Enable .vimrc files per project "
 set exrc
@@ -126,37 +118,57 @@ endif
 
 set mouse=a
 
-"YouCompleteMe
-set completeopt-=preview
-let g:ycm_add_preview_to_completeopt = 0
-let g:ycm_global_ycm_extra_conf = "~/.vim/config/.ycm_extra_conf.py"
-let g:ycm_confirm_extra_conf = 0
-let g:ycm_enable_diagnostic_signs = 1
-let g:ycm_enable_diagnostic_highlighting = 0
-let g:ycm_auto_trigger = 1
-let g:ycm_min_num_of_chars_for_completion = 99
-let g:ycm_autoclose_preview_window_after_insertion=1
-map <F3> :YcmCompleter GoTo<CR>
-imap <F3> <C-\><C-O>:YcmCompleter GoTo<CR>
-nnoremap <leader>gh :YcmCompleter GoToInclude<CR>
-nnoremap <leader>gc :YcmCompleter GoToDeclaration<CR>
-nnoremap <leader>gf :YcmCompleter GoToDefinition<CR>
-nnoremap <leader>gt :YcmCompleter GoTo<CR>
-nnoremap <leader>gi :YcmCompleter GoToImprecise<CR>
-nnoremap <leader>gy :YcmCompleter GetType<CR>
+" LanguageClient
+let g:LanguageClient_serverCommands = {
+    \   'python': ['pyls'],
+    \   'cpp': [
+    \       '~/.local/bin/ccls',
+    \       '--log-file=/tmp/ccls.log',
+    \       '--init={"cacheDirectory":"/tmp/ccls"}'
+    \   ],
+    \   'c': [
+    \       '~/.local/bin/ccls',
+    \       '--log-file=/tmp/ccls.log',
+    \       '--init={"cacheDirectory":"/tmp/ccls"}'
+    \   ]
+    \ }
+set formatexpr=LanguageClient_textDocument_rangeFormatting()
+nnoremap <leader>ry :call LanguageClient#textDocument_hover()<CR>
+nnoremap <leader>rJ :call LanguageClient#textDocument_implementation()<CR>
+nnoremap <leader>rj :call LanguageClient#textDocument_definition()<CR>
+nnoremap <leader>rf :call LanguageClient#textDocument_references()<CR>
+nnoremap <leader>rp :call LanguageClient#textDocument_documentSymbol()<CR>
+map <F3> :call LanguageClient#textDocument_definition()<CR>
+imap <F3> <C-\><C-O>:call LanguageClient#textDocument_definition()<CR>
+nnoremap <leader>rn :call LanguageClient#textDocument_rename()<CR>
+nnoremap <leader>rv :call LanguageClient#findLocations({'method':'$ccls/inheritance','flat':v:true,'level':3,'derived':v:true})<cr>
+nnoremap <leader>rh :call LanguageClient#findLocations({'method':'$ccls/call'})<cr>
+
+
+" Deoplete
+let g:deoplete#enable_at_startup = 1
+call deoplete#custom#source('_', 'matchers', ['matcher_full_fuzzy'])
+call deoplete#custom#option({ 'ignore_case': v:true })
+function! s:check_back_space() abort "{{{
+    let col = col('.') - 1
+    return !col || getline('.')[col - 1]  =~ '\s'
+endfunction"}}}
+inoremap <silent><expr> <TAB>
+        \ pumvisible() ? "\<C-n>" :
+        \ <SID>check_back_space() ? "\<TAB>" :
+        \ deoplete#manual_complete()
 
 "FSHere
 map <F4> :FSHere<CR>
 imap <F4> <C-\><C-O>:FSHere<CR>
 
-set wildignore+=*/tmp/*,*.so,*.swp,*.zip     " MacOSX/Linux
+set wildignore+=*/tmp/*,*.so,*.swp,*.zip
 
 "TAGBAR
 map <F8> :TagbarToggle<CR>
 imap <F8> <C-\><C-O>:TagbarToggle<CR>
 let g:tagbar_indent = 1
-autocmd FileType c,cpp nested :TagbarOpen
-"autocmd BufEnter * nested :call tagbar#autoopen(0)
+"autocmd FileType c,cpp nested :TagbarOpen
 
 "spellcheck
 map <F2> :setlocal spell! spelllang=en_us<CR>
@@ -167,7 +179,7 @@ hi SpellBad ctermfg=red guifg=red
 set laststatus=2
 let g:airline#extensions#tabline#enabled = 1
 let g:airline#extensions#tagbar#enabled = 1
-let g:airline_theme='nord'
+let g:airline_theme='papercolor'
 let g:airline_powerline_fonts = 1
 set fillchars+=stl:\ ,stlnc:\
 
@@ -179,12 +191,9 @@ let NERDTreeQuitOnOpen= 1
 
 "Autoformater
 map <silent> <F12> mzgg=G`z<CR>
-autocmd Filetype c,cpp map <silent> <F12> :%!clang-format-6.0 -style=file<CR>
+autocmd Filetype c,cpp map <silent> <F12> :%!clang-format -style=file<CR>
 imap <silent> <F12> <C-\><C-O>mzgg=G`z<CR>
-autocmd Filetype c,cpp imap <silent> <F12> <C-\><C-O>:%!clang-format-6.0 -style=file<CR>
-
-" F2 toggles paste mode one and off "
-" set pastetoggle=<F2>
+autocmd Filetype c,cpp imap <silent> <F12> <C-\><C-O>:%!clang-format -style=file<CR>
 
 "Buffer & Windows Mgmt
 map <silent> <A-Left> :bp!<CR>
@@ -199,7 +208,6 @@ nnoremap <C-J> <C-W><C-J>
 nnoremap <C-K> <C-W><C-K>
 nnoremap <C-L> <C-W><C-L>
 nnoremap <C-H> <C-W><C-H>
-
 
 "location list
 nnoremap <leader>ln :lne<CR>
@@ -220,13 +228,6 @@ map <silent> <F9> :noh<CR>
 imap <silent> <F9> <C-\><C-O>:noh<CR>
 vnoremap // y/<C-R>"<CR>
 
-"CTags
-"set tags=./tags;/
-"set tags+=./TAGS;/
-"imap <silent> <F4> <C-\><C-O>g<C-]>
-"vmap <silent> <F4> g<C-]>
-"map <silent> <F4> g<C-]>
-
 "GENERAL
 inoremap jk <Esc>
 nnoremap <leader>lb i//<ESC>75a-<ESC><CR>
@@ -235,5 +236,23 @@ nnoremap <leader>lh i//<ESC>75a-<ESC>i<CR> Umbra<CR> (c) 2018 Dominik Durner<CR>
 "RTags
 autocmd Filetype c,cpp silent! execute "!rc -w $(pwd) >/dev/null 2>&1" | redraw!
 
+"Large File Handling
+autocmd BufWinEnter * if line2byte(line("$") + 1) > 1000000 | syntax clear | endif
+
 "fzf
 nnoremap <C-P> :Files<CR>
+
+let g:fzf_colors =
+\ { 'fg':      ['fg', 'Normal'],
+  \ 'bg':      ['bg', 'Normal'],
+  \ 'hl':      ['fg', 'Comment'],
+  \ 'fg+':     ['fg', 'CursorLine', 'CursorColumn', 'Normal'],
+  \ 'bg+':     ['bg', 'CursorLine', 'CursorColumn'],
+  \ 'hl+':     ['fg', 'Statement'],
+  \ 'info':    ['fg', 'PreProc'],
+  \ 'border':  ['fg', 'Ignore'],
+  \ 'prompt':  ['fg', 'Conditional'],
+  \ 'pointer': ['fg', 'Exception'],
+  \ 'marker':  ['fg', 'Keyword'],
+  \ 'spinner': ['fg', 'Label'],
+  \ 'header':  ['fg', 'Comment'] }

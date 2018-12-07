@@ -69,21 +69,16 @@ alias ll='ls -alF'
 alias la='ls -A'
 alias l='ls -CF'
 
-source /usr/share/bash-completion/bash_completion
-source ~/.git_completion.bash
-source ~/.shell_prompt_nord.sh
+export PATH="/usr/lib/ccache/bin/:$PATH"
+export PATH=$PATH:~/.repos/fzf/bin
+source ~/.repos/fzf/shell/key-bindings.bash
+source ~/.repos/fzf/shell/completion.bash
+source ~/.shell_prompt.sh
 
 alias mj='nice make -j `getconf _NPROCESSORS_ONLN`'
+alias svim="sudo -E vim"
+export VISUAL="vim"
+export EDITOR="vim"
 alias open="xdg-open 2>/dev/null"
 alias [="open"
-alias svim="sudo -E vim"
-export VISUAL=vim
-export EDITOR="$VISUAL"
 
-export PATH="/usr/lib/ccache/bin/:$PATH"
-
-export PATH=$PATH:~/.fzf/bin
-
-# FZF
-source ~/.fzf/shell/key-bindings.bash
-source ~/.fzf/shell/completion.bash

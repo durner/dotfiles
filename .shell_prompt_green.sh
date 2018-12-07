@@ -4,7 +4,7 @@
 function __promptline_host {
   local only_if_ssh="0"
 
-  if [ $only_if_ssh -eq 0 -o -n "${SSH_CLIENT}" ]; then
+  if [ ! $only_if_ssh -o -n "${SSH_CLIENT}" ]; then
     if [[ -n ${ZSH_VERSION-} ]]; then print %m; elif [[ -n ${FISH_VERSION-} ]]; then hostname -s; else printf "%s" \\h; fi
   fi
 }
@@ -19,10 +19,10 @@ function __promptline_ps1 {
   local slice_prefix slice_empty_prefix slice_joiner slice_suffix is_prompt_empty=1
 
   # section "a" header
-  #slice_prefix="${a_bg}${sep}${a_fg}${a_bg}${space}" slice_suffix="$space${a_sep_fg}" slice_joiner="${a_fg}${a_bg}${alt_sep}${space}" slice_empty_prefix="${a_fg}${a_bg}${space}"
-  #[ $is_prompt_empty -eq 1 ] && slice_prefix="$slice_empty_prefix"
+  slice_prefix="${a_bg}${sep}${a_fg}${a_bg}${space}" slice_suffix="$space${a_sep_fg}" slice_joiner="${a_fg}${a_bg}${alt_sep}${space}" slice_empty_prefix="${a_fg}${a_bg}${space}"
+  [ $is_prompt_empty -eq 1 ] && slice_prefix="$slice_empty_prefix"
   # section "a" slices
-  #__promptline_wrapper "$(__promptline_host)" "$slice_prefix" "$slice_suffix" && { slice_prefix="$slice_joiner"; is_prompt_empty=0; }
+  __promptline_wrapper "$(__promptline_host)" "$slice_prefix" "$slice_suffix" && { slice_prefix="$slice_joiner"; is_prompt_empty=0; }
 
   # section "b" header
   slice_prefix="${b_bg}${sep}${b_fg}${b_bg}${space}" slice_suffix="$space${b_sep_fg}" slice_joiner="${b_fg}${b_bg}${alt_sep}${space}" slice_empty_prefix="${b_fg}${b_bg}${space}"
@@ -89,7 +89,6 @@ function __promptline_cwd {
       part="${part:0:17}⋯"
     fi
     cwd="${cwd%/*}"
-
     formatted_cwd="$dir_sep$part$formatted_cwd"
     part_count=$((part_count+1))
 
@@ -102,10 +101,10 @@ function __promptline_left_prompt {
   local slice_prefix slice_empty_prefix slice_joiner slice_suffix is_prompt_empty=1
 
   # section "a" header
-  #slice_prefix="${a_bg}${sep}${a_fg}${a_bg}${space}" slice_suffix="$space${a_sep_fg}" slice_joiner="${a_fg}${a_bg}${alt_sep}${space}" slice_empty_prefix="${a_fg}${a_bg}${space}"
-  #[ $is_prompt_empty -eq 1 ] && slice_prefix="$slice_empty_prefix"
+  slice_prefix="${a_bg}${sep}${a_fg}${a_bg}${space}" slice_suffix="$space${a_sep_fg}" slice_joiner="${a_fg}${a_bg}${alt_sep}${space}" slice_empty_prefix="${a_fg}${a_bg}${space}"
+  [ $is_prompt_empty -eq 1 ] && slice_prefix="$slice_empty_prefix"
   # section "a" slices
-  #__promptline_wrapper "$(__promptline_host)" "$slice_prefix" "$slice_suffix" && { slice_prefix="$slice_joiner"; is_prompt_empty=0; }
+  __promptline_wrapper "$(__promptline_host)" "$slice_prefix" "$slice_suffix" && { slice_prefix="$slice_joiner"; is_prompt_empty=0; }
 
   # section "b" header
   slice_prefix="${b_bg}${sep}${b_fg}${b_bg}${space}" slice_suffix="$space${b_sep_fg}" slice_joiner="${b_fg}${b_bg}${alt_sep}${space}" slice_empty_prefix="${b_fg}${b_bg}${space}"
@@ -164,21 +163,21 @@ function __promptline {
   local alt_rsep=""
   local reset="${wrap}0${end_wrap}"
   local reset_bg="${wrap}49${end_wrap}"
-  local a_fg="${wrap}38;5;220${end_wrap}"
-  local a_bg="${wrap}48;5;166${end_wrap}"
-  local a_sep_fg="${wrap}38;5;166${end_wrap}"
+  local a_fg="${wrap}38;5;222${end_wrap}"
+  local a_bg="${wrap}48;5;208${end_wrap}"
+  local a_sep_fg="${wrap}38;5;208${end_wrap}"
   local b_fg="${wrap}38;5;231${end_wrap}"
-  local b_bg="${wrap}48;5;31${end_wrap}"
-  local b_sep_fg="${wrap}38;5;31${end_wrap}"
+  local b_bg="${wrap}48;5;29${end_wrap}"
+  local b_sep_fg="${wrap}38;5;29${end_wrap}"
   local c_fg="${wrap}38;5;231${end_wrap}"
-  local c_bg="${wrap}48;5;25${end_wrap}"
-  local c_sep_fg="${wrap}38;5;25${end_wrap}"
+  local c_bg="${wrap}48;5;23${end_wrap}"
+  local c_sep_fg="${wrap}38;5;23${end_wrap}"
   local warn_fg="${wrap}38;5;231${end_wrap}"
-  local warn_bg="${wrap}48;5;52${end_wrap}"
-  local warn_sep_fg="${wrap}38;5;52${end_wrap}"
+  local warn_bg="${wrap}48;5;88${end_wrap}"
+  local warn_sep_fg="${wrap}38;5;88${end_wrap}"
   local y_fg="${wrap}38;5;231${end_wrap}"
-  local y_bg="${wrap}48;5;25${end_wrap}"
-  local y_sep_fg="${wrap}38;5;25${end_wrap}"
+  local y_bg="${wrap}48;5;29${end_wrap}"
+  local y_sep_fg="${wrap}38;5;29${end_wrap}"
   if [[ -n ${ZSH_VERSION-} ]]; then
     PROMPT="$(__promptline_left_prompt)"
     RPROMPT="$(__promptline_right_prompt)"
