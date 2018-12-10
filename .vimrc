@@ -15,6 +15,7 @@ Plug 'derekwyatt/vim-fswitch'
 Plug 'octol/vim-cpp-enhanced-highlight'
 Plug 'vim-airline/vim-airline-themes'
 Plug 'jalvesaq/Nvim-R'
+Plug 'airblade/vim-gitgutter'
 "Language Server
 Plug 'Shougo/deoplete.nvim'
 Plug 'roxma/nvim-yarp'
@@ -143,7 +144,7 @@ imap <F3> <C-\><C-O>:call LanguageClient#textDocument_definition()<CR>
 nnoremap <leader>rn :call LanguageClient#textDocument_rename()<CR>
 nnoremap <leader>rv :call LanguageClient#findLocations({'method':'$ccls/inheritance','flat':v:true,'level':3,'derived':v:true})<cr>
 nnoremap <leader>rh :call LanguageClient#findLocations({'method':'$ccls/call'})<cr>
-
+set completeopt-=preview
 
 " Deoplete
 let g:deoplete#enable_at_startup = 1
@@ -231,7 +232,6 @@ vnoremap // y/<C-R>"<CR>
 "GENERAL
 inoremap jk <Esc>
 nnoremap <leader>lb i//<ESC>75a-<ESC><CR>
-nnoremap <leader>lh i//<ESC>75a-<ESC>i<CR> Umbra<CR> (c) 2018 Dominik Durner<CR><ESC>73i-<ESC><CR>
 
 "RTags
 autocmd Filetype c,cpp silent! execute "!rc -w $(pwd) >/dev/null 2>&1" | redraw!
@@ -241,6 +241,17 @@ autocmd BufWinEnter * if line2byte(line("$") + 1) > 1000000 | syntax clear | end
 
 "fzf
 nnoremap <C-P> :Files<CR>
+
+" Command for git grep
+" - fzf#vim#grep(command, with_column, [options], [fullscreen])
+command! -bang -nargs=* Gitgrep
+  \ call fzf#vim#grep(
+  \   'git grep --line-number '.shellescape(<q-args>), 0,
+  \   { 'dir': systemlist('git rev-parse --show-toplevel')[0] }, <bang>0)
+command! -bang -nargs=* Gitgrepi
+  \ call fzf#vim#grep(
+  \   'git grep -i --line-number '.shellescape(<q-args>), 0,
+  \   { 'dir': systemlist('git rev-parse --show-toplevel')[0] }, <bang>0)
 
 let g:fzf_colors =
 \ { 'fg':      ['fg', 'Normal'],
