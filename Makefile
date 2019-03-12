@@ -4,7 +4,7 @@ MAKEFILE_DIR := $(dir ${MAKEFILE_PATH})
 #---------------------------------------------------------------------------
 REPO_DIR := ~/.repos/
 FZF_DIR := $(REPO_DIR)fzf
-CCLS_VERSION := 5cd28df
+CCLS_VERSION := master
 CCLS_REPO_DIR := $(REPO_DIR)ccls/repo
 CCLS_BUILD_DIR := $(REPO_DIR)ccls/build
 CCLS_INSTALL_PREFIX := ~/.local
@@ -23,7 +23,7 @@ install-ls:
 	cd $(CCLS_BUILD_DIR) && cmake -DCMAKE_BUILD_TYPE=Release -DCMAKE_INSTALL_PREFIX=$(CCLS_INSTALL_PREFIX) $(CCLS_REPO_DIR)
 	cd $(CCLS_BUILD_DIR) && make -j4
 	cd $(CCLS_BUILD_DIR) && make install
-	pip3 install neovim python-language-server
+	pip3 install neovim python-language-server compiledb
 #---------------------------------------------------------------------------
 install-symlinks:
 	@mkdir -p ~/.config

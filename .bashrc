@@ -61,6 +61,23 @@ if [ -x /usr/bin/dircolors ]; then
     alias egrep='egrep --color=auto'
 fi
 
+# set PATH so it includes user's private bin if it exists
+if [ -d "$HOME/bin" ] ; then
+    PATH="$HOME/bin:$PATH"
+fi
+if [ -d "$HOME/.local/bin" ] ; then
+    PATH="$HOME/.local/bin:$PATH"
+fi
+if [ -d "$HOME/.repos/fzf/bin" ] ; then
+    PATH="$HOME/.repos/fzf/bin:$PATH"
+    source ~/.repos/fzf/shell/key-bindings.bash
+    source ~/.repos/fzf/shell/completion.bash
+fi
+if [ -d "/usr/lib/ccache/bin" ] ; then
+    PATH="/usr/lib/ccache/bin:$PATH"
+fi
+
+
 # colored GCC warnings and errors
 export GCC_COLORS='error=01;31:warning=01;35:note=01;36:caret=01;32:locus=01:quote=01'
 
@@ -69,16 +86,10 @@ alias ll='ls -alF'
 alias la='ls -A'
 alias l='ls -CF'
 
-export PATH="/usr/lib/ccache/bin/:$PATH"
-export PATH=$PATH:~/.repos/fzf/bin
-source ~/.repos/fzf/shell/key-bindings.bash
-source ~/.repos/fzf/shell/completion.bash
 source ~/.shell_prompt.sh
-
 alias mj='nice make -j `getconf _NPROCESSORS_ONLN`'
 alias svim="sudo -E vim"
 export VISUAL="vim"
 export EDITOR="vim"
 alias open="xdg-open 2>/dev/null"
 alias [="open"
-
