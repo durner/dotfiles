@@ -126,12 +126,12 @@ let g:LanguageClient_serverCommands = {
     \   'cpp': [
     \       '~/.local/bin/ccls',
     \       '--log-file=/tmp/ccls.log',
-    \       '--init={"cacheDirectory":"/tmp/ccls"}'
+    \       '--init={"cache": {"directory": "/tmp/ccls-cache"}}'
     \   ],
     \   'c': [
     \       '~/.local/bin/ccls',
     \       '--log-file=/tmp/ccls.log',
-    \       '--init={"cacheDirectory":"/tmp/ccls"}'
+    \       '--init={"cache": {"directory": "/tmp/ccls-cache"}}'
     \   ]
     \ }
 set formatexpr=LanguageClient_textDocument_rangeFormatting()

@@ -1,0 +1,90 @@
+{
+    "window.zoomLevel": 0,
+    "workbench.activityBar.visible": true,
+
+    "vim.easymotion": true,
+    "vim.sneak": true,
+    "vim.incsearch": true,
+    "vim.overrideCopy": true,
+    "vim.useSystemClipboard": true,
+    "vim.useCtrlKeys": true,
+    "vim.hlsearch": true,
+    "vim.leader": ",",
+    "vim.normalModeKeyBindingsNonRecursive": [
+        {
+            "before": [":", "w"],
+            "commands": ["workbench.action.files.save"]
+        },
+        {
+            "before": [":", "q"],
+            "commands": ["workbench.action.closeFile"]
+        },
+        {
+            "before": ["<leader>", "f"],
+            "commands": ["workbench.action.gotoSymbol"]
+        },
+        {
+            "before": ["<leader>", "w", "v"],
+            "commands": ["workbench.action.splitEditorRight"]
+        },
+        {
+            "before": ["<leader>", "w", "s"],
+            "commands": ["workbench.action.splitEditorDown"]
+        },
+        {
+            "before": ["<leader>", "r", "j"],
+            "commands": ["editor.action.goToDeclaration"]
+        },
+        {
+            "before": ["<leader>", "r", "k"],
+            "commands": ["editor.action.goToImplementation"]
+        },
+        {
+            "before": ["<leader>", "r", "f"],
+            "commands": ["editor.action.referenceSearch.trigger"]
+        },
+        {
+            "before": ["<leader>", "r", "h"],
+            "commands": ["ccls.inheritanceHierarchy", "ccls.inheritanceHierarchy.focus"]
+        },
+        {
+            "before": ["<leader>", "r", "c"],
+            "commands": ["ccls.callHierarchy", "ccls.callHierarchy.focus"]
+        },
+        {
+            "before": ["<leader>", "t", "l"],
+            "commands": ["workbench.action.nextEditor"]
+        },
+        {
+            "before": ["<leader>", "t", "h"],
+            "commands": ["workbench.action.previousEditor"]
+        }
+    ],
+    "vim.insertModeKeyBindings": [
+        {
+            "before": ["j", "k"],
+            "after": ["<Esc>"]
+        }
+    ],
+    "vim.visualModeKeyBindingsNonRecursive": [
+        {
+            "before": [">"],
+            "commands": ["editor.action.indentLines"]
+        },
+        {
+            "before": ["<"],
+            "commands": ["editor.action.outdentLines"]
+        },
+    ],
+    "editor.wordWrap": "on",
+    "cmake.configureOnOpen": true,
+    "cmake.buildDirectory" : "${workspaceRoot}/bin/${buildType}",
+    "editor.codeLens": false,
+    "editor.renderWhitespace": "boundary",
+    "workbench.colorTheme": "Default Light+",
+    "[cpp]": {
+        "editor.defaultFormatter": "xaver.clang-format"
+    },
+    "window.openFilesInNewWindow": "on",
+    "workbench.editor.enablePreview": false,
+}
