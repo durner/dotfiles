@@ -136,19 +136,30 @@ let g:LanguageClient_serverCommands = {
     \ }
 set formatexpr=LanguageClient_textDocument_rangeFormatting()
 nnoremap <leader>ry :call LanguageClient#textDocument_hover()<CR>
-nnoremap <leader>rJ :call LanguageClient#textDocument_implementation()<CR>
+nnoremap <leader>rk :call LanguageClient#textDocument_implementation()<CR>
 nnoremap <leader>rj :call LanguageClient#textDocument_definition()<CR>
 nnoremap <leader>rf :call LanguageClient#textDocument_references()<CR>
+nnoremap <leader>rF :call LanguageClient#textDocument_references({'includeDeclaration': v:false})<CR>
 nnoremap <leader>rp :call LanguageClient#textDocument_documentSymbol()<CR>
 map <F3> :call LanguageClient#textDocument_definition()<CR>
 imap <F3> <C-\><C-O>:call LanguageClient#textDocument_definition()<CR>
 nnoremap <leader>rn :call LanguageClient#textDocument_rename()<CR>
-nnoremap <leader>rv :call LanguageClient#findLocations({'method':'$ccls/inheritance','flat':v:true,'level':3,'derived':v:true})<cr>
-nnoremap <leader>rh :call LanguageClient#findLocations({'method':'$ccls/call'})<cr>
+" bases
+nnoremap <leader>rb :call LanguageClient#findLocations({'method':'$ccls/inheritance'})<cr>
+" derived
+nnoremap <leader>rh :call LanguageClient#findLocations({'method':'$ccls/inheritance','derived':v:true})<cr>
+" caller
+nnoremap <leader>rv :call LanguageClient#findLocations({'method':'$ccls/call'})<cr>
+" callee
+nnoremap <leader>rc :call LanguageClient#findLocations({'method':'$ccls/call','callee':v:true})<cr>
+
 set completeopt-=preview
 
 " Deoplete
 let g:deoplete#enable_at_startup = 1
+let g:deoplete#ignore_sources = {}
+let g:deoplete#ignore_sources._ = ['buffer', 'around']
+call deoplete#custom#source('_', 'disabled_syntaxes', ['Comment', 'String'])
 call deoplete#custom#source('_', 'matchers', ['matcher_full_fuzzy'])
 call deoplete#custom#option({ 'ignore_case': v:true })
 function! s:check_back_space() abort "{{{
