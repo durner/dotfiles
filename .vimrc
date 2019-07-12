@@ -26,19 +26,22 @@ Plug 'autozimu/LanguageClient-neovim', { 'branch': 'next', 'do': 'bash install.s
 "nord-template colors
 "Plug 'arcticicestudio/nord-vim'
 "editplus
-Plug 'godlygeek/csapprox'
-
+"Plug 'godlygeek/csapprox'
+"candid
+Plug 'flrnprz/candid.vim'
 call plug#end()
 " Colorsheme
 "augroup nord-overrides
 "    autocmd!
 "    autocmd ColorScheme nord highlight Comment ctermfg=13 guifg='#EBCB8B'
 "augroup END
-set t_Co=256
-set background=light
+" Automatic syntax highlight "
+syntax on
+set termguicolors
+set background=dark
 "colorscheme nord
-colorscheme editplus
-
+"colorscheme editplus
+colorscheme candid
 " Learn it the hard way
 " noremap <Up> <NOP>
 " noremap <Down> <NOP>
@@ -49,8 +52,6 @@ colorscheme editplus
 let mapleader = ','
 let g:mapleader = ','
 
-" Automatic syntax highlight "
-syntax on
 set encoding=utf8
 set enc=utf-8
 "set termencoding=utf-8
@@ -160,7 +161,6 @@ let g:deoplete#enable_at_startup = 1
 let g:deoplete#ignore_sources = {}
 let g:deoplete#ignore_sources._ = ['buffer', 'around']
 call deoplete#custom#source('_', 'disabled_syntaxes', ['Comment', 'String'])
-call deoplete#custom#source('_', 'matchers', ['matcher_full_fuzzy'])
 call deoplete#custom#option({ 'ignore_case': v:true })
 function! s:check_back_space() abort "{{{
     let col = col('.') - 1
