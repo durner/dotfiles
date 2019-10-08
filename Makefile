@@ -21,7 +21,7 @@ install-ls:
 	cd $(CCLS_REPO_DIR) && git checkout $(CCLS_VERSION)
 	mkdir -p $(CCLS_INSTALL_PREFIX) $(CCLS_BUILD_DIR)
 	cd $(CCLS_BUILD_DIR) && cmake -DCMAKE_BUILD_TYPE=Release -DCMAKE_INSTALL_PREFIX=$(CCLS_INSTALL_PREFIX) $(CCLS_REPO_DIR)
-	cd $(CCLS_BUILD_DIR) && make -j4
+	cd $(CCLS_BUILD_DIR) && make -j8
 	cd $(CCLS_BUILD_DIR) && make install
 	pip3 install neovim python-language-server compiledb
 #---------------------------------------------------------------------------
@@ -33,6 +33,7 @@ install-symlinks:
 	@sh -c "[ ! -L ~/.tmux ] || rm -rf ~/.tmux;"
 	@sh -c "[ ! -L ~/.tmux.conf ] || rm ~/.tmux.conf;"
 	@sh -c "[ ! -L ~/.vim ] || rm -rf ~/.vim;"
+	@sh -c "[ ! -L ~/.config/nvim ] || rm -rf ~/.config/nvim;"
 	@sh -c "[ ! -L ~/.vimrc ] || rm ~/.vimrc;"
 	@sh -c "[ ! -L ~/.shell_prompt.sh ] || rm ~/.shell_prompt.sh;"
 	@cp ${MAKEFILE_DIR}.bashrc ~/
@@ -40,7 +41,8 @@ install-symlinks:
 	@cp -a ${MAKEFILE_DIR}.tmux ~/
 	@cp ${MAKEFILE_DIR}.tmux.conf ~/
 	@cp -a ${MAKEFILE_DIR}.vim ~/
-	@cp ${MAKEFILE_DIR}.vimrc ~/
+	@cp -a ${MAKEFILE_DIR}.vim ~/.config/nvim
+	@cp ${MAKEFILE_DIR}/.vim/config.vim ~/.vimrc
 	@cp ${MAKEFILE_DIR}.shell_prompt.sh ~/
 #---------------------------------------------------------------------------
 install: install-fzf install-symlinks install-ls

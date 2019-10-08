@@ -18,17 +18,23 @@ Plug 'jalvesaq/Nvim-R'
 "Plug 'airblade/vim-gitgutter'
 Plug 'ntnn/vim-diction'
 "Language Server
-Plug 'Shougo/deoplete.nvim'
-Plug 'roxma/nvim-yarp'
-Plug 'roxma/vim-hug-neovim-rpc'
-Plug 'autozimu/LanguageClient-neovim', { 'branch': 'next', 'do': 'bash install.sh' }
+Plug 'autozimu/LanguageClient-neovim', { 'commit': 'ec4af74', 'do': 'bash install.sh' }
+if has('nvim')
+    Plug 'Shougo/deoplete.nvim', {
+        \ 'do': ':UpdateRemotePlugins',
+        \ }
+else
+    Plug 'Shougo/deoplete.nvim'
+    Plug 'roxma/nvim-yarp'
+    Plug 'roxma/vim-hug-neovim-rpc'
+endif
 
 "nord-template colors
 "Plug 'arcticicestudio/nord-vim'
 "editplus
-"Plug 'godlygeek/csapprox'
+Plug 'godlygeek/csapprox'
 "candid
-Plug 'flrnprz/candid.vim'
+"Plug 'flrnprz/candid.vim'
 call plug#end()
 " Colorsheme
 "augroup nord-overrides
@@ -40,8 +46,8 @@ syntax on
 set termguicolors
 set background=dark
 "colorscheme nord
-"colorscheme editplus
-colorscheme candid
+colorscheme editplus
+"colorscheme candid
 " Learn it the hard way
 " noremap <Up> <NOP>
 " noremap <Down> <NOP>
@@ -206,7 +212,7 @@ let NERDTreeQuitOnOpen= 1
 map <silent> <F12> mzgg=G`z<CR>
 autocmd Filetype c,cpp map <silent> <F12> :%!clang-format -style=file<CR>
 imap <silent> <F12> <C-\><C-O>mzgg=G`z<CR>
-autocmd Filetype c,cpp imap <silent> <F12> <C-\><C-O>:%!clang-format -style=file<CR>
+autocmd Filetype c,cpp imap <silent> <F12> <C-\><C-O>:%!clang-format style=file<CR>
 
 "Buffer & Windows Mgmt
 map <silent> <A-Left> :bp!<CR>
@@ -265,17 +271,17 @@ command! -bang -nargs=* Gitgrepi
   \   'git grep -i --line-number '.shellescape(<q-args>), 0,
   \   { 'dir': systemlist('git rev-parse --show-toplevel')[0] }, <bang>0)
 
-let g:fzf_colors =
-\ { 'fg':      ['fg', 'Normal'],
-  \ 'bg':      ['bg', 'Normal'],
-  \ 'hl':      ['fg', 'Comment'],
-  \ 'fg+':     ['fg', 'CursorLine', 'CursorColumn', 'Normal'],
-  \ 'bg+':     ['bg', 'CursorLine', 'CursorColumn'],
-  \ 'hl+':     ['fg', 'Statement'],
-  \ 'info':    ['fg', 'PreProc'],
-  \ 'border':  ['fg', 'Ignore'],
-  \ 'prompt':  ['fg', 'Conditional'],
-  \ 'pointer': ['fg', 'Exception'],
-  \ 'marker':  ['fg', 'Keyword'],
-  \ 'spinner': ['fg', 'Label'],
-  \ 'header':  ['fg', 'Comment'] }
+"let g:fzf_colors =
+"\ { 'fg':      ['fg', 'Normal'],
+"  \ 'bg':      ['bg', 'Normal'],
+"  \ 'hl':      ['fg', 'Comment'],
+"  \ 'fg+':     ['fg', 'CursorLine', 'CursorColumn', 'Normal'],
+"  \ 'bg+':     ['bg', 'CursorLine', 'CursorColumn'],
+"  \ 'hl+':     ['fg', 'Statement'],
+"  \ 'info':    ['fg', 'PreProc'],
+"  \ 'border':  ['fg', 'Ignore'],
+"  \ 'prompt':  ['fg', 'Conditional'],
+"  \ 'pointer': ['fg', 'Exception'],
+"  \ 'marker':  ['fg', 'Keyword'],
+"  \ 'spinner': ['fg', 'Label'],
+"  \ 'header':  ['fg', 'Comment'] }
