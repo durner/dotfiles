@@ -2,7 +2,7 @@ call plug#begin('~/.vim/plugged')
 
 Plug 'embear/vim-localvimrc'
 Plug 'scrooloose/nerdtree'
-Plug 'ryanoasis/vim-devicons'
+"Plug 'ryanoasis/vim-devicons'
 Plug '~/.repos/fzf'
 Plug 'junegunn/fzf.vim'
 Plug 'majutsushi/tagbar'
@@ -32,9 +32,9 @@ endif
 "nord-template colors
 "Plug 'arcticicestudio/nord-vim'
 "editplus
-Plug 'godlygeek/csapprox'
+"Plug 'godlygeek/csapprox'
 "candid
-"Plug 'flrnprz/candid.vim'
+Plug 'flrnprz/candid.vim'
 call plug#end()
 " Colorsheme
 "augroup nord-overrides
@@ -44,10 +44,10 @@ call plug#end()
 " Automatic syntax highlight "
 syntax on
 set termguicolors
-set background=dark
+"set background=dark
 "colorscheme nord
-colorscheme editplus
-"colorscheme candid
+"colorscheme editplus
+colorscheme candid
 " Learn it the hard way
 " noremap <Up> <NOP>
 " noremap <Down> <NOP>
@@ -119,10 +119,11 @@ endif
 
 if has('gui')
   set guioptions-=m  "menu bar
-  set guioptions-=T  "toolbar
-  set guioptions-=r  "scrollbar
-  set guioptions-=L  "scrollbar
-  set guifont=DejaVuSansMonoNerdFont\ 12
+  "set guioptions-=T  "toolbar
+  "set guioptions-=r  "scrollbar
+  "set guioptions-=L  "scrollbar
+  set belloff=all
+  set guifont=FiraCodeRetina\ 13
 endif
 
 set mouse=a
@@ -176,6 +177,7 @@ inoremap <silent><expr> <TAB>
         \ pumvisible() ? "\<C-n>" :
         \ <SID>check_back_space() ? "\<TAB>" :
         \ deoplete#manual_complete()
+set signcolumn=yes
 
 "FSHere
 map <F4> :FSHere<CR>
