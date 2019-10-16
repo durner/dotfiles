@@ -15,6 +15,7 @@ Plug 'derekwyatt/vim-fswitch'
 Plug 'octol/vim-cpp-enhanced-highlight'
 Plug 'vim-airline/vim-airline-themes'
 Plug 'jalvesaq/Nvim-R'
+Plug 'rhysd/vim-clang-format'
 "Plug 'airblade/vim-gitgutter'
 Plug 'ntnn/vim-diction'
 "Language Server
@@ -212,9 +213,9 @@ let NERDTreeQuitOnOpen= 1
 
 "Autoformater
 map <silent> <F12> mzgg=G`z<CR>
-autocmd Filetype c,cpp map <silent> <F12> :%!clang-format -style=file<CR>
+autocmd Filetype c,cpp map <silent> <F12> :ClangFormat<CR>
 imap <silent> <F12> <C-\><C-O>mzgg=G`z<CR>
-autocmd Filetype c,cpp imap <silent> <F12> <C-\><C-O>:%!clang-format style=file<CR>
+autocmd Filetype c,cpp imap <silent> <F12> <C-\><C-O>:ClangFormat<CR>
 
 "Buffer & Windows Mgmt
 map <silent> <A-Left> :bp!<CR>
@@ -287,3 +288,5 @@ command! -bang -nargs=* Gitgrepi
 "  \ 'marker':  ['fg', 'Keyword'],
 "  \ 'spinner': ['fg', 'Label'],
 "  \ 'header':  ['fg', 'Comment'] }
+
+let g:clang_format#detect_style_file = 1
