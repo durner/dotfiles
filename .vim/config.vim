@@ -19,7 +19,7 @@ Plug 'rhysd/vim-clang-format'
 "Plug 'airblade/vim-gitgutter'
 Plug 'ntnn/vim-diction'
 "Language Server
-Plug 'autozimu/LanguageClient-neovim', { 'commit': 'ec4af74', 'do': 'bash install.sh' }
+Plug 'autozimu/LanguageClient-neovim', { 'branch': 'next', 'do': 'bash install.sh' }
 if has('nvim')
     Plug 'Shougo/deoplete.nvim', {
         \ 'do': ':UpdateRemotePlugins',
