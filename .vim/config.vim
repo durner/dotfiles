@@ -83,10 +83,20 @@ set softtabstop=4
 " Auto Load Localvimrc
 let g:localvimrc_ask = 0
 
+" indent
 set display=lastline
-set linebreak
 set autoindent
 set smartindent
+
+" wrap
+set wrap
+set linebreak
+" only linebreak at some characters (reduced from default)
+set breakat-=-
+
+" wrap indention
+set breakindent
+set breakindentopt=shift:2
 
 " Show line numbers "
 set number
