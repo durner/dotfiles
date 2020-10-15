@@ -20,7 +20,7 @@ install-ls:
 	git clone --recursive https://github.com/MaskRay/ccls $(CCLS_REPO_DIR)
 	cd $(CCLS_REPO_DIR) && git checkout $(CCLS_VERSION)
 	mkdir -p $(CCLS_INSTALL_PREFIX) $(CCLS_BUILD_DIR)
-	cd $(CCLS_BUILD_DIR) && cmake -DCMAKE_BUILD_TYPE=Release -DCMAKE_INSTALL_PREFIX=$(CCLS_INSTALL_PREFIX) $(CCLS_REPO_DIR)
+	cd $(CCLS_BUILD_DIR) && cmake -DCLANG_LINK_CLANG_DYLIB=on -DCMAKE_BUILD_TYPE=Release -DCMAKE_INSTALL_PREFIX=$(CCLS_INSTALL_PREFIX) $(CCLS_REPO_DIR)
 	cd $(CCLS_BUILD_DIR) && make -j8
 	cd $(CCLS_BUILD_DIR) && make install
 	pip3 install neovim python-language-server compiledb
