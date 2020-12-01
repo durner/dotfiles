@@ -177,7 +177,7 @@ set completeopt-=preview
 " Deoplete
 let g:deoplete#enable_at_startup = 1
 call deoplete#custom#source('_', 'disabled_syntaxes', ['Comment', 'String'])
-call deoplete#custom#option({ 'ignore_case': v:true, 'ignore_sources':  ['buffer', 'around', 'tag', 'member']})
+call deoplete#custom#option({ 'ignore_case': v:true, 'ignore_sources': { 'cpp': ['buffer', 'around', 'tag', 'member']}})
 function! s:check_back_space() abort "{{{
     let col = col('.') - 1
     return !col || getline('.')[col - 1]  =~ '\s'
