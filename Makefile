@@ -8,6 +8,7 @@ CCLS_VERSION := master
 CCLS_REPO_DIR := $(REPO_DIR)ccls/repo
 CCLS_BUILD_DIR := $(REPO_DIR)ccls/build
 CCLS_INSTALL_PREFIX := ~/.local
+SCALA_METALS := org.scalameta:metals_2.12:0.9.8
 #---------------------------------------------------------------------------
 install-arch:
 	yay -Sy gvim clang nvm llvm gcc python python-pip
@@ -33,6 +34,19 @@ install-ls-general:
 install-ls-ts:
 	npm i -g typescript-language-server
 #---------------------------------------------------------------------------
+install-ls-scala:
+	curl -fLo coursier https://git.io/coursier-cli-linux
+	chmod +x coursier
+	./coursier bootstrap \
+  		--java-opt -Xss4m \
+  		--java-opt -Xms100m \
+  		--java-opt -Dmetals.client=LanguageClient-neovim \
+		${SCALA_METALS} \
+  		-r bintray:scalacenter/releases \
+  		-r sonatype:snapshots \
+  		-o  ~/.local/bin/metals-vim -f
+	rm coursier
+#---------------------------------------------------------------------------
 install-symlinks:
 	@mkdir -p ~/.config
 	@mkdir -p ~/.local
@@ -53,7 +67,7 @@ install-symlinks:
 	@cp ${MAKEFILE_DIR}/.vim/config.vim ~/.vimrc
 	@cp ${MAKEFILE_DIR}.shell_prompt.sh ~/
 #---------------------------------------------------------------------------
-install-ls: install-ls-general install-ls-ts install-ls-ccls
+install-ls: install-ls-general install-ls-ts install-ls-ccls install-ls-scala
 #---------------------------------------------------------------------------
 install: install-arch install-fzf install-symlinks install-ls
 #---------------------------------------------------------------------------

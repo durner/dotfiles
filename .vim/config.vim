@@ -154,6 +154,7 @@ let g:LanguageClient_serverCommands = {
     \   'typescript': ['typescript-language-server', '--stdio'],
     \   'typescript.tsx': ['typescript-language-server', '--stdio'],
     \   'typescriptreact': ['typescript-language-server', '--stdio'],
+    \   'scala': ['metals-vim'],
     \ }
 set formatexpr=LanguageClient_textDocument_rangeFormatting()
 nnoremap <leader>ry :call LanguageClient#textDocument_hover()<CR>
