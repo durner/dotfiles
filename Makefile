@@ -9,13 +9,16 @@ CCLS_REPO_DIR := $(REPO_DIR)ccls/repo
 CCLS_BUILD_DIR := $(REPO_DIR)ccls/build
 CCLS_INSTALL_PREFIX := ~/.local
 #---------------------------------------------------------------------------
+install-arch:
+	yay -Sy gvim clang nvm llvm gcc python python-pip
+#---------------------------------------------------------------------------
 install-fzf:
 	if [ ! -d $(FZF_DIR) ]; then \
 		git clone --depth 1 https://github.com/junegunn/fzf.git $(FZF_DIR); \
 	fi
 	$(FZF_DIR)/install --bin
 #---------------------------------------------------------------------------
-install-ls:
+install-ls-ccls:
 	rm -rf $(CCLS_REPO_DIR) $(CCLS_BUILD_DIR)
 	git clone --recursive https://github.com/MaskRay/ccls $(CCLS_REPO_DIR)
 	cd $(CCLS_REPO_DIR) && git checkout $(CCLS_VERSION)
@@ -23,7 +26,12 @@ install-ls:
 	cd $(CCLS_BUILD_DIR) && cmake -DCLANG_LINK_CLANG_DYLIB=on -DCMAKE_BUILD_TYPE=Release -DCMAKE_INSTALL_PREFIX=$(CCLS_INSTALL_PREFIX) $(CCLS_REPO_DIR)
 	cd $(CCLS_BUILD_DIR) && make -j8
 	cd $(CCLS_BUILD_DIR) && make install
+#---------------------------------------------------------------------------
+install-ls-general:
 	pip3 install neovim python-language-server compiledb
+#---------------------------------------------------------------------------
+install-ls-ts:
+	npm i -g typescript-language-server
 #---------------------------------------------------------------------------
 install-symlinks:
 	@mkdir -p ~/.config
@@ -45,5 +53,7 @@ install-symlinks:
 	@cp ${MAKEFILE_DIR}/.vim/config.vim ~/.vimrc
 	@cp ${MAKEFILE_DIR}.shell_prompt.sh ~/
 #---------------------------------------------------------------------------
-install: install-fzf install-symlinks install-ls
+install-ls: install-ls-general install-ls-ts install-ls-ccls
+#---------------------------------------------------------------------------
+install: install-arch install-fzf install-symlinks install-ls
 #---------------------------------------------------------------------------

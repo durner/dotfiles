@@ -15,6 +15,7 @@ Plug 'vim-airline/vim-airline-themes'
 Plug 'jalvesaq/Nvim-R'
 Plug 'rhysd/vim-clang-format'
 Plug 'jackguo380/vim-lsp-cxx-highlight'
+Plug 'HerringtonDarkholme/yats.vim'
 "Plug 'airblade/vim-gitgutter'
 Plug 'ntnn/vim-diction'
 "Language Server
@@ -150,6 +151,9 @@ let g:LanguageClient_serverCommands = {
     \   'python': ['pyls'],
     \   'c': s:ccls_command,
     \   'cpp': s:ccls_command,
+    \   'typescript': ['typescript-language-server', '--stdio'],
+    \   'typescript.tsx': ['typescript-language-server', '--stdio'],
+    \   'typescriptreact': ['typescript-language-server', '--stdio'],
     \ }
 set formatexpr=LanguageClient_textDocument_rangeFormatting()
 nnoremap <leader>ry :call LanguageClient#textDocument_hover()<CR>

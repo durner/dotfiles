@@ -86,6 +86,10 @@ alias ll='ls -alF'
 alias la='ls -A'
 alias l='ls -CF'
 
+# Typescript
+source /usr/share/nvm/init-nvm.sh
+
+# General aliases
 source ~/.shell_prompt.sh
 alias mj='nice make -j `getconf _NPROCESSORS_ONLN`'
 alias svim="sudo -E vim"
