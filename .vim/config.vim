@@ -2,10 +2,8 @@ call plug#begin('~/.vim/plugged')
 
 Plug 'embear/vim-localvimrc'
 Plug 'scrooloose/nerdtree'
-"Plug 'ryanoasis/vim-devicons'
 Plug '~/.repos/fzf'
 Plug 'junegunn/fzf.vim'
-Plug 'majutsushi/tagbar'
 Plug 'tpope/vim-fugitive'
 Plug 'vim-airline/vim-airline'
 Plug 'lervag/vimtex'
@@ -16,6 +14,7 @@ Plug 'octol/vim-cpp-enhanced-highlight'
 Plug 'vim-airline/vim-airline-themes'
 Plug 'jalvesaq/Nvim-R'
 Plug 'rhysd/vim-clang-format'
+Plug 'jackguo380/vim-lsp-cxx-highlight'
 "Plug 'airblade/vim-gitgutter'
 Plug 'ntnn/vim-diction'
 "Language Server
@@ -31,11 +30,11 @@ else
 endif
 
 "nord-template colors
-" Plug 'arcticicestudio/nord-vim'
+"Plug 'arcticicestudio/nord-vim'
 "editplus
 "Plug 'godlygeek/csapprox'
 "candid
-"Plug 'flrnprz/candid.vim'
+Plug 'flrnprz/candid.vim'
 " tender
 Plug 'jacoborus/tender.vim'
 call plug#end()
@@ -50,8 +49,8 @@ set termguicolors
 "set background=dark
 "colorscheme nord
 "colorscheme editplus
-"colorscheme candid
-colorscheme tender
+colorscheme candid
+"colorscheme tender
 " Learn it the hard way
 " noremap <Up> <NOP>
 " noremap <Down> <NOP>
@@ -143,18 +142,14 @@ endif
 set mouse=a
 
 " LanguageClient
+let s:ccls_settings = {
+         \ 'highlight': { 'lsRanges' : v:true },
+         \ }
+let s:ccls_command = ['ccls', '-init=' . json_encode(s:ccls_settings)]
 let g:LanguageClient_serverCommands = {
     \   'python': ['pyls'],
-    \   'cpp': [
-    \       '~/.local/bin/ccls',
-    \       '--log-file=/tmp/ccls.log',
-    \       '--init={"cache": {"directory": "/tmp/ccls-cache"}}'
-    \   ],
-    \   'c': [
-    \       '~/.local/bin/ccls',
-    \       '--log-file=/tmp/ccls.log',
-    \       '--init={"cache": {"directory": "/tmp/ccls-cache"}}'
-    \   ]
+    \   'c': s:ccls_command,
+    \   'cpp': s:ccls_command,
     \ }
 set formatexpr=LanguageClient_textDocument_rangeFormatting()
 nnoremap <leader>ry :call LanguageClient#textDocument_hover()<CR>
@@ -197,11 +192,6 @@ imap <F4> <C-\><C-O>:FSHere<CR>
 
 set wildignore+=*/tmp/*,*.so,*.swp,*.zip
 
-"TAGBAR
-map <F8> :TagbarToggle<CR>
-imap <F8> <C-\><C-O>:TagbarToggle<CR>
-let g:tagbar_indent = 1
-"autocmd FileType c,cpp nested :TagbarOpen
 
 "spellcheck
 map <F2> :setlocal spell! spelllang=en_us<CR>
@@ -211,7 +201,6 @@ hi SpellBad ctermfg=red guifg=red
 "AIRLINE
 set laststatus=2
 let g:airline#extensions#tabline#enabled = 1
-let g:airline#extensions#tagbar#enabled = 1
 let g:airline_theme='tender'
 let g:airline_powerline_fonts = 1
 set fillchars+=stl:\ ,stlnc:\
