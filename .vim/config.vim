@@ -31,11 +31,13 @@ else
 endif
 
 "nord-template colors
-"Plug 'arcticicestudio/nord-vim'
+" Plug 'arcticicestudio/nord-vim'
 "editplus
 "Plug 'godlygeek/csapprox'
 "candid
-Plug 'flrnprz/candid.vim'
+"Plug 'flrnprz/candid.vim'
+" tender
+Plug 'jacoborus/tender.vim'
 call plug#end()
 " Colorsheme
 "augroup nord-overrides
@@ -48,7 +50,8 @@ set termguicolors
 "set background=dark
 "colorscheme nord
 "colorscheme editplus
-colorscheme candid
+"colorscheme candid
+colorscheme tender
 " Learn it the hard way
 " noremap <Up> <NOP>
 " noremap <Down> <NOP>
@@ -209,7 +212,7 @@ hi SpellBad ctermfg=red guifg=red
 set laststatus=2
 let g:airline#extensions#tabline#enabled = 1
 let g:airline#extensions#tagbar#enabled = 1
-let g:airline_theme='papercolor'
+let g:airline_theme='tender'
 let g:airline_powerline_fonts = 1
 set fillchars+=stl:\ ,stlnc:\
 
