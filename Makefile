@@ -10,8 +10,11 @@ CCLS_BUILD_DIR := $(REPO_DIR)ccls/build
 CCLS_INSTALL_PREFIX := ~/.local
 SCALA_METALS := org.scalameta:metals_2.12:0.9.8
 #---------------------------------------------------------------------------
-install-arch:
-	yay -Sy gvim clang nvm llvm gcc python python-pip
+install-minimal:
+	yay -Syyu curl neovim clang nvm llvm gcc python python-pip cmake clang-format libclang-dev cmake-curses-gui
+#---------------------------------------------------------------------------
+install-desktop:
+	yay -Syyu vlc thunderbird chromium-browser texlive tlp aspell-de aspell-en hunspell-de-de hunspell-en-us
 #---------------------------------------------------------------------------
 install-fzf:
 	if [ ! -d $(FZF_DIR) ]; then \
@@ -32,7 +35,7 @@ install-ls-general:
 	pip3 install neovim python-language-server compiledb
 #---------------------------------------------------------------------------
 install-ls-ts:
-	npm i -g typescript-language-server
+	sudo npm i -g typescript-language-server
 #---------------------------------------------------------------------------
 install-ls-scala:
 	curl -fLo coursier https://git.io/coursier-cli-linux
@@ -62,12 +65,11 @@ install-symlinks:
 	@cp ${MAKEFILE_DIR}.clang-format ~/
 	@cp -a ${MAKEFILE_DIR}.tmux ~/
 	@cp ${MAKEFILE_DIR}.tmux.conf ~/
-	@cp -a ${MAKEFILE_DIR}.vim ~/
 	@cp -a ${MAKEFILE_DIR}.vim ~/.config/nvim
-	@cp ${MAKEFILE_DIR}/.vim/config.vim ~/.vimrc
 	@cp ${MAKEFILE_DIR}.shell_prompt.sh ~/
 #---------------------------------------------------------------------------
 install-ls: install-ls-general install-ls-ts install-ls-ccls install-ls-scala
 #---------------------------------------------------------------------------
-install: install-arch install-fzf install-symlinks install-ls
+install: install-minimal install-fzf install-symlinks install-ls
 #---------------------------------------------------------------------------
+install-gui: install install-desktop

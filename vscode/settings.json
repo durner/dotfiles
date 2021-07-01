@@ -1,7 +1,6 @@
 {
     "window.zoomLevel": 0,
     "workbench.activityBar.visible": true,
-
     "vim.easymotion": true,
     "vim.sneak": true,
     "vim.incsearch": true,

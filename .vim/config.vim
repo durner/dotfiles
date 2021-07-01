@@ -33,7 +33,7 @@ endif
 "nord-template colors
 "Plug 'arcticicestudio/nord-vim'
 "editplus
-"Plug 'godlygeek/csapprox'
+Plug 'godlygeek/csapprox'
 "candid
 Plug 'flrnprz/candid.vim'
 " tender
@@ -49,8 +49,8 @@ syntax on
 set termguicolors
 "set background=dark
 "colorscheme nord
-"colorscheme editplus
-colorscheme candid
+colorscheme editplus
+"colorscheme candid
 "colorscheme tender
 " Learn it the hard way
 " noremap <Up> <NOP>
