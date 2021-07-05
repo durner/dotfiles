@@ -11,10 +11,12 @@ CCLS_INSTALL_PREFIX := ~/.local
 SCALA_METALS := org.scalameta:metals_2.12:0.9.8
 #---------------------------------------------------------------------------
 install-minimal:
-	yay -Syyu curl neovim clang nvm llvm gcc python python-pip cmake clang-format libclang-dev cmake-curses-gui
+	yay -Syyu curl neovim clang llvm gcc python python-pip cmake tmux
+	#yay -Syyu nvm
+	#nvm install node
 #---------------------------------------------------------------------------
 install-desktop:
-	yay -Syyu vlc thunderbird chromium-browser texlive tlp aspell-de aspell-en hunspell-de-de hunspell-en-us
+	yay -Syyu vlc inkscape gimp thunderbird chromium texlive-core libreoffice tlp aspell-de aspell-en hunspell-de hunspell-en_us
 #---------------------------------------------------------------------------
 install-fzf:
 	if [ ! -d $(FZF_DIR) ]; then \

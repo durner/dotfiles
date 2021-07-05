@@ -156,6 +156,8 @@ let g:LanguageClient_serverCommands = {
     \   'typescriptreact': ['typescript-language-server', '--stdio'],
     \   'scala': ['metals-vim'],
     \ }
+let g:LanguageClient_useVirtualText = "No"
+let g:lsp_cxx_hl_light_bg = 1
 set formatexpr=LanguageClient_textDocument_rangeFormatting()
 nnoremap <leader>ry :call LanguageClient#textDocument_hover()<CR>
 nnoremap <leader>rk :call LanguageClient#textDocument_implementation()<CR>
