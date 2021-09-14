@@ -145,8 +145,9 @@ set mouse=a
 " LanguageClient
 let s:ccls_settings = {
          \ 'highlight': { 'lsRanges' : v:true },
+         \ "cache": {"directory": "/tmp/ccls-cache"},
          \ }
-let s:ccls_command = ['ccls', '-init=' . json_encode(s:ccls_settings)]
+let s:ccls_command = ['ccls', '--log-file=/tmp/ccls.log', '-init=' . json_encode(s:ccls_settings)]
 let g:LanguageClient_serverCommands = {
     \   'python': ['pyls'],
     \   'c': s:ccls_command,
@@ -165,8 +166,8 @@ nnoremap <leader>rj :call LanguageClient#textDocument_definition()<CR>
 nnoremap <leader>rf :call LanguageClient#textDocument_references()<CR>
 nnoremap <leader>rF :call LanguageClient#textDocument_references({'includeDeclaration': v:false})<CR>
 nnoremap <leader>rp :call LanguageClient#textDocument_documentSymbol()<CR>
-map <F3> :call LanguageClient#textDocument_definition()<CR>
-imap <F3> <C-\><C-O>:call LanguageClient#textDocument_definition()<CR>
+map <F12> :call LanguageClient#textDocument_definition()<CR>
+imap <F12> <C-\><C-O>:call LanguageClient#textDocument_definition()<CR>
 nnoremap <leader>rn :call LanguageClient#textDocument_rename()<CR>
 " bases
 nnoremap <leader>rb :call LanguageClient#findLocations({'method':'$ccls/inheritance'})<cr>
@@ -213,26 +214,26 @@ let g:airline_powerline_fonts = 1
 set fillchars+=stl:\ ,stlnc:\
 
 "NERDTREE
-map <F7> :NERDTreeToggle<CR>
-imap <F7> <C-\><C-O>:NERDTreeToggle<CR>
+map <F5> :NERDTreeToggle<CR>
+imap <F5> <C-\><C-O>:NERDTreeToggle<CR>
 let g:NERDTreeShowHidden = 1
 let NERDTreeQuitOnOpen= 1
 
 "Autoformater
-map <silent> <F12> mzgg=G`z<CR>
-autocmd Filetype c,cpp map <silent> <F12> :ClangFormat<CR>
-imap <silent> <F12> <C-\><C-O>mzgg=G`z<CR>
-autocmd Filetype c,cpp imap <silent> <F12> <C-\><C-O>:ClangFormat<CR>
+map <silent> <leader>ra mzgg=G`z<CR>
+autocmd Filetype c,cpp map <silent> <leader>ra :ClangFormat<CR>
+imap <silent> <leader>ra <C-\><C-O>mzgg=G`z<CR>
+autocmd Filetype c,cpp imap <silent> <leader>ra <C-\><C-O>:ClangFormat<CR>
 
 "Buffer & Windows Mgmt
 map <silent> <A-Left> :bp!<CR>
 map <silent> <A-Right> :bn!<CR>
-map <silent> <F5> :bp!<CR>
-map <silent> <F6> :bn!<CR>
+map <silent> <F6> :bp!<CR>
+map <silent> <F7> :bn!<CR>
 imap <silent> <A-Left> <C-\><C-O>:bp!<CR>
 imap <silent> <A-Right> <C-\><C-O>:bn!<CR>
-imap <silent> <F5> <C-\><C-O>:bp!<CR>
-imap <silent> <F6> <C-\><C-O>:bn!<CR>
+imap <silent> <F6> <C-\><C-O>:bp!<CR>
+imap <silent> <F7> <C-\><C-O>:bn!<CR>
 nnoremap <C-J> <C-W><C-J>
 nnoremap <C-K> <C-W><C-K>
 nnoremap <C-L> <C-W><C-L>

@@ -61,21 +61,20 @@ install-vscode:
 	cat ${MAKEFILE_DIR}vscode/extensions_list.txt | xargs -n 1 code --install-extension
 #---------------------------------------------------------------------------
 install-symlinks:
-	@mkdir -p ~/.config
 	@mkdir -p ~/.local
-	@sh -c "[ ! -L ~/.bashrc ] || rm ~/.bashrc;"
-	@sh -c "[ ! -L ~/.clang-format ] || rm ~/.clang-format;"
-	@sh -c "[ ! -L ~/.tmux ] || rm -rf ~/.tmux;"
-	@sh -c "[ ! -L ~/.tmux.conf ] || rm ~/.tmux.conf;"
-	@sh -c "[ ! -L ~/.vim ] || rm -rf ~/.vim;"
-	@sh -c "[ ! -L ~/.config/nvim ] || rm -rf ~/.config/nvim;"
-	@sh -c "[ ! -L ~/.vimrc ] || rm ~/.vimrc;"
-	@sh -c "[ ! -L ~/.shell_prompt.sh ] || rm ~/.shell_prompt.sh;"
+	@sh -c "rm -f ~/.bashrc;"
+	@sh -c "rm -f ~/.clang-format;"
+	@sh -c "rm -rf ~/.tmux;"
+	@sh -c "rm -f ~/.tmux.conf;"
+	@sh -c "rm -rf ~/.vim;"
+	@sh -c "rm -rf ~/.config/nvim;"
+	@sh -c "rm -f ~/.shell_prompt.sh;"
+	@mkdir -p ~/.config/nvim
 	@cp ${MAKEFILE_DIR}.bashrc ~/
 	@cp ${MAKEFILE_DIR}.clang-format ~/
 	@cp -a ${MAKEFILE_DIR}.tmux ~/
 	@cp ${MAKEFILE_DIR}.tmux.conf ~/
-	@cp -a ${MAKEFILE_DIR}.vim ~/.config/nvim
+	@cp -a ${MAKEFILE_DIR}.vim/* ~/.config/nvim/
 	@cp ${MAKEFILE_DIR}.shell_prompt.sh ~/
 #---------------------------------------------------------------------------
 install-ls: install-ls-general install-ls-ts install-ls-ccls install-ls-scala

@@ -14,12 +14,12 @@
         "when": "terminalFocus"
     },
     {
-        "key": "f6",
-        "command": "workbench.action.nextEditor"
+        "key": "f7",
+        "command": "workbench.action.nextEditor",
     },
     {
-        "key": "f5",
-        "command": "workbench.action.previousEditor"
+        "key": "f6",
+        "command": "workbench.action.previousEditor",
     },
     {
         "key": "enter",
@@ -38,5 +38,15 @@
         "key": "f4",
         "command": "C_Cpp.SwitchHeaderSource",
         "when": "editorTextFocus && editorLangId == 'c' || editorTextFocus && editorLangId == 'cpp' || editorTextFocus && editorLangId == 'cuda-cpp'"
-    }
+    },
+    {
+        "key": "f5",
+        "command": "workbench.action.debug.pause",
+        "when": "debugState == 'running'"
+    },
+    {
+        "key": "f6",
+        "command": "-workbench.action.debug.pause",
+        "when": "debugState == 'running'"
+    },
 ]

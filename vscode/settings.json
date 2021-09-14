@@ -57,6 +57,10 @@
         {
             "before": ["<leader>", "t", "h"],
             "commands": ["workbench.action.previousEditor"]
+        },
+        {
+            "before": ["<leader>", "r", "a"],
+            "commands": ["editor.action.formatDocument"]
         }
     ],
     "vim.insertModeKeyBindings": [
@@ -75,6 +79,11 @@
             "commands": ["editor.action.outdentLines"]
         },
     ],
+    "vim.handleKeys": {
+        "<C-c>": false,
+        "<C-v>": false,
+        "<C-x>": false
+    },
     "editor.wordWrap": "off",
     "editor.rulers": [120],
     "editor.tabCompletion": "on",
@@ -89,4 +98,5 @@
     "window.openFilesInNewWindow": "on",
     "workbench.editor.enablePreview": false,
     "ccls.cache.directory": "/tmp/.ccls",
+    "cSpell.enabled": false,
 }
