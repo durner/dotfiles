@@ -214,8 +214,8 @@ let g:airline_powerline_fonts = 1
 set fillchars+=stl:\ ,stlnc:\
 
 "NERDTREE
-map <F5> :NERDTreeToggle<CR>
-imap <F5> <C-\><C-O>:NERDTreeToggle<CR>
+map <F7> :NERDTreeToggle<CR>
+imap <F7> <C-\><C-O>:NERDTreeToggle<CR>
 let g:NERDTreeShowHidden = 1
 let NERDTreeQuitOnOpen= 1
 
@@ -228,12 +228,12 @@ autocmd Filetype c,cpp imap <silent> <leader>ra <C-\><C-O>:ClangFormat<CR>
 "Buffer & Windows Mgmt
 map <silent> <A-Left> :bp!<CR>
 map <silent> <A-Right> :bn!<CR>
-map <silent> <F6> :bp!<CR>
-map <silent> <F7> :bn!<CR>
+map <silent> <F5> :bp!<CR>
+map <silent> <F6> :bn!<CR>
 imap <silent> <A-Left> <C-\><C-O>:bp!<CR>
 imap <silent> <A-Right> <C-\><C-O>:bn!<CR>
-imap <silent> <F6> <C-\><C-O>:bp!<CR>
-imap <silent> <F7> <C-\><C-O>:bn!<CR>
+imap <silent> <F5> <C-\><C-O>:bp!<CR>
+imap <silent> <F6> <C-\><C-O>:bn!<CR>
 nnoremap <C-J> <C-W><C-J>
 nnoremap <C-K> <C-W><C-K>
 nnoremap <C-L> <C-W><C-L>
