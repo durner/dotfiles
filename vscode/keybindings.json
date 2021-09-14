@@ -28,10 +28,15 @@
     },
     {
         "key": "ctrl+n",
-        "command": "workbench.action.toggleSidebarVisibility",
+        "command": "workbench.action.toggleSidebarVisibility"
     },
     {
         "key": "ctrl+space",
-        "command": "workbench.action.showCommands",
+        "command": "workbench.action.showCommands"
+    },
+    {
+        "key": "f4",
+        "command": "C_Cpp.SwitchHeaderSource",
+        "when": "editorTextFocus && editorLangId == 'c' || editorTextFocus && editorLangId == 'cpp' || editorTextFocus && editorLangId == 'cuda-cpp'"
     }
 ]

@@ -75,7 +75,9 @@
             "commands": ["editor.action.outdentLines"]
         },
     ],
-    "editor.wordWrap": "on",
+    "editor.wordWrap": "off",
+    "editor.rulers": [120],
+    "editor.tabCompletion": "on",
     "cmake.configureOnOpen": true,
     "cmake.buildDirectory" : "${workspaceRoot}/bin/${buildType}",
     "editor.codeLens": false,
@@ -86,4 +88,5 @@
     },
     "window.openFilesInNewWindow": "on",
     "workbench.editor.enablePreview": false,
+    "ccls.cache.directory": "/tmp/.ccls",
 }

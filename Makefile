@@ -52,6 +52,14 @@ install-ls-scala:
   		-o  ~/.local/bin/metals-vim -f
 	rm coursier
 #---------------------------------------------------------------------------
+install-vscode:
+	yay -Syyu visual-studio-code-bin
+	@sh -c "[ ! -L ~/.config/Code/User/settings.json ] || rm ~/.config/Code/User/settings.json;"
+	@sh -c "[ ! -L ~/.config/Code/User/keybindings.json ] || rm ~/.config/Code/User/keybindings.json;"
+	@cp ${MAKEFILE_DIR}vscode/settings.json ~/.config/Code/User/
+	@cp ${MAKEFILE_DIR}vscode/keybindings.json ~/.config/Code/User/
+	cat ${MAKEFILE_DIR}vscode/extensions_list.txt | xargs -n 1 code --install-extension
+#---------------------------------------------------------------------------
 install-symlinks:
 	@mkdir -p ~/.config
 	@mkdir -p ~/.local
