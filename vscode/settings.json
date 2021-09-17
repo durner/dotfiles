@@ -11,14 +11,6 @@
     "vim.leader": ",",
     "vim.normalModeKeyBindingsNonRecursive": [
         {
-            "before": [":", "w"],
-            "commands": ["workbench.action.files.save"]
-        },
-        {
-            "before": [":", "q"],
-            "commands": ["workbench.action.closeFile"]
-        },
-        {
             "before": ["<leader>", "f"],
             "commands": ["workbench.action.gotoSymbol"]
         },
@@ -61,12 +53,34 @@
         {
             "before": ["<leader>", "r", "a"],
             "commands": ["editor.action.formatDocument"]
+        },
+        {
+            "before": ["<leader>", "l", "b"],
+            "after": ["i", "/", "/", "<ESC>", "7", "5", "a", "-", "<ESC>", "<CR>"]
+        },
+        {
+            "before": ["<C-v>"],
+            "after": ["a"],
+            "commands": ["editor.action.clipboardPasteAction"]
+        },
+        {
+            "before": ["<leader>", "l", "h"],
+            "commands": [":nohl"]
+        },
+        {
+            "before": ["<leader>", "l", "s"],
+            "commands": ["cSpell.toggleEnableForGlobal"]
         }
     ],
     "vim.insertModeKeyBindings": [
         {
             "before": ["j", "k"],
             "after": ["<Esc>"]
+        },
+        {
+            "before": ["<C-v>"],
+            "after": [],
+            "commands": ["editor.action.clipboardPasteAction"]
         }
     ],
     "vim.visualModeKeyBindingsNonRecursive": [
@@ -78,10 +92,26 @@
             "before": ["<"],
             "commands": ["editor.action.outdentLines"]
         },
+        {
+            "before": ["<C-v>"],
+            "after":  [],
+            "commands": ["editor.action.clipboardPasteAction"]
+        },
+        {
+            "before": ["/", "/"],
+            "after": ["y", "/", "<C-R>", "\"", "<CR>", "\""]
+        },
+        {
+            "before": ["<leader>", "l", "h"],
+            "commands": [":noh"]
+        },
+        {
+            "before": ["<leader>", "l", "s"],
+            "commands": ["cSpell.toggleEnableForGlobal"]
+        }
     ],
     "vim.handleKeys": {
         "<C-c>": false,
-        "<C-v>": false,
         "<C-x>": false
     },
     "editor.wordWrap": "off",
@@ -90,8 +120,6 @@
     "cmake.configureOnOpen": true,
     "cmake.buildDirectory" : "${workspaceRoot}/bin/${buildType}",
     "editor.codeLens": false,
-    "editor.renderWhitespace": "boundary",
-    "workbench.colorTheme": "Default Light+",
     "[cpp]": {
         "editor.defaultFormatter": "xaver.clang-format"
     },
@@ -99,4 +127,11 @@
     "workbench.editor.enablePreview": false,
     "ccls.cache.directory": "/tmp/.ccls",
     "cSpell.enabled": false,
+    "editor.fontFamily": "'FiraCode Nerd Font Mono', 'Droid Sans Mono', 'monospace', monospace, 'Droid Sans Fallback'",
+    "workbench.colorTheme": "Visual Studio Light",
+    "C_Cpp.autocomplete": "Disabled",
+    "C_Cpp.formatting": "Disabled",
+    "C_Cpp.errorSquiggles": "Disabled",
+    "C_Cpp.intelliSenseEngine": "Disabled"
 }
+

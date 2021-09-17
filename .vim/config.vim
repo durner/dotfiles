@@ -254,8 +254,8 @@ vmap <C-v> "_dP
 imap <C-v> <C-r><C-o>+
 
 " seach and delete results
-map <silent> <F9> :noh<CR>
-imap <silent> <F9> <C-\><C-O>:noh<CR>
+map <silent> <leader>lh :noh<CR>
+imap <silent> <leader>lh <C-\><C-O>:noh<CR>
 vnoremap // y/<C-R>"<CR>
 
 "GENERAL

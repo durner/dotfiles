@@ -54,6 +54,7 @@ install-ls-scala:
 #---------------------------------------------------------------------------
 install-vscode:
 	yay -Syyu visual-studio-code-bin
+	@mkdir -p ~/.config/Code/User
 	@sh -c "[ ! -L ~/.config/Code/User/settings.json ] || rm ~/.config/Code/User/settings.json;"
 	@sh -c "[ ! -L ~/.config/Code/User/keybindings.json ] || rm ~/.config/Code/User/keybindings.json;"
 	@cp ${MAKEFILE_DIR}vscode/settings.json ~/.config/Code/User/
