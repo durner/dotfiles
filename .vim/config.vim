@@ -44,6 +44,8 @@ call plug#end()
 "    autocmd!
 "    autocmd ColorScheme nord highlight Comment ctermfg=13 guifg='#EBCB8B'
 "augroup END
+" Syntax cpp Highlighting for Light Themes
+let g:lsp_cxx_hl_light_bg = 1
 " Automatic syntax highlight "
 syntax on
 set termguicolors
@@ -158,7 +160,6 @@ let g:LanguageClient_serverCommands = {
     \   'scala': ['metals-vim'],
     \ }
 let g:LanguageClient_useVirtualText = "No"
-let g:lsp_cxx_hl_light_bg = 1
 set formatexpr=LanguageClient_textDocument_rangeFormatting()
 nnoremap <leader>ry :call LanguageClient#textDocument_hover()<CR>
 nnoremap <leader>rk :call LanguageClient#textDocument_implementation()<CR>
@@ -166,8 +167,8 @@ nnoremap <leader>rj :call LanguageClient#textDocument_definition()<CR>
 nnoremap <leader>rf :call LanguageClient#textDocument_references()<CR>
 nnoremap <leader>rF :call LanguageClient#textDocument_references({'includeDeclaration': v:false})<CR>
 nnoremap <leader>rp :call LanguageClient#textDocument_documentSymbol()<CR>
-map <F12> :call LanguageClient#textDocument_definition()<CR>
-imap <F12> <C-\><C-O>:call LanguageClient#textDocument_definition()<CR>
+map <F3> :call LanguageClient#textDocument_definition()<CR>
+imap <F3> <C-\><C-O>:call LanguageClient#textDocument_definition()<CR>
 nnoremap <leader>rn :call LanguageClient#textDocument_rename()<CR>
 " bases
 nnoremap <leader>rb :call LanguageClient#findLocations({'method':'$ccls/inheritance'})<cr>
@@ -254,8 +255,9 @@ vmap <C-v> "_dP
 imap <C-v> <C-r><C-o>+
 
 " seach and delete results
+map <silent> <F9> :noh<CR>
 map <silent> <leader>lh :noh<CR>
-imap <silent> <leader>lh <C-\><C-O>:noh<CR>
+imap <silent> <F9> <C-\><C-O>:noh<CR>
 vnoremap // y/<C-R>"<CR>
 
 "GENERAL
@@ -281,20 +283,5 @@ command! -bang -nargs=* Gitgrepi
   \ call fzf#vim#grep(
   \   'git grep -i --line-number '.shellescape(<q-args>), 0,
   \   { 'dir': systemlist('git rev-parse --show-toplevel')[0] }, <bang>0)
-
-"let g:fzf_colors =
-"\ { 'fg':      ['fg', 'Normal'],
-"  \ 'bg':      ['bg', 'Normal'],
-"  \ 'hl':      ['fg', 'Comment'],
-"  \ 'fg+':     ['fg', 'CursorLine', 'CursorColumn', 'Normal'],
-"  \ 'bg+':     ['bg', 'CursorLine', 'CursorColumn'],
-"  \ 'hl+':     ['fg', 'Statement'],
-"  \ 'info':    ['fg', 'PreProc'],
-"  \ 'border':  ['fg', 'Ignore'],
-"  \ 'prompt':  ['fg', 'Conditional'],
-"  \ 'pointer': ['fg', 'Exception'],
-"  \ 'marker':  ['fg', 'Keyword'],
-"  \ 'spinner': ['fg', 'Label'],
-"  \ 'header':  ['fg', 'Comment'] }
 
 let g:clang_format#detect_style_file = 1

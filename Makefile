@@ -11,12 +11,14 @@ CCLS_INSTALL_PREFIX := ~/.local
 SCALA_METALS := org.scalameta:metals_2.12:0.9.8
 #---------------------------------------------------------------------------
 install-minimal:
-	yay -Syyu curl neovim clang llvm gcc python python-pip cmake tmux
+	@sh -c "[ -f /etc/arch-release ] && yay -Syyu --needed curl neovim clang llvm gcc python python-pip cmake tmux git || echo 'OS is not Arch';"
+	@sh -c "[ -f /etc/lsb-release ] && sudo apt install curl neovim clang llvm llvm-dev gcc python3 python3-pip cmake tmux cmake-curses-gui git || echo 'OS is not Ubuntu';"
 	#yay -Syyu nvm
 	#nvm install node
 #---------------------------------------------------------------------------
 install-desktop:
-	yay -Syyu vlc inkscape gimp thunderbird chromium texlive-core libreoffice tlp aspell-de aspell-en hunspell-de hunspell-en_us
+	@sh -c "[ -f /etc/arch-release ] && yay -Syyu --needed vlc inkscape gimp thunderbird chromium texlive-core libreoffice aspell-de aspell-en hunspell-de hunspell-en_us || echo 'OS is not Arch';"
+	@sh -c "[ -f /etc/lsb-release ] && sudo apt install vlc inkscape gimp thunderbird chromium-browser texlive libreoffice aspell-de aspell-en hunspell-de-de hunspell-en-us || echo 'OS is not Ubuntu';"
 #---------------------------------------------------------------------------
 install-fzf:
 	if [ ! -d $(FZF_DIR) ]; then \
@@ -53,10 +55,10 @@ install-ls-scala:
 	rm coursier
 #---------------------------------------------------------------------------
 install-vscode:
-	yay -Syyu visual-studio-code-bin
+	@sh -c "[ -f /etc/arch-release ] && yay -Syyu visual-studio-code-bin || echo 'OS is not Arch';"
 	@mkdir -p ~/.config/Code/User
-	@sh -c "[ ! -L ~/.config/Code/User/settings.json ] || rm ~/.config/Code/User/settings.json;"
-	@sh -c "[ ! -L ~/.config/Code/User/keybindings.json ] || rm ~/.config/Code/User/keybindings.json;"
+	@sh -c "[ ! -f ~/.config/Code/User/settings.json ] || rm ~/.config/Code/User/settings.json;"
+	@sh -c "[ ! -f ~/.config/Code/User/keybindings.json ] || rm ~/.config/Code/User/keybindings.json;"
 	@cp ${MAKEFILE_DIR}vscode/settings.json ~/.config/Code/User/
 	@cp ${MAKEFILE_DIR}vscode/keybindings.json ~/.config/Code/User/
 	cat ${MAKEFILE_DIR}vscode/extensions_list.txt | xargs -n 1 code --install-extension
@@ -78,7 +80,7 @@ install-symlinks:
 	@cp -a ${MAKEFILE_DIR}.vim/* ~/.config/nvim/
 	@cp ${MAKEFILE_DIR}.shell_prompt.sh ~/
 #---------------------------------------------------------------------------
-install-ls: install-ls-general install-ls-ts install-ls-ccls install-ls-scala
+install-ls: install-ls-general install-ls-ccls install-ls-scala
 #---------------------------------------------------------------------------
 install: install-minimal install-fzf install-symlinks install-ls
 #---------------------------------------------------------------------------

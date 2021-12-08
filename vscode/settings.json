@@ -1,6 +1,4 @@
 {
-    "window.zoomLevel": 0,
-    "workbench.activityBar.visible": true,
     "vim.easymotion": true,
     "vim.sneak": true,
     "vim.incsearch": true,
@@ -10,10 +8,6 @@
     "vim.hlsearch": true,
     "vim.leader": ",",
     "vim.normalModeKeyBindingsNonRecursive": [
-        {
-            "before": ["<leader>", "f"],
-            "commands": ["workbench.action.gotoSymbol"]
-        },
         {
             "before": ["<leader>", "w", "v"],
             "commands": ["workbench.action.splitEditorRight"]
@@ -39,8 +33,20 @@
             "commands": ["ccls.inheritanceHierarchy", "ccls.inheritanceHierarchy.focus"]
         },
         {
+            "before": ["<leader>", "r", "b"],
+            "commands": ["ccls.showBase"]
+        },
+        {
             "before": ["<leader>", "r", "c"],
-            "commands": ["ccls.callHierarchy", "ccls.callHierarchy.focus"]
+            "commands": ["ccls.call.useCallees", "ccls.callHierarchy.focus"]
+        },
+        {
+            "before": ["<leader>", "r", "v"],
+            "commands": ["ccls.call.useCallers", "ccls.callHierarchy.focus"]
+        },
+        {
+            "before": ["<leader>", "r", "n"],
+            "commands": ["editor.action.rename"]
         },
         {
             "before": ["<leader>", "t", "l"],
@@ -59,12 +65,11 @@
             "after": ["i", "/", "/", "<ESC>", "7", "5", "a", "-", "<ESC>", "<CR>"]
         },
         {
-            "before": ["<C-v>"],
-            "after": ["a"],
-            "commands": ["editor.action.clipboardPasteAction"]
+            "before": ["<leader>", "l", "h"],
+            "commands": [":nohl"]
         },
         {
-            "before": ["<leader>", "l", "h"],
+            "before": ["<leader>", "l", "l"],
             "commands": [":nohl"]
         },
         {
@@ -99,11 +104,15 @@
         },
         {
             "before": ["/", "/"],
-            "after": ["y", "/", "<C-R>", "\"", "<CR>", "\""]
+            "after": ["y", "/", "<C-R>", "\"", "<CR>"]
         },
         {
             "before": ["<leader>", "l", "h"],
             "commands": [":noh"]
+        },
+        {
+            "before": ["<leader>", "l", "l"],
+            "commands": [":nohl"]
         },
         {
             "before": ["<leader>", "l", "s"],
@@ -111,27 +120,48 @@
         }
     ],
     "vim.handleKeys": {
+        "<C-f>": false,
+        "<C-j>": false,
         "<C-c>": false,
         "<C-x>": false
     },
-    "editor.wordWrap": "off",
-    "editor.rulers": [120],
-    "editor.tabCompletion": "on",
+    "vim.statusBarColorControl": true,
     "cmake.configureOnOpen": true,
-    "cmake.buildDirectory" : "${workspaceRoot}/bin/${buildType}",
-    "editor.codeLens": false,
+    "cmake.buildDirectory" : "${workspaceRoot}/build/${buildType}",
     "[cpp]": {
         "editor.defaultFormatter": "xaver.clang-format"
     },
     "window.openFilesInNewWindow": "on",
-    "workbench.editor.enablePreview": false,
+    "window.zoomLevel": 1,
     "ccls.cache.directory": "/tmp/.ccls",
-    "cSpell.enabled": false,
-    "editor.fontFamily": "'FiraCode Nerd Font Mono', 'Droid Sans Mono', 'monospace', monospace, 'Droid Sans Fallback'",
+    "workbench.activityBar.visible": true,
     "workbench.colorTheme": "Visual Studio Light",
+    "workbench.colorCustomizations": {
+        "statusBar.background": "#005f5f",
+        "statusBar.noFolderBackground": "#005f5f",
+        "statusBar.debuggingBackground": "#005f5f"
+    },
+    "explorer.confirmDelete": false,
     "C_Cpp.autocomplete": "Disabled",
     "C_Cpp.formatting": "Disabled",
     "C_Cpp.errorSquiggles": "Disabled",
-    "C_Cpp.intelliSenseEngine": "Disabled"
+    "C_Cpp.intelliSenseEngine": "Disabled",
+    "C_Cpp.codeFolding": "Disabled",
+    "cSpell.enabled": false,
+    "editor.fontFamily": "'FiraCode Nerd Font Mono', 'Droid Sans Mono', 'monospace', monospace, 'Droid Sans Fallback'",
+    "editor.wordWrap": "off",
+    "editor.rulers": [120],
+    "editor.codeLens": false,
+    "editor.tabCompletion": "on",
+    "editor.autoClosingBrackets": "never",
+    "editor.tabSize": 4,
+    "editor.cursorStyle": "line",
+    "editor.insertSpaces": true,
+    "editor.lineNumbers": "on",
+    "editor.wordSeparators": "/\\()\"':,.;<>~!@#$%^&*|+=[]{}`?-",
+    "editor.occurrencesHighlight": false,
+    "editor.selectionHighlight": false,
+    "editor.fontSize": 12,
+    "editor.minimap.enabled": false
 }
 
