@@ -148,6 +148,7 @@ set mouse=a
 let s:ccls_settings = {
          \ 'highlight': { 'lsRanges' : v:true },
          \ "cache": {"directory": "/tmp/ccls-cache"},
+         \ "clang": { "extraArgs": [ "-std=c++20" ] }
          \ }
 let s:ccls_command = ['ccls', '--log-file=/tmp/ccls.log', '-init=' . json_encode(s:ccls_settings)]
 let g:LanguageClient_serverCommands = {
@@ -161,15 +162,16 @@ let g:LanguageClient_serverCommands = {
     \ }
 let g:LanguageClient_useVirtualText = "No"
 set formatexpr=LanguageClient_textDocument_rangeFormatting()
-nnoremap <leader>ry :call LanguageClient#textDocument_hover()<CR>
-nnoremap <leader>rk :call LanguageClient#textDocument_implementation()<CR>
-nnoremap <leader>rj :call LanguageClient#textDocument_definition()<CR>
-nnoremap <leader>rf :call LanguageClient#textDocument_references()<CR>
+nmap <silent> <leader>ry <Plug>(lcn-hover)
+nmap <silent> <leader>rk <Plug>(lcn-implementation)
+nmap <silent> <leader>rj <Plug>(lcn-definition)
+nmap <silent> <leader>rf <Plug>(lcn-references)
 nnoremap <leader>rF :call LanguageClient#textDocument_references({'includeDeclaration': v:false})<CR>
-nnoremap <leader>rp :call LanguageClient#textDocument_documentSymbol()<CR>
-map <F3> :call LanguageClient#textDocument_definition()<CR>
-imap <F3> <C-\><C-O>:call LanguageClient#textDocument_definition()<CR>
-nnoremap <leader>rn :call LanguageClient#textDocument_rename()<CR>
+nmap <silent> <leader>rp <Plug>(lcn-code-action)
+map <silent> <F3><Plug>(lcn-definition)
+imap <silent> <F3> <C-\><C-O><Plug>(lcn-definition)
+
+nmap <silent> <leader>rn <Plug>(lcn-rename)
 " bases
 nnoremap <leader>rb :call LanguageClient#findLocations({'method':'$ccls/inheritance'})<cr>
 " derived

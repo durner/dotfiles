@@ -11,8 +11,8 @@ CCLS_INSTALL_PREFIX := ~/.local
 SCALA_METALS := org.scalameta:metals_2.12:0.9.8
 #---------------------------------------------------------------------------
 install-minimal:
-	@sh -c "[ -f /etc/arch-release ] && yay -Syyu --needed curl neovim clang llvm gcc python python-pip cmake tmux git || echo 'OS is not Arch';"
-	@sh -c "[ -f /etc/lsb-release ] && sudo apt install curl neovim clang llvm llvm-dev gcc python3 python3-pip cmake tmux cmake-curses-gui git || echo 'OS is not Ubuntu';"
+	@sh -c "[ -f /etc/arch-release ] && yay -Syyu --needed curl neovim clang llvm gcc python python-pip cmake tmux git ccache ninja cgdb rr || echo 'OS is not Arch';"
+	@sh -c "[ -f /etc/lsb-release ] && sudo apt install curl neovim clang llvm llvm-dev gcc python3 python3-pip cmake tmux cmake-curses-gui git ninja-build ccache cgdb || echo 'OS is not Ubuntu';"
 	#yay -Syyu nvm
 	#nvm install node
 #---------------------------------------------------------------------------
