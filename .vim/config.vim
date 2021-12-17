@@ -1,25 +1,44 @@
 call plug#begin('~/.vim/plugged')
 
+"General
 Plug 'embear/vim-localvimrc'
-Plug 'scrooloose/nerdtree'
+Plug 'ntnn/vim-diction'
+
+"FZF
 Plug '~/.repos/fzf'
 Plug 'junegunn/fzf.vim'
-Plug 'tpope/vim-fugitive'
+
+"Design Plugins
+Plug 'vim-airline/vim-airline-themes'
+Plug 'scrooloose/nerdtree'
 Plug 'vim-airline/vim-airline'
-Plug 'lervag/vimtex'
 Plug 'edkolev/promptline.vim'
 Plug 'bronson/vim-trailing-whitespace'
+
+"CPP
 Plug 'derekwyatt/vim-fswitch'
 Plug 'octol/vim-cpp-enhanced-highlight'
-Plug 'vim-airline/vim-airline-themes'
-Plug 'jalvesaq/Nvim-R'
 Plug 'rhysd/vim-clang-format'
-Plug 'jackguo380/vim-lsp-cxx-highlight'
+
+"R
+Plug 'jalvesaq/Nvim-R'
+
+"Tex
+Plug 'lervag/vimtex'
+
+"TS
 Plug 'HerringtonDarkholme/yats.vim'
+
+"Git
+Plug 'tpope/vim-fugitive'
 "Plug 'airblade/vim-gitgutter'
-Plug 'ntnn/vim-diction'
+
 "Language Server
 Plug 'autozimu/LanguageClient-neovim', { 'branch': 'next', 'do': 'bash install.sh' }
+Plug 'Shougo/echodoc.vim'
+Plug 'jackguo380/vim-lsp-cxx-highlight'
+
+"Deoplete
 if has('nvim')
     Plug 'Shougo/deoplete.nvim', {
         \ 'do': ':UpdateRemotePlugins',
@@ -30,23 +49,27 @@ else
     Plug 'roxma/vim-hug-neovim-rpc'
 endif
 
-"nord-template colors
+"Color plugins
+"nord
 "Plug 'arcticicestudio/nord-vim'
 "editplus
 Plug 'godlygeek/csapprox'
 "candid
 Plug 'flrnprz/candid.vim'
-" tender
+"tender
 Plug 'jacoborus/tender.vim'
 call plug#end()
-" Colorsheme
+
+"Colorsheme
 "augroup nord-overrides
 "    autocmd!
 "    autocmd ColorScheme nord highlight Comment ctermfg=13 guifg='#EBCB8B'
 "augroup END
+
 " Syntax cpp Highlighting for Light Themes
 let g:lsp_cxx_hl_light_bg = 1
-" Automatic syntax highlight "
+
+" Automatic syntax highlight
 syntax on
 set termguicolors
 "set background=dark
@@ -64,6 +87,7 @@ colorscheme editplus
 let mapleader = ','
 let g:mapleader = ','
 
+" encoding
 set encoding=utf8
 set enc=utf-8
 "set termencoding=utf-8
@@ -114,6 +138,7 @@ set ignorecase
 set smartcase
 set colorcolumn=0
 
+" misc settings
 set nocompatible
 set noequalalways
 set showmatch
@@ -141,8 +166,11 @@ if has('gui')
   set belloff=all
   set guifont=FiraCodeRetina\ 13
 endif
-
 set mouse=a
+
+" Echodoc
+set noshowmode
+let g:echodoc_enable_at_startup = 1
 
 " LanguageClient
 let s:ccls_settings = {
@@ -160,17 +188,27 @@ let g:LanguageClient_serverCommands = {
     \   'typescriptreact': ['typescript-language-server', '--stdio'],
     \   'scala': ['metals-vim'],
     \ }
+let g:LanguageClient_showCompletionDocs = 0
 let g:LanguageClient_useVirtualText = "No"
 set formatexpr=LanguageClient_textDocument_rangeFormatting()
-nmap <silent> <leader>ry <Plug>(lcn-hover)
-nmap <silent> <leader>rk <Plug>(lcn-implementation)
-nmap <silent> <leader>rj <Plug>(lcn-definition)
-nmap <silent> <leader>rf <Plug>(lcn-references)
-nnoremap <leader>rF :call LanguageClient#textDocument_references({'includeDeclaration': v:false})<CR>
-nmap <silent> <leader>rp <Plug>(lcn-code-action)
-map <silent> <F3><Plug>(lcn-definition)
-imap <silent> <F3> <C-\><C-O><Plug>(lcn-definition)
 
+" show hovered symbol info
+nmap <silent> <leader>ry <Plug>(lcn-hover)
+" goto impl
+nmap <silent> <leader>rk <Plug>(lcn-implementation)
+" goto
+nmap <silent> <leader>rj <Plug>(lcn-definition)
+" references
+nmap <silent> <leader>rf <Plug>(lcn-references)
+" references
+nnoremap <leader>rF :call LanguageClient#textDocument_references({'includeDeclaration': v:false})<CR>
+" quick fix
+nmap <silent> <leader>rp <Plug>(lcn-code-action)
+" goto
+map <silent> <F3> <Plug>(lcn-definition)
+" goto
+imap <silent> <F3> <C-\><C-O><Plug>(lcn-definition)
+" rename
 nmap <silent> <leader>rn <Plug>(lcn-rename)
 " bases
 nnoremap <leader>rb :call LanguageClient#findLocations({'method':'$ccls/inheritance'})<cr>
@@ -181,10 +219,11 @@ nnoremap <leader>rv :call LanguageClient#findLocations({'method':'$ccls/call'})<
 " callee
 nnoremap <leader>rc :call LanguageClient#findLocations({'method':'$ccls/call','callee':v:true})<cr>
 
-set completeopt-=preview
-
 " Deoplete
+set completeopt-=preview
 let g:deoplete#enable_at_startup = 1
+call deoplete#custom#source('_', 'max_abbr_width', 120)
+call deoplete#custom#source('_', 'max_menu_width', 20)
 call deoplete#custom#source('_', 'disabled_syntaxes', ['Comment', 'String'])
 call deoplete#custom#option({ 'ignore_case': v:true, 'ignore_sources': { 'cpp': ['buffer', 'around', 'tag', 'member']}})
 function! s:check_back_space() abort "{{{
@@ -195,7 +234,10 @@ inoremap <silent><expr> <TAB>
         \ pumvisible() ? "\<C-n>" :
         \ <SID>check_back_space() ? "\<TAB>" :
         \ deoplete#manual_complete()
+
+" Show diagnostics
 set signcolumn=yes
+set shortmess+=c
 
 "FSHere
 map <F4> :FSHere<CR>
