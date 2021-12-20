@@ -54,6 +54,9 @@ install-ls-scala:
   		-o  ~/.local/bin/metals-vim -f
 	rm coursier
 #---------------------------------------------------------------------------
+install-vim:
+	curl -fLo ~/.vim/autoload/plug.vim --create-dirs https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
+#---------------------------------------------------------------------------
 install-vscode:
 	@sh -c "[ -f /etc/arch-release ] && yay -Syyu visual-studio-code-bin || echo 'OS is not Arch';"
 	@mkdir -p ~/.config/Code/User
@@ -81,11 +84,11 @@ install-symlinks:
 	@cp ${MAKEFILE_DIR}.shell_prompt.sh ~/
 #---------------------------------------------------------------------------
 install-vim-deoplete:
-	@mkdir =p ~/.vim/plugged/deoplete.nvim/rplugin/python3/deoplete/filter/
+	@mkdir -p ~/.vim/plugged/deoplete.nvim/rplugin/python3/deoplete/filter/
 	@mv ~/.config/nvim/converter_truncate_abbr_cpp.py ~/.vim/plugged/deoplete.nvim/rplugin/python3/deoplete/filter/
 #---------------------------------------------------------------------------
 install-ls: install-ls-general install-ls-ccls install-ls-scala
 #---------------------------------------------------------------------------
-install: install-minimal install-fzf install-symlinks install-ls
+install: install-minimal install-fzf install-symlinks install-vim install-ls
 #---------------------------------------------------------------------------
 install-gui: install install-desktop
