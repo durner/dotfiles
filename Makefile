@@ -80,6 +80,10 @@ install-symlinks:
 	@cp -a ${MAKEFILE_DIR}.vim/* ~/.config/nvim/
 	@cp ${MAKEFILE_DIR}.shell_prompt.sh ~/
 #---------------------------------------------------------------------------
+install-vim-deoplete:
+	@mkdir =p ~/.vim/plugged/deoplete.nvim/rplugin/python3/deoplete/filter/
+	@mv ~/.config/nvim/converter_truncate_abbr_cpp.py ~/.vim/plugged/deoplete.nvim/rplugin/python3/deoplete/filter/
+#---------------------------------------------------------------------------
 install-ls: install-ls-general install-ls-ccls install-ls-scala
 #---------------------------------------------------------------------------
 install: install-minimal install-fzf install-symlinks install-ls

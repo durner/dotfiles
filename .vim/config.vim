@@ -226,6 +226,8 @@ call deoplete#custom#source('_', 'max_abbr_width', 120)
 call deoplete#custom#source('_', 'max_menu_width', 20)
 call deoplete#custom#source('_', 'disabled_syntaxes', ['Comment', 'String'])
 call deoplete#custom#option({ 'ignore_case': v:true, 'ignore_sources': { 'cpp': ['buffer', 'around', 'tag', 'member']}})
+call deoplete#custom#source('_', 'converters', ['converter_remove_overlap', 'converter_truncate_abbr_cpp',
+            \ 'converter_truncate_kind', 'converter_truncate_info', 'converter_truncate_menu'])
 function! s:check_back_space() abort "{{{
     let col = col('.') - 1
     return !col || getline('.')[col - 1]  =~ '\s'
