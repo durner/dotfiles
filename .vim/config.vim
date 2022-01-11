@@ -67,16 +67,16 @@ call plug#end()
 "augroup END
 
 " Syntax cpp Highlighting for Light Themes
-let g:lsp_cxx_hl_light_bg = 1
+let g:lsp_cxx_hl_light_bg = 0
 
 " Automatic syntax highlight
 syntax on
 set termguicolors
 "set background=dark
 "colorscheme nord
-colorscheme editplus
+"colorscheme editplus
 "colorscheme candid
-"colorscheme tender
+colorscheme tender
 " Learn it the hard way
 " noremap <Up> <NOP>
 " noremap <Down> <NOP>
@@ -91,7 +91,7 @@ let g:mapleader = ','
 set encoding=utf8
 set enc=utf-8
 "set termencoding=utf-8
-"let g:cpp_class_scope_highlight = 1
+let g:cpp_class_scope_highlight = 1
 
 " Reload files modified outside of Vim "
 set autoread
@@ -208,6 +208,10 @@ nmap <silent> <leader>rp <Plug>(lcn-code-action)
 map <silent> <F3> <Plug>(lcn-definition)
 " goto
 imap <silent> <F3> <C-\><C-O><Plug>(lcn-definition)
+" goto
+nmap <silent> <C-LeftMouse> <Plug>(lcn-definition)
+" goto
+imap <silent> <C-LeftMouse> <C-\><C-O><Plug>(lcn-definition)
 " rename
 nmap <silent> <leader>rn <Plug>(lcn-rename)
 " bases
@@ -318,6 +322,20 @@ autocmd BufWinEnter * if line2byte(line("$") + 1) > 1000000 | syntax clear | end
 
 "fzf
 nnoremap <C-P> :Files<CR>
+let g:fzf_colors =
+\ { 'fg':      ['fg', 'Normal'],
+  \ 'bg':      ['bg', 'Normal'],
+  \ 'hl':      ['fg', 'Comment'],
+  \ 'fg+':     ['fg', 'CursorLine', 'CursorColumn', 'Normal'],
+  \ 'bg+':     ['bg', 'CursorLine', 'CursorColumn'],
+  \ 'hl+':     ['fg', 'Statement'],
+  \ 'info':    ['fg', 'PreProc'],
+  \ 'border':  ['fg', 'Ignore'],
+  \ 'prompt':  ['fg', 'Conditional'],
+  \ 'pointer': ['fg', 'Exception'],
+  \ 'marker':  ['fg', 'Keyword'],
+  \ 'spinner': ['fg', 'Label'],
+  \ 'header':  ['fg', 'Comment'] }
 
 " Command for git grep
 " - fzf#vim#grep(command, with_column, [options], [fullscreen])
@@ -331,3 +349,4 @@ command! -bang -nargs=* Gitgrepi
   \   { 'dir': systemlist('git rev-parse --show-toplevel')[0] }, <bang>0)
 
 let g:clang_format#detect_style_file = 1
+
