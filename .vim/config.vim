@@ -51,13 +51,15 @@ endif
 
 "Color plugins
 "nord
-"Plug 'arcticicestudio/nord-vim'
+Plug 'arcticicestudio/nord-vim'
 "editplus
 Plug 'godlygeek/csapprox'
 "candid
 Plug 'flrnprz/candid.vim'
 "tender
 Plug 'jacoborus/tender.vim'
+"one
+Plug 'sonph/onehalf', { 'rtp': 'vim' }
 call plug#end()
 
 "Colorsheme
@@ -67,7 +69,7 @@ call plug#end()
 "augroup END
 
 " Syntax cpp Highlighting for Light Themes
-let g:lsp_cxx_hl_light_bg = 0
+let g:lsp_cxx_hl_light_bg = 1
 
 " Automatic syntax highlight
 syntax on
@@ -76,7 +78,8 @@ set termguicolors
 "colorscheme nord
 "colorscheme editplus
 "colorscheme candid
-colorscheme tender
+"colorscheme tender
+colorscheme onehalflight
 " Learn it the hard way
 " noremap <Up> <NOP>
 " noremap <Down> <NOP>
@@ -164,7 +167,7 @@ if has('gui')
   "set guioptions-=r  "scrollbar
   "set guioptions-=L  "scrollbar
   set belloff=all
-  set guifont=FiraCodeRetina\ 13
+  set guifont=FiraCodeRetina\ 12
 endif
 set mouse=a
 
@@ -193,17 +196,17 @@ let g:LanguageClient_useVirtualText = "No"
 set formatexpr=LanguageClient_textDocument_rangeFormatting()
 
 " show hovered symbol info
-nmap <silent> <leader>ry <Plug>(lcn-hover)
+nmap <silent> <leader>y <Plug>(lcn-hover)
 " goto impl
-nmap <silent> <leader>rk <Plug>(lcn-implementation)
+nmap <silent> <leader>k <Plug>(lcn-implementation)
 " goto
-nmap <silent> <leader>rj <Plug>(lcn-definition)
+nmap <silent> <leader>j <Plug>(lcn-definition)
 " references
-nmap <silent> <leader>rf <Plug>(lcn-references)
+nmap <silent> <leader>r <Plug>(lcn-references)
 " references
-nnoremap <leader>rF :call LanguageClient#textDocument_references({'includeDeclaration': v:false})<CR>
+nnoremap <leader>R :call LanguageClient#textDocument_references({'includeDeclaration': v:false})<CR>
 " quick fix
-nmap <silent> <leader>rp <Plug>(lcn-code-action)
+nmap <silent> <leader>p <Plug>(lcn-code-action)
 " goto
 map <silent> <F3> <Plug>(lcn-definition)
 " goto
@@ -213,15 +216,15 @@ nmap <silent> <C-LeftMouse> <Plug>(lcn-definition)
 " goto
 imap <silent> <C-LeftMouse> <C-\><C-O><Plug>(lcn-definition)
 " rename
-nmap <silent> <leader>rn <Plug>(lcn-rename)
+nmap <silent> <leader>n <Plug>(lcn-rename)
 " bases
-nnoremap <leader>rb :call LanguageClient#findLocations({'method':'$ccls/inheritance'})<cr>
+nnoremap <leader>b :call LanguageClient#findLocations({'method':'$ccls/inheritance'})<cr>
 " derived
-nnoremap <leader>rh :call LanguageClient#findLocations({'method':'$ccls/inheritance','derived':v:true})<cr>
+nnoremap <leader>h :call LanguageClient#findLocations({'method':'$ccls/inheritance','derived':v:true})<cr>
 " caller
-nnoremap <leader>rv :call LanguageClient#findLocations({'method':'$ccls/call'})<cr>
+nnoremap <leader>c :call LanguageClient#findLocations({'method':'$ccls/call'})<cr>
 " callee
-nnoremap <leader>rc :call LanguageClient#findLocations({'method':'$ccls/call','callee':v:true})<cr>
+nnoremap <leader>e :call LanguageClient#findLocations({'method':'$ccls/call','callee':v:true})<cr>
 
 " Deoplete
 set completeopt-=preview
@@ -271,10 +274,10 @@ let g:NERDTreeShowHidden = 1
 let NERDTreeQuitOnOpen= 1
 
 "Autoformater
-map <silent> <leader>ra mzgg=G`z<CR>
-autocmd Filetype c,cpp map <silent> <leader>ra :ClangFormat<CR>
-imap <silent> <leader>ra <C-\><C-O>mzgg=G`z<CR>
-autocmd Filetype c,cpp imap <silent> <leader>ra <C-\><C-O>:ClangFormat<CR>
+map <silent> <leader>a mzgg=G`z<CR>
+autocmd Filetype c,cpp map <silent> <leader>a :ClangFormat<CR>
+imap <silent> <leader>a <C-\><C-O>mzgg=G`z<CR>
+autocmd Filetype c,cpp imap <silent> <leader>a <C-\><C-O>:ClangFormat<CR>
 
 "Buffer & Windows Mgmt
 map <silent> <A-Left> :bp!<CR>
@@ -290,11 +293,6 @@ nnoremap <C-K> <C-W><C-K>
 nnoremap <C-L> <C-W><C-L>
 nnoremap <C-H> <C-W><C-H>
 
-"location list
-nnoremap <leader>ln :lne<CR>
-nnoremap <leader>lp :lp<CR>
-nnoremap <leader>lc :lcl<CR>
-
 " allows to stamp in visual mode
 vnoremap p "_dP
 
@@ -306,13 +304,13 @@ imap <C-v> <C-r><C-o>+
 
 " seach and delete results
 map <silent> <F9> :noh<CR>
-map <silent> <leader>lh :noh<CR>
+map <silent> <leader>x :noh<CR>
 imap <silent> <F9> <C-\><C-O>:noh<CR>
 vnoremap // y/<C-R>"<CR>
 
 "GENERAL
 inoremap jk <Esc>
-nnoremap <leader>lb i//<ESC>75a-<ESC><CR>
+nnoremap <leader>- i//<ESC>75a-<ESC><CR>
 
 "RTags
 autocmd Filetype c,cpp silent! execute "!rc -w $(pwd) >/dev/null 2>&1" | redraw!
@@ -322,6 +320,10 @@ autocmd BufWinEnter * if line2byte(line("$") + 1) > 1000000 | syntax clear | end
 
 "fzf
 nnoremap <C-P> :Files<CR>
+nnoremap <silent> <leader>t :Buffers<CR>
+nnoremap <silent> <leader>f :Files<CR>
+nnoremap <silent> <leader>g :GFiles<CR>
+nnoremap <silent> <leader>l :BLines<CR>
 let g:fzf_colors =
 \ { 'fg':      ['fg', 'Normal'],
   \ 'bg':      ['bg', 'Normal'],
