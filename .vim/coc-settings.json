@@ -1,0 +1,36 @@
+{
+    "languageserver": {
+        "ccls": {
+            "command": "ccls",
+            "filetypes": [
+                "c",
+                "cpp",
+                "objc",
+                "objcpp"
+            ],
+            "rootPatterns": [
+                ".ccls",
+                "compile_commands.json",
+                ".vim/",
+                ".git/",
+                ".hg/"
+            ],
+            "initializationOptions": {
+                "highlight": {
+                    "lsRanges": true
+                },
+                "clang": {
+                    "extraArgs": [ "-std=c++20" ]
+                },
+                "cache": {
+                    "directory": "/tmp/ccls-cache"
+                }
+            }
+        },
+        "metals": {
+            "command": "metals-vim",
+            "rootPatterns": ["build.sbt"],
+            "filetypes": ["scala", "sbt"]
+        }
+    }
+}

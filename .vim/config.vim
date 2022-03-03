@@ -33,21 +33,12 @@ Plug 'HerringtonDarkholme/yats.vim'
 Plug 'tpope/vim-fugitive'
 "Plug 'airblade/vim-gitgutter'
 
-"Language Server
-Plug 'autozimu/LanguageClient-neovim', { 'branch': 'next', 'do': 'bash install.sh' }
-Plug 'Shougo/echodoc.vim'
-Plug 'jackguo380/vim-lsp-cxx-highlight'
+"Coc
+Plug 'neoclide/coc.nvim', {'branch': 'release'}
+Plug 'antoinemadec/coc-fzf'
 
-"Deoplete
-if has('nvim')
-    Plug 'Shougo/deoplete.nvim', {
-        \ 'do': ':UpdateRemotePlugins',
-        \ }
-else
-    Plug 'Shougo/deoplete.nvim'
-    Plug 'roxma/nvim-yarp'
-    Plug 'roxma/vim-hug-neovim-rpc'
-endif
+"Language Server cxx extension
+Plug 'jackguo380/vim-lsp-cxx-highlight'
 
 "Color plugins
 "nord
@@ -142,6 +133,7 @@ set smartcase
 set colorcolumn=0
 
 " misc settings
+set updatetime=300
 set nocompatible
 set noequalalways
 set showmatch
@@ -171,78 +163,63 @@ if has('gui')
 endif
 set mouse=a
 
-" Echodoc
-set noshowmode
-let g:echodoc_enable_at_startup = 1
+" Coc completion
+" install extensions
+let g:coc_global_extensions = ['coc-pyright', 'coc-java', 'coc-rust-analyzer', 'coc-r-lsp']
 
-" LanguageClient
-let s:ccls_settings = {
-         \ 'highlight': { 'lsRanges' : v:true },
-         \ "cache": {"directory": "/tmp/ccls-cache"},
-         \ "clang": { "extraArgs": [ "-std=c++20" ] }
-         \ }
-let s:ccls_command = ['ccls', '--log-file=/tmp/ccls.log', '-init=' . json_encode(s:ccls_settings)]
-let g:LanguageClient_serverCommands = {
-    \   'python': ['pyls'],
-    \   'c': s:ccls_command,
-    \   'cpp': s:ccls_command,
-    \   'typescript': ['typescript-language-server', '--stdio'],
-    \   'typescript.tsx': ['typescript-language-server', '--stdio'],
-    \   'typescriptreact': ['typescript-language-server', '--stdio'],
-    \   'scala': ['metals-vim'],
-    \ }
-let g:LanguageClient_showCompletionDocs = 0
-let g:LanguageClient_useVirtualText = "No"
-set formatexpr=LanguageClient_textDocument_rangeFormatting()
+" Use tab for trigger completion with characters ahead and navigate.
+" Use command ':verbose imap <tab>' to make sure tab is not mapped by other plugin.
+inoremap <silent><expr> <TAB>
+      \ pumvisible() ? "\<C-n>" :
+      \ <SID>check_back_space() ? "\<TAB>" :
+      \ coc#refresh()
+inoremap <expr><S-TAB> pumvisible() ? "\<C-p>" : "\<C-h>"
+
+function! s:check_back_space() abort
+  let col = col('.') - 1
+  return !col || getline('.')[col - 1]  =~# '\s'
+endfunction
+
+" Use <c-space> to trigger completion.
+if has('nvim')
+  inoremap <silent><expr> <c-space> coc#refresh()
+else
+  inoremap <silent><expr> <c-@> coc#refresh()
+endif
+
+" Make <CR> auto-select the first completion
+inoremap <silent><expr> <cr> pumvisible() ? coc#_select_confirm()
+                              \: "\<C-g>u\<CR>\<c-r>=coc#on_enter()\<CR>"
 
 " show hovered symbol info
-nmap <silent> <leader>y <Plug>(lcn-hover)
+nmap <silent> <leader>y :call CocAction('definitionHover')<cr>
 " goto impl
-nmap <silent> <leader>k <Plug>(lcn-implementation)
+nmap <silent> <leader>k <Plug>(coc-implementation)
 " goto
-nmap <silent> <leader>j <Plug>(lcn-definition)
+nmap <silent> <leader>j <Plug>(coc-definition)
 " references
-nmap <silent> <leader>r <Plug>(lcn-references)
-" references
-nnoremap <leader>R :call LanguageClient#textDocument_references({'includeDeclaration': v:false})<CR>
+nmap <silent> <leader>r <Plug>(coc-references)
 " quick fix
-nmap <silent> <leader>p <Plug>(lcn-code-action)
+nmap <silent> <leader>p <Plug>(coc-codeaction)
 " goto
-map <silent> <F3> <Plug>(lcn-definition)
+map <silent> <F3> <Plug>(coc-definition)
 " goto
-imap <silent> <F3> <C-\><C-O><Plug>(lcn-definition)
+imap <silent> <F3> <C-\><C-O><Plug>(coc-definition)
 " goto
-nmap <silent> <C-LeftMouse> <Plug>(lcn-definition)
+nmap <silent> <C-LeftMouse> <Plug>(coc-definition)
 " goto
-imap <silent> <C-LeftMouse> <C-\><C-O><Plug>(lcn-definition)
+imap <silent> <C-LeftMouse> <C-\><C-O><Plug>(coc-definition)
 " rename
-nmap <silent> <leader>n <Plug>(lcn-rename)
+nmap <silent> <leader>n <Plug>(coc-rename)
 " bases
-nnoremap <leader>b :call LanguageClient#findLocations({'method':'$ccls/inheritance'})<cr>
+nnoremap <silent> <leader>b :call CocLocations('ccls', '$ccls/inheritance')<cr>
 " derived
-nnoremap <leader>h :call LanguageClient#findLocations({'method':'$ccls/inheritance','derived':v:true})<cr>
+nnoremap <silent> <leader>h :call CocLocations('ccls', '$ccls/inheritance', {'derived': v:true})<cr>
 " caller
-nnoremap <leader>c :call LanguageClient#findLocations({'method':'$ccls/call'})<cr>
+nnoremap <silent> <leader>c :call CocLocations('ccls', '$ccls/call')<cr>
 " callee
-nnoremap <leader>e :call LanguageClient#findLocations({'method':'$ccls/call','callee':v:true})<cr>
+nnoremap <silent> <leader>e :call CocLocations('ccls', '$ccls/call',  {'callee': v:true})<cr>
 
-" Deoplete
-set completeopt-=preview
-let g:deoplete#enable_at_startup = 1
-call deoplete#custom#source('_', 'max_abbr_width', 120)
-call deoplete#custom#source('_', 'max_menu_width', 20)
-call deoplete#custom#source('_', 'disabled_syntaxes', ['Comment', 'String'])
-call deoplete#custom#option({ 'ignore_case': v:true, 'ignore_sources': { 'cpp': ['buffer', 'around', 'tag', 'member']}})
-call deoplete#custom#source('_', 'converters', ['converter_remove_overlap', 'converter_truncate_abbr_cpp',
-            \ 'converter_truncate_kind', 'converter_truncate_info', 'converter_truncate_menu'])
-function! s:check_back_space() abort "{{{
-    let col = col('.') - 1
-    return !col || getline('.')[col - 1]  =~ '\s'
-endfunction"}}}
-inoremap <silent><expr> <TAB>
-        \ pumvisible() ? "\<C-n>" :
-        \ <SID>check_back_space() ? "\<TAB>" :
-        \ deoplete#manual_complete()
 
 " Show diagnostics
 set signcolumn=yes
