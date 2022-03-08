@@ -19,6 +19,8 @@ install-minimal:
 install-desktop:
 	@sh -c "[ -f /etc/arch-release ] && yay -Syyu --needed vlc inkscape gimp thunderbird chromium texlive-core libreoffice aspell-de aspell-en hunspell-de hunspell-en_us || echo 'OS is not Arch';"
 	@sh -c "[ -f /etc/lsb-release ] && sudo apt install vlc inkscape gimp thunderbird chromium-browser texlive libreoffice aspell-de aspell-en hunspell-de-de hunspell-en-us || echo 'OS is not Ubuntu';"
+	sudo cp ${MAKEFILE_DIR}/iptables/iptables.rules /etc/iptables/iptables.rules
+	sudo cp ${MAKEFILE_DIR}/iptables/ip6tables.rules /etc/iptables/ip6tables.rules
 #---------------------------------------------------------------------------
 install-fzf:
 	if [ ! -d $(FZF_DIR) ]; then \
@@ -83,12 +85,8 @@ install-symlinks:
 	@cp -a ${MAKEFILE_DIR}.vim/* ~/.config/nvim/
 	@cp ${MAKEFILE_DIR}.shell_prompt.sh ~/
 #---------------------------------------------------------------------------
-install-vim-deoplete:
-	@mkdir -p ~/.vim/plugged/deoplete.nvim/rplugin/python3/deoplete/filter/
-	@mv ~/.config/nvim/converter_truncate_abbr_cpp.py ~/.vim/plugged/deoplete.nvim/rplugin/python3/deoplete/filter/
-#---------------------------------------------------------------------------
 install-ls: install-ls-general install-ls-ccls install-ls-scala
 #---------------------------------------------------------------------------
 install: install-minimal install-fzf install-symlinks install-vim install-ls
 #---------------------------------------------------------------------------
-install-gui: install install-desktop
+install-gui: install install-desktop install-vscode
