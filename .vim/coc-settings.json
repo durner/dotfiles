@@ -20,7 +20,7 @@
                     "lsRanges": true
                 },
                 "clang": {
-                    "extraArgs": [ "-std=c++20" ]
+                    "extraArgs": [ "-I./include", "-I./src", "-isystem" ]
                 },
                 "cache": {
                     "directory": "/tmp/ccls-cache"

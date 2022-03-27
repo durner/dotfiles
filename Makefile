@@ -19,8 +19,11 @@ install-minimal:
 install-desktop:
 	@sh -c "[ -f /etc/arch-release ] && yay -Syyu --needed vlc inkscape gimp thunderbird chromium texlive-core libreoffice aspell-de aspell-en hunspell-de hunspell-en_us || echo 'OS is not Arch';"
 	@sh -c "[ -f /etc/lsb-release ] && sudo apt install vlc inkscape gimp thunderbird chromium-browser texlive libreoffice aspell-de aspell-en hunspell-de-de hunspell-en-us || echo 'OS is not Ubuntu';"
+	@cp ${MAKEFILE_DIR}/scripts/screen-scaling.sh ~/.screen-scaling.sh
+	@cp ${MAKEFILE_DIR}/.bash_profile ~/
 	sudo cp ${MAKEFILE_DIR}/iptables/iptables.rules /etc/iptables/iptables.rules
 	sudo cp ${MAKEFILE_DIR}/iptables/ip6tables.rules /etc/iptables/ip6tables.rules
+	sudo cp ${MAKEFILE_DIR}/scripts/wifi-wired-exclusive.sh /etc/NetworkManager/dispatcher.d/70-wifi-wired-exclusive.sh
 #---------------------------------------------------------------------------
 install-fzf:
 	if [ ! -d $(FZF_DIR) ]; then \
