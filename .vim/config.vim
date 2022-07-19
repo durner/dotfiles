@@ -225,6 +225,17 @@ nnoremap <silent> <leader>e :call CocLocations('ccls', '$ccls/call',  {'callee':
 set signcolumn=yes
 set shortmess+=c
 
+" R
+function! s:customNvimRMappings()
+   nmap <buffer> <Leader>pr <Plug>RStart
+   imap <buffer> <Leader>pr <Plug>RStart
+   vmap <buffer> <Leader>pr <Plug>RStart
+endfunction
+augroup myNvimR
+   au!
+   autocmd filetype r call s:customNvimRMappings()
+augroup end
+
 "FSHere
 map <F4> :FSHere<CR>
 imap <F4> <C-\><C-O>:FSHere<CR>

@@ -14,14 +14,24 @@ SCALING="1"
 FORCE_FONT_DPI="96"
 SCREEN_SCALE_FACTORS="eDP-1=1;HDMI-1=1;DP-1=1;"
 
-if lsusb | grep "Microsoft"
+if lsusb | grep "Maxxter"
 then
-    echo "Microsoft keyboard present"
+    echo "At Home"
     # settings for 150% scale
-    CURSOR_SIZE="30"
+    CURSOR_SIZE="32"
     SCALING="1.5"
     FORCE_FONT_DPI="144"
     SCREEN_SCALE_FACTORS="eDP-1=1.5;HDMI-1=1.5;DP-1=1.5;"
+else
+    if lsusb | grep "Microsoft"
+    then
+        echo "At Work"
+        # settings for 125% scale
+        CURSOR_SIZE="24"
+        SCALING="1.25"
+        FORCE_FONT_DPI="120"
+        SCREEN_SCALE_FACTORS="eDP-1=1.25;HDMI-1=1.25;DP-1=1.25;"
+    fi
 fi
 
 kwriteconfig5 --file $CURSOR_CONFIG --group "Mouse" --key "cursorSize" "$CURSOR_SIZE"
