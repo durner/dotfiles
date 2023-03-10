@@ -14,6 +14,7 @@ Plug 'scrooloose/nerdtree'
 Plug 'vim-airline/vim-airline'
 Plug 'edkolev/promptline.vim'
 Plug 'bronson/vim-trailing-whitespace'
+Plug 'ryanoasis/vim-devicons'
 
 "CPP
 Plug 'derekwyatt/vim-fswitch'
@@ -31,7 +32,7 @@ Plug 'HerringtonDarkholme/yats.vim'
 
 "Git
 Plug 'tpope/vim-fugitive'
-"Plug 'airblade/vim-gitgutter'
+Plug 'airblade/vim-gitgutter'
 
 "Coc
 Plug 'neoclide/coc.nvim', {'branch': 'release'}
@@ -41,36 +42,31 @@ Plug 'antoinemadec/coc-fzf'
 Plug 'jackguo380/vim-lsp-cxx-highlight'
 
 "Color plugins
-"nord
-Plug 'arcticicestudio/nord-vim'
 "editplus
 Plug 'godlygeek/csapprox'
 "candid
 Plug 'flrnprz/candid.vim'
 "tender
 Plug 'jacoborus/tender.vim'
+"sonokai
+Plug 'sainnhe/sonokai'
 "one
 Plug 'sonph/onehalf', { 'rtp': 'vim' }
 call plug#end()
 
-"Colorsheme
-"augroup nord-overrides
-"    autocmd!
-"    autocmd ColorScheme nord highlight Comment ctermfg=13 guifg='#EBCB8B'
-"augroup END
-
 " Syntax cpp Highlighting for Light Themes
-let g:lsp_cxx_hl_light_bg = 1
+"let g:lsp_cxx_hl_light_bg = 1
 
 " Automatic syntax highlight
 syntax on
 set termguicolors
 "set background=dark
-"colorscheme nord
 "colorscheme editplus
 "colorscheme candid
 "colorscheme tender
-colorscheme onehalflight
+"colorscheme onehalflight
+colorscheme sonokai
+
 " Learn it the hard way
 " noremap <Up> <NOP>
 " noremap <Down> <NOP>
@@ -168,14 +164,20 @@ set mouse=a
 let g:coc_global_extensions = ['coc-pyright', 'coc-java', 'coc-rust-analyzer', 'coc-r-lsp']
 
 " Use tab for trigger completion with characters ahead and navigate.
-" Use command ':verbose imap <tab>' to make sure tab is not mapped by other plugin.
+" NOTE: Use command ':verbose imap <tab>' to make sure tab is not mapped by
+" other plugin before putting this into your config.
 inoremap <silent><expr> <TAB>
-      \ pumvisible() ? "\<C-n>" :
-      \ <SID>check_back_space() ? "\<TAB>" :
+      \ coc#pum#visible() ? coc#pum#next(1):
+      \ CheckBackspace() ? "\<Tab>" :
       \ coc#refresh()
-inoremap <expr><S-TAB> pumvisible() ? "\<C-p>" : "\<C-h>"
+inoremap <expr><S-TAB> coc#pum#visible() ? coc#pum#prev(1) : "\<C-h>"
 
-function! s:check_back_space() abort
+" Make <CR> to accept selected completion item or notify coc.nvim to format
+" <C-g>u breaks current undo, please make your own choice.
+inoremap <silent><expr> <CR> coc#pum#visible() ? coc#pum#confirm()
+                              \: "\<C-g>u\<CR>\<c-r>=coc#on_enter()\<CR>"
+
+function! CheckBackspace() abort
   let col = col('.') - 1
   return !col || getline('.')[col - 1]  =~# '\s'
 endfunction
@@ -187,9 +189,6 @@ else
   inoremap <silent><expr> <c-@> coc#refresh()
 endif
 
-" Make <CR> auto-select the first completion
-inoremap <silent><expr> <cr> pumvisible() ? coc#_select_confirm()
-                              \: "\<C-g>u\<CR>\<c-r>=coc#on_enter()\<CR>"
 
 " show hovered symbol info
 nmap <silent> <leader>y :call CocAction('definitionHover')<cr>
@@ -209,7 +208,7 @@ imap <silent> <F3> <C-\><C-O><Plug>(coc-definition)
 nmap <silent> <C-LeftMouse> <Plug>(coc-definition)
 " goto
 imap <silent> <C-LeftMouse> <C-\><C-O><Plug>(coc-definition)
-" rename
+" rename (use :wa and :tabo afterwards)
 nmap <silent> <leader>n <Plug>(coc-rename)
 " bases
 nnoremap <silent> <leader>b :call CocLocations('ccls', '$ccls/inheritance')<cr>
@@ -219,7 +218,8 @@ nnoremap <silent> <leader>h :call CocLocations('ccls', '$ccls/inheritance', {'de
 nnoremap <silent> <leader>c :call CocLocations('ccls', '$ccls/call')<cr>
 " callee
 nnoremap <silent> <leader>e :call CocLocations('ccls', '$ccls/call',  {'callee': v:true})<cr>
-
+" error next
+nmap <silent> <leader>m <Plug>(coc-diagnostic-next-error)
 
 " Show diagnostics
 set signcolumn=yes
