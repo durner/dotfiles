@@ -43,25 +43,6 @@ install-ls-ccls:
 install-ls-general:
 	pip3 install neovim python-language-server compiledb
 #---------------------------------------------------------------------------
-install-ls-ts:
-	sudo npm i -g typescript-language-server
-#---------------------------------------------------------------------------
-install-ls-scala:
-	curl -fLo coursier https://git.io/coursier-cli-linux
-	chmod +x coursier
-	./coursier bootstrap \
-  		--java-opt -Xss4m \
-  		--java-opt -Xms100m \
-  		--java-opt -Dmetals.client=LanguageClient-neovim \
-		${SCALA_METALS} \
-  		-r bintray:scalacenter/releases \
-  		-r sonatype:snapshots \
-  		-o  ~/.local/bin/metals-vim -f
-	rm coursier
-#---------------------------------------------------------------------------
-install-vim:
-	curl -fLo ~/.local/share/nvim/site/autoload/plug.vim --create-dirs https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
-#---------------------------------------------------------------------------
 install-vscode:
 	@sh -c "[ -f /etc/arch-release ] && yay -Syyu visual-studio-code-bin || echo 'OS is not Arch';"
 	@mkdir -p ~/.config/Code/User
@@ -77,7 +58,6 @@ install-symlinks:
 	@sh -c "rm -f ~/.clang-format;"
 	@sh -c "rm -rf ~/.tmux;"
 	@sh -c "rm -f ~/.tmux.conf;"
-	@sh -c "rm -rf ~/.vim;"
 	@sh -c "rm -rf ~/.config/nvim;"
 	@sh -c "rm -f ~/.shell_prompt.sh;"
 	@mkdir -p ~/.config/nvim
@@ -85,11 +65,11 @@ install-symlinks:
 	@cp ${MAKEFILE_DIR}.clang-format ~/
 	@cp -a ${MAKEFILE_DIR}.tmux ~/
 	@cp ${MAKEFILE_DIR}.tmux.conf ~/
-	@cp -a ${MAKEFILE_DIR}.vim/* ~/.config/nvim/
+	@cp -a ${MAKEFILE_DIR}nvim/* ~/.config/nvim/
 	@cp ${MAKEFILE_DIR}.shell_prompt.sh ~/
 #---------------------------------------------------------------------------
-install-ls: install-ls-general install-ls-ccls install-ls-scala
+install-ls: install-ls-general
 #---------------------------------------------------------------------------
-install: install-minimal install-fzf install-symlinks install-vim install-ls
+install: install-minimal install-fzf install-symlinks install-ls
 #---------------------------------------------------------------------------
 install-gui: install install-desktop install-vscode
