@@ -11,13 +11,13 @@ CCLS_INSTALL_PREFIX := ~/.local
 SCALA_METALS := org.scalameta:metals_2.12:0.9.8
 #---------------------------------------------------------------------------
 install-minimal:
-	@sh -c "[ -f /etc/arch-release ] && yay -Syyu --needed curl neovim clang llvm gcc python python-pip cmake tmux git ccache ninja cgdb rr npm || echo 'OS is not Arch';"
+	@sh -c "[ -f /etc/arch-release ] && yay -Syyu --needed curl neovim clang llvm lldb gcc python python-pip cmake tmux git ccache ninja cgdb rr npm || echo 'OS is not Arch';"
 	@sh -c "[ -f /etc/lsb-release ] && sudo apt install curl neovim clang llvm llvm-dev gcc python3 python3-pip cmake tmux cmake-curses-gui git ninja-build ccache cgdb libclang-dev lld liburing-dev npm  || echo 'OS is not Ubuntu';"
 	#yay -Syyu nvm
 	#nvm install node
 #---------------------------------------------------------------------------
 install-desktop:
-	@sh -c "[ -f /etc/arch-release ] && yay -Syyu --needed vlc inkscape gimp thunderbird chromium texlive-core libreoffice aspell-de aspell-en hunspell-de hunspell-en_us || echo 'OS is not Arch';"
+	@sh -c "[ -f /etc/arch-release ] && yay -Syyu --needed vlc inkscape gimp thunderbird chromium texlive-core libreoffice aspell-de aspell-en hunspell-de hunspell-en_us borg butt || echo 'OS is not Arch';"
 	@sh -c "[ -f /etc/lsb-release ] && sudo apt install vlc inkscape gimp thunderbird chromium-browser texlive libreoffice aspell-de aspell-en hunspell-de-de hunspell-en-us || echo 'OS is not Ubuntu';"
 	@cp ${MAKEFILE_DIR}/scripts/screen-scaling.sh ~/.screen-scaling.sh
 	@cp ${MAKEFILE_DIR}/.bash_profile ~/

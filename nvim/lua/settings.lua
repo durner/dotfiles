@@ -33,6 +33,9 @@ require'lspconfig'.grammarly.setup({
 })
 
 vim.cmd [[
+" Spell Checking
+hi SpellBad ctermfg=red guifg=red
+
 "Large File Handling
 autocmd BufWinEnter * if line2byte(line("$") + 1) > 1000000 | syntax clear | endif
 ]]

@@ -21,7 +21,11 @@ return require("lazy").setup({
             require("catppuccin").setup({
                 flavour = "latte",
                 integrations = {
-                    barbar = true,
+                    cmp = true,
+                    gitsigns = true,
+                    nvimtree = true,
+                    treesitter = true,
+                    barbar = true
                 }
             })
             vim.cmd.colorscheme "catppuccin"
@@ -32,7 +36,11 @@ return require("lazy").setup({
         event = "VeryLazy",
         config = function()
             require("lualine").setup({
-                options = {globalstatus = true, icons_enabled = true},
+                options = {
+                    globalstatus = true,
+                    icons_enabled = true,
+                    theme = "catppuccin"
+                },
                 sections = {lualine_a = {{'filename', path = 1}}}
             })
         end
@@ -52,6 +60,13 @@ return require("lazy").setup({
                 show_first_indent_level = false,
                 show_trailing_blankline_indent = false
             })
+        end
+    }, {
+        "folke/which-key.nvim",
+        event = "VeryLazy",
+        init = function()
+            vim.o.timeout = true
+            vim.o.timeoutlen = 300
         end
     }, -- }
     -- { Search
@@ -95,6 +110,10 @@ return require("lazy").setup({
             require("mason-lspconfig").setup({
                 ensure_installed = {"bashls", "pyright", "texlab", "grammarly"}
             })
+            require('mason-nvim-dap').setup({
+                ensure_installed = {'python', 'cppdbg'},
+                handlers = {}
+            })
 
             require("mason-lspconfig").setup_handlers({
                 function(server_name)
@@ -105,7 +124,29 @@ return require("lazy").setup({
             })
         end
     }, -- }
-    -- { Completion
+    -- { DAP
+    {
+        'https://github.com/jay-babu/mason-nvim-dap.nvim',
+        dependencies = {
+            'https://github.com/mfussenegger/nvim-dap',
+            'https://github.com/rcarriga/nvim-dap-ui',
+            'https://github.com/theHamsta/nvim-dap-virtual-text'
+        },
+        config = function()
+            local dap = require 'dap'
+            local dapui = require 'dapui'
+            dapui.setup()
+            dap.listeners.after.event_initialized["dapui_config"] = function()
+                dapui.open({})
+            end
+            dap.listeners.before.event_terminated["dapui_config"] = function()
+                dapui.close({})
+            end
+            dap.listeners.before.event_exited["dapui_config"] = function()
+                dapui.close({})
+            end
+        end
+    }, -- { Completion
     {
         -- Auto completion
         "https://github.com/hrsh7th/nvim-cmp",
@@ -135,6 +176,7 @@ return require("lazy").setup({
             local luasnip = require("luasnip")
 
             cmp.setup({
+                completion = { autocomplete = false },
                 mapping = cmp.mapping.preset.insert({
                     ["<CR>"] = cmp.mapping.confirm(),
                     ["<Tab>"] = cmp.mapping(function(fallback)
@@ -183,10 +225,14 @@ return require("lazy").setup({
         end
     }, {
         -- Copilot
-        "zbirenbaum/copilot.lua",
+        "https://github.com/zbirenbaum/copilot.lua",
         event = "InsertEnter",
-        opts = {suggestion = {enable = true}, panel = {enable = false}}
+        config = function()
+            require("copilot").setup({suggestion = {enable = true}, panel = {enable = false}})
+            vim.cmd(":Copilot disable")
+        end
     }, -- }
+    -- }
     -- { Syntax highlighting
     {
         -- Treesitter
