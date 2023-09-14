@@ -75,15 +75,13 @@ alias ll='ls -alF'
 alias la='ls -A'
 alias l='ls -CF'
 
-# Typescript
-source /usr/share/nvm/init-nvm.sh
-
 # General aliases
 source ~/.shell_prompt.sh
 alias nmake='cmake -GNinja'
 alias nnmake='ccmake -GNinja'
 alias mj='nice make -j `getconf _NPROCESSORS_ONLN`'
 alias svim="sudo -E vim"
+alias vim="nvim"
 export VISUAL="vim"
 export EDITOR="vim"
 alias open="xdg-open 2>/dev/null"

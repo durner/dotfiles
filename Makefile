@@ -17,13 +17,17 @@ install-minimal:
 	#nvm install node
 #---------------------------------------------------------------------------
 install-desktop:
-	@sh -c "[ -f /etc/arch-release ] && yay -Syyu --needed vlc inkscape gimp thunderbird chromium texlive-core libreoffice aspell-de aspell-en hunspell-de hunspell-en_us borg butt || echo 'OS is not Arch';"
+	@sh -c "[ -f /etc/arch-release ] && yay -Syyu --needed vlc inkscape gimp thunderbird chromium texlive-core texlive-bibtexextra texlive-latex texlive-latexextra texlive-fontsextra texlive-mathscience biber libreoffice aspell-de aspell-en hunspell-de hunspell-en_us borg butt || echo 'OS is not Arch';"
 	@sh -c "[ -f /etc/lsb-release ] && sudo apt install vlc inkscape gimp thunderbird chromium-browser texlive libreoffice aspell-de aspell-en hunspell-de-de hunspell-en-us || echo 'OS is not Ubuntu';"
-	@cp ${MAKEFILE_DIR}/scripts/screen-scaling.sh ~/.screen-scaling.sh
-	@cp ${MAKEFILE_DIR}/.bash_profile ~/
 	sudo cp ${MAKEFILE_DIR}/iptables/iptables.rules /etc/iptables/iptables.rules
 	sudo cp ${MAKEFILE_DIR}/iptables/ip6tables.rules /etc/iptables/ip6tables.rules
+	sudo systemctl enable iptables
 	sudo cp ${MAKEFILE_DIR}/scripts/wifi-wired-exclusive.sh /etc/NetworkManager/dispatcher.d/70-wifi-wired-exclusive.sh
+#---------------------------------------------------------------------------
+install-laptop:
+	@sh -c "[ -f /etc/arch-release ] && yay -Syyu --needed laptop-mode-tools ntfs-3g ttf-dejavu-nerd mattermost-desktop whatsapp-nativefier || echo 'OS is not Arch';"
+	sudo systemctl enable laptop-mode
+	sudo systemctl enable bluetooth
 #---------------------------------------------------------------------------
 install-fzf:
 	if [ ! -d $(FZF_DIR) ]; then \
@@ -41,7 +45,7 @@ install-ls-ccls:
 	cd $(CCLS_BUILD_DIR) && make install
 #---------------------------------------------------------------------------
 install-ls-general:
-	pip3 install neovim python-language-server compiledb
+	# pip3 install neovim python-language-server compiledb
 #---------------------------------------------------------------------------
 install-vscode:
 	@sh -c "[ -f /etc/arch-release ] && yay -Syyu visual-studio-code-bin || echo 'OS is not Arch';"
@@ -72,4 +76,4 @@ install-ls: install-ls-general
 #---------------------------------------------------------------------------
 install: install-minimal install-fzf install-symlinks install-ls
 #---------------------------------------------------------------------------
-install-gui: install install-desktop install-vscode
+install-gui: install install-desktop install-laptop
