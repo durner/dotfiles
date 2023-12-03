@@ -19,7 +19,7 @@ return require("lazy").setup({
         "https://github.com/catppuccin/nvim",
         config = function()
             require("catppuccin").setup({
-                flavour = "latte",
+                flavour = "macchiato",
                 integrations = {
                     cmp = true,
                     gitsigns = true,
@@ -50,17 +50,6 @@ return require("lazy").setup({
         init = function() vim.g.barbar_auto_setup = true end,
         opts = {},
         version = "^1.0.0"
-    }, {
-        -- Better indention
-        "https://github.com/lukas-reineke/indent-blankline.nvim",
-        event = {"BufReadPost", "BufNewFile"},
-        config = function()
-            require("indent_blankline").setup({
-                show_current_context = true,
-                show_first_indent_level = false,
-                show_trailing_blankline_indent = false
-            })
-        end
     }, {
         "folke/which-key.nvim",
         event = "VeryLazy",
@@ -253,16 +242,6 @@ return require("lazy").setup({
     }, -- }
     -- { Formatting
     {
-        -- Neoformat for clang-format
-        "https://github.com/sbdchd/neoformat",
-        cmd = "Neoformat",
-        config = function()
-            vim.g.neoformat_try_node_exe = true
-            vim.g.neoformat_basic_format_align = 1
-            vim.g.neoformat_basic_format_retab = 1
-            vim.g.neoformat_basic_format_trim = 1
-        end
-    }, {
         -- Better brackets
         'windwp/nvim-autopairs',
         event = "InsertEnter",

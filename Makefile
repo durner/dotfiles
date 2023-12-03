@@ -11,8 +11,8 @@ CCLS_INSTALL_PREFIX := ~/.local
 SCALA_METALS := org.scalameta:metals_2.12:0.9.8
 #---------------------------------------------------------------------------
 install-minimal:
-	@sh -c "[ -f /etc/arch-release ] && yay -Syyu --needed curl neovim clang llvm lldb gcc python python-pip cmake tmux git ccache ninja cgdb rr npm || echo 'OS is not Arch';"
-	@sh -c "[ -f /etc/lsb-release ] && sudo apt install curl neovim clang llvm llvm-dev gcc python3 python3-pip cmake tmux cmake-curses-gui git ninja-build ccache cgdb libclang-dev lld liburing-dev npm  || echo 'OS is not Ubuntu';"
+	@sh -c "[ -f /etc/arch-release ] && yay -Syyu --needed curl neovim wl-clipboard clang llvm lldb gcc python python-pip cmake tmux git ccache ninja cgdb rr npm || echo 'OS is not Arch';"
+	@sh -c "[ -f /etc/lsb-release ] && sudo apt install curl neovim wl-clipboard clang llvm llvm-dev gcc python3 python3-pip cmake tmux cmake-curses-gui git ninja-build ccache cgdb libclang-dev lld liburing-dev npm  || echo 'OS is not Ubuntu';"
 	#yay -Syyu nvm
 	#nvm install node
 #---------------------------------------------------------------------------
@@ -72,7 +72,7 @@ install-symlinks:
 	@cp -a ${MAKEFILE_DIR}nvim/* ~/.config/nvim/
 	@cp ${MAKEFILE_DIR}.shell_prompt.sh ~/
 #---------------------------------------------------------------------------
-install-ls: install-ls-general
+install-ls: install-ls-general install-ls-ccls
 #---------------------------------------------------------------------------
 install: install-minimal install-fzf install-symlinks install-ls
 #---------------------------------------------------------------------------

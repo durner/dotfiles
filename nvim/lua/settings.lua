@@ -28,10 +28,6 @@ require("ccls").setup({
     }
 })
 
-require'lspconfig'.grammarly.setup({
-    filetypes = {"markdown", "latex", "tex", "text"}
-})
-
 vim.cmd [[
 " Spell Checking
 hi SpellBad ctermfg=red guifg=red

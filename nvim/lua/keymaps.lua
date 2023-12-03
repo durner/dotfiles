@@ -22,7 +22,7 @@ wk.register({
             "<cmd>lua require('fzf-lua').live_grep({ cmd = 'git grep -i --line-number --column --color=always' })<cr>",
             "Git grep"
         },
-        a = {"<cmd>Neoformat<cr>", "Format"},
+        a = {"<cmd>lua vim.lsp.buf.format()<cr>", "Format"},
         v = {dap.toggle_breakpoint, "Toggle Breakpoint"},
         V = {
             function()
@@ -51,16 +51,6 @@ wk.register({
     ["<F12>"] = {"<cmd>noh<cr>", "Disable highlighting", mode = {"i", "n"}},
     ["//"] = {'y/<C-R>"<cr>', "Highlight underlying word", mode = {"v", "n"}}
 }, {nowait = true})
-
-if (vim.bo.filetype == 'c' or vim.bo.filetype == 'cpp') then
-    wk.register({
-        ["<leader>"] = { a = {"<cmd>Neoformat<cr>", "Format"} }
-    })
-else
-    wk.register({
-        ["<leader>"] = { a = {"mzgg=G`z<cr>", "Format"} }
-    })
-end
 
 vim.cmd [[
 " R
