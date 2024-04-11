@@ -19,7 +19,8 @@ return require("lazy").setup({
         "https://github.com/catppuccin/nvim",
         config = function()
             require("catppuccin").setup({
-                flavour = "macchiato",
+                -- flavour = "macchiato",
+                flavour = "latte",
                 integrations = {
                     cmp = true,
                     gitsigns = true,
@@ -117,6 +118,7 @@ return require("lazy").setup({
     {
         'https://github.com/jay-babu/mason-nvim-dap.nvim',
         dependencies = {
+            'https://github.com/nvim-neotest/nvim-nio',
             'https://github.com/mfussenegger/nvim-dap',
             'https://github.com/rcarriga/nvim-dap-ui',
             'https://github.com/theHamsta/nvim-dap-virtual-text'
