@@ -12,18 +12,18 @@ SCALA_METALS := org.scalameta:metals_2.12:0.9.8
 #---------------------------------------------------------------------------
 install-minimal:
 	@sh -c "[ -f /etc/arch-release ] && yay -Syyu --needed curl neovim wl-clipboard clang llvm lldb gcc python python-pip cmake tmux git ccache ninja cgdb rr npm ufw || echo 'OS is not Arch';"
-	@sh -c "[ -f /etc/lsb-release ] && sudo apt install curl neovim wl-clipboard clang llvm llvm-dev gcc python3 python3-pip cmake tmux cmake-curses-gui git ninja-build ccache cgdb libclang-dev lld liburing-dev npm ufw || echo 'OS is not Ubuntu';"
-	sudo systemctl enable ufw
-	sudo ufw default deny
-	sudo ufw limit ssh
-	sudo ufw enable
+	@sh -c "[ -f /etc/lsb-release ] && sudo apt install curl neovim wl-clipboard clang llvm llvm-dev gcc python3 python3-pip cmake tmux cmake-curses-gui git ninja-build ccache cgdb libclang-dev lld liburing-dev npm tree-sitter-cli|| echo 'OS is not Ubuntu';"
 	#yay -Syyu nvm
 	#nvm install node
 #---------------------------------------------------------------------------
 install-desktop:
 	@sh -c "[ -f /etc/arch-release ] && yay -Syyu --needed vlc inkscape gimp thunderbird chromium texlive-core texlive-bibtexextra texlive-latex texlive-latexextra texlive-fontsextra texlive-mathscience biber libreoffice aspell-de aspell-en hunspell-de hunspell-en_us borg butt || echo 'OS is not Arch';"
-	@sh -c "[ -f /etc/lsb-release ] && sudo apt install vlc inkscape gimp thunderbird chromium-browser texlive libreoffice aspell-de aspell-en hunspell-de-de hunspell-en-us || echo 'OS is not Ubuntu';"
+	@sh -c "[ -f /etc/lsb-release ] && sudo apt install vlc inkscape gimp thunderbird chromium-browser texlive libreoffice aspell-de aspell-en hunspell-de-de hunspell-en-us ufw || echo 'OS is not Ubuntu';"
 	sudo cp ${MAKEFILE_DIR}/scripts/wifi-wired-exclusive.sh /etc/NetworkManager/dispatcher.d/70-wifi-wired-exclusive.sh
+	sudo systemctl enable ufw
+	sudo ufw default deny
+	sudo ufw limit ssh
+	sudo ufw enable
 #---------------------------------------------------------------------------
 install-laptop:
 	@sh -c "[ -f /etc/arch-release ] && yay -Syyu --needed laptop-mode-tools ntfs-3g ttf-dejavu-nerd mattermost-desktop whatsapp-nativefier || echo 'OS is not Arch';"
