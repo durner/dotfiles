@@ -5,27 +5,56 @@ capabilities.clang = {}
 capabilities.clang.offsetEncoding = "utf-8"
 capabilities.clang.offset_encoding = "utf-8"
 
-local util = require("lspconfig.util")
-local server_config = {
-    filetypes = {"c", "cpp", "objc", "objcpp", "opencl", "hpp", "h"},
-    offset_encoding = "utf-8",
+require 'lspconfig'.clangd.setup {
     root_dir = function(fname)
-        return util.root_pattern("compile_commands.json", "compile_flags.txt",
-                                 ".git")(fname) or util.find_git_ancestor(fname)
+        return require("lspconfig.util").root_pattern(
+                "Makefile",
+                "configure.ac",
+                "configure.in",
+                "config.h.in",
+                "meson.build",
+                "meson_options.txt",
+                "build.ninja"
+            )(fname)
+            or require("lspconfig.util").root_pattern("compile_commands.json", "compile_flags.txt")(fname)
+            or require("lspconfig.util").find_git_ancestor(fname)
     end,
-    init_options = {
-        highlight = {lsRanges = true},
-        clang = {extraArgs = {"-I./include", "-I./src", "-isystem"}},
-        cache = {directory = "/tmp/.ccls-cache"}
+    capabilities = capabilities,
+    cmd = {
+        "clangd",
+        "--background-index",
+        "--clang-tidy",
+        "--header-insertion=iwyu",
+        "--completion-style=detailed",
+        "--function-arg-placeholders",
+        "--fallback-style=llvm",
+        "--path-mappings=/data/=/home/"
     },
-    capabilities = capabilities
-}
-require("ccls").setup({
-    lsp = {
-        lspconfig = server_config,
-        server = server_config,
-        codelens = {enable = true}
+    init_options = {
+        usePlaceholders = true,
+        completeUnimported = true,
+        clangdFileStatus = true
     }
+}
+
+local autocmd = vim.api.nvim_create_autocmd
+
+-- Remove whitespace on save
+autocmd("BufWritePre", {
+    pattern = "",
+    command = ":%s/\\s\\+$//e"
+})
+
+-- Auto format on save
+autocmd("BufWritePre", {
+    pattern = "",
+    command = ":silent lua vim.lsp.buf.format()"
+})
+
+-- Don't auto comment new lines
+autocmd("BufEnter", {
+    pattern = "",
+    command = "set fo-=c fo-=r fo-=o"
 })
 
 vim.cmd [[
