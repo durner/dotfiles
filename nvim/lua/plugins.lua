@@ -9,18 +9,30 @@ end
 vim.opt.rtp:prepend(lazypath)
 
 return require("lazy").setup({
+    -- { UI Style
     {
         -- UI components
         "https://github.com/MunifTanjim/nui.nvim",
         lazy = true
-    }, -- { UI Style
+    },
+    {
+        -- new ui for cmd
+        "folke/noice.nvim",
+        event = "VeryLazy",
+        opts = {
+        },
+        dependencies = {
+            "MunifTanjim/nui.nvim",
+            "rcarriga/nvim-notify",
+        }
+    },
     {
         -- catppuccin Theme
         "https://github.com/catppuccin/nvim",
         config = function()
             require("catppuccin").setup({
-                -- flavour = "macchiato",
-                flavour = "latte",
+                flavour = "macchiato",
+                --flavour = "latte",
                 integrations = {
                     cmp = true,
                     gitsigns = true,
@@ -31,7 +43,8 @@ return require("lazy").setup({
             })
             vim.cmd.colorscheme "catppuccin"
         end
-    }, {
+    },
+    {
         -- Airline style
         "https://github.com/nvim-lualine/lualine.nvim",
         event = "VeryLazy",
@@ -42,16 +55,18 @@ return require("lazy").setup({
                     icons_enabled = true,
                     theme = "catppuccin"
                 },
-                sections = {lualine_a = {{'filename', path = 1}}}
+                sections = { lualine_a = { { 'filename', path = 1 } } }
             })
         end
-    }, {
+    },
+    {
         "romgrk/barbar.nvim",
-        dependencies = {"nvim-tree/nvim-web-devicons"},
+        dependencies = { "nvim-tree/nvim-web-devicons" },
         init = function() vim.g.barbar_auto_setup = true end,
         opts = {},
         version = "^1.0.0"
-    }, {
+    },
+    {
         "folke/which-key.nvim",
         event = "VeryLazy",
         init = function()
@@ -64,14 +79,15 @@ return require("lazy").setup({
         -- FZF
         "ibhagwan/fzf-lua",
         config = function() require("fzf-lua").setup({}) end
-    }, {
+    },
+    {
         -- NVIM Tree
         "https://github.com/nvim-tree/nvim-tree.lua",
         version = "*",
         cmd = "NvimTreeToggle",
-        dependencies = {"nvim-tree/nvim-web-devicons"},
+        dependencies = { "nvim-tree/nvim-web-devicons" },
         config = function()
-            require("nvim-tree").setup({view = {adaptive_size = true}})
+            require("nvim-tree").setup({ view = { adaptive_size = true } })
         end
     }, -- }
     -- { Languages
@@ -79,10 +95,8 @@ return require("lazy").setup({
         --  CCLS
         "https://github.com/ranjithshegde/ccls.nvim",
         lazy = true
-    }, {
-        -- Switch between header and source
-        "https://github.com/derekwyatt/vim-fswitch"
-    }, {
+    },
+    {
         --  R
         "https://github.com/jalvesaq/Nvim-R"
     }, --
@@ -90,18 +104,18 @@ return require("lazy").setup({
     {
         -- LSP and completion
         "https://github.com/williamboman/mason-lspconfig.nvim",
-        event = {"BufReadPost", "BufNewFile"},
+        event = { "BufReadPost", "BufNewFile" },
         dependencies = {
             "https://github.com/williamboman/mason.nvim",
-            "https://github.com/neovim/nvim-lspconfig"
+            "https://github.com/neovim/nvim-lspconfig",
         },
         config = function()
             require("mason").setup()
             require("mason-lspconfig").setup({
-                ensure_installed = {"bashls", "pyright", "texlab", "grammarly"}
+                ensure_installed = { "bashls", "pyright", "texlab", "grammarly" }
             })
             require('mason-nvim-dap').setup({
-                ensure_installed = {'python', 'cppdbg'},
+                ensure_installed = { 'python', 'cppdbg' },
                 handlers = {}
             })
 
@@ -137,7 +151,7 @@ return require("lazy").setup({
                 dapui.close({})
             end
         end
-    }, -- { Completion
+    }, --  } { Completion
     {
         -- Auto completion
         "https://github.com/hrsh7th/nvim-cmp",
@@ -147,11 +161,11 @@ return require("lazy").setup({
             "https://github.com/hrsh7th/cmp-path",
             "https://github.com/jalvesaq/cmp-nvim-r",
             "https://github.com/saadparwaiz1/cmp_luasnip", {
-                "zbirenbaum/copilot-cmp",
-                config = function()
-                    require("copilot_cmp").setup()
-                end
-            }
+            "zbirenbaum/copilot-cmp",
+            config = function()
+                require("copilot_cmp").setup()
+            end
+        }
         },
         event = "VeryLazy",
         config = function()
@@ -159,15 +173,14 @@ return require("lazy").setup({
                 unpack = unpack or table.unpack
                 local line, col = unpack(vim.api.nvim_win_get_cursor(0))
                 return col ~= 0 and
-                           vim.api.nvim_buf_get_lines(0, line - 1, line, true)[1]:sub(
-                               col, col):match("%s") == nil
+                    vim.api.nvim_buf_get_lines(0, line - 1, line, true)[1]:sub(
+                        col, col):match("%s") == nil
             end
 
             local cmp = require("cmp")
             local luasnip = require("luasnip")
 
             cmp.setup({
-                completion = { autocomplete = false },
                 mapping = cmp.mapping.preset.insert({
                     ["<CR>"] = cmp.mapping.confirm(),
                     ["<Tab>"] = cmp.mapping(function(fallback)
@@ -180,7 +193,7 @@ return require("lazy").setup({
                         else
                             fallback()
                         end
-                    end, {"i", "s"}),
+                    end, { "i", "s" }),
                     ["<S-Tab>"] = cmp.mapping(function(fallback)
                         if cmp.visible() then
                             cmp.select_prev_item()
@@ -189,7 +202,7 @@ return require("lazy").setup({
                         else
                             fallback()
                         end
-                    end, {"i", "s"})
+                    end, { "i", "s" })
                 }),
                 snippet = {
                     expand = function(args)
@@ -197,29 +210,41 @@ return require("lazy").setup({
                     end
                 },
                 sources = cmp.config.sources({
-                    {name = "nvim_lsp", group_index = 2},
-                    {name = "copilot", group_index = 2},
-                    {name = "luasnip", group_index = 2},
-                    {name = "buffer", group_index = 2},
-                    {name = "cmp_nvim_r", group_index = 2},
-                    {name = "path", group_index = 2}
-                })
+                    { name = "nvim_lsp",   group_index = 2 },
+                    { name = "copilot",    group_index = 2 },
+                    { name = "luasnip",    group_index = 2 },
+                    { name = "buffer",     group_index = 2 },
+                    { name = "cmp_nvim_r", group_index = 2 },
+                    { name = "path",       group_index = 2 }
+                }),
+                window = {
+                    documentation = {
+                        border = { '╭', '─', '╮', '│', '╯', '─', '╰', '│' },
+                        winhighlight = 'Normal:Pmenu,FloatBorder:Pmenu,CursorLine:PmenuSel,Search:None',
+                    },
+                    completion = {
+                        border = { '┌', '─', '┐', '│', '┘', '─', '└', '│' },
+                        winhighlight = 'Normal:Pmenu,FloatBorder:Pmenu,CursorLine:PmenuSel,Search:None',
+                    }
+                },
             })
         end
-    }, {
+    },
+    {
         -- Snippets
         "https://github.com/L3MON4D3/LuaSnip",
         event = 'VeryLazy',
-        dependencies = {"https://github.com/rafamadriz/friendly-snippets"},
+        dependencies = { "https://github.com/rafamadriz/friendly-snippets" },
         config = function()
             require("luasnip.loaders.from_vscode").lazy_load()
         end
-    }, {
+    },
+    {
         -- Copilot
         "https://github.com/zbirenbaum/copilot.lua",
         event = "InsertEnter",
         config = function()
-            require("copilot").setup({suggestion = {enable = true}, panel = {enable = false}})
+            require("copilot").setup({ suggestion = { enable = true }, panel = { enable = false } })
             vim.cmd(":Copilot disable")
         end
     }, -- }
@@ -228,7 +253,7 @@ return require("lazy").setup({
     {
         -- Treesitter
         "https://github.com/nvim-treesitter/nvim-treesitter",
-        event = {"BufReadPost", "BufNewFile"},
+        event = { "BufReadPost", "BufNewFile" },
         config = function()
             require("nvim-treesitter.configs").setup({
                 ensure_installed = {
@@ -237,8 +262,8 @@ return require("lazy").setup({
                 },
                 sync_install = false,
                 auto_install = true,
-                highlight = {enable = true},
-                indent = {enable = true}
+                highlight = { enable = true },
+                indent = { enable = true }
             })
         end
     }, -- }
@@ -248,7 +273,8 @@ return require("lazy").setup({
         'windwp/nvim-autopairs',
         event = "InsertEnter",
         opts = {}
-    }, {
+    },
+    {
         'johnfrankmorgan/whitespace.nvim',
         config = function() require('whitespace-nvim').setup({}) end
     }, -- }
@@ -258,12 +284,13 @@ return require("lazy").setup({
         "https://github.com/lewis6991/gitsigns.nvim",
         event = "VeryLazy",
         config = function()
-            require("gitsigns").setup({current_line_blame = true})
+            require("gitsigns").setup({ current_line_blame = true })
         end
-    }, {
+    },
+    {
         -- Diff View
         "https://github.com/sindrets/diffview.nvim",
-        cmd = {"DiffviewFileHistory"}
+        cmd = { "DiffviewFileHistory" }
     }
     -- }
 })
