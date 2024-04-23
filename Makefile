@@ -36,15 +36,6 @@ install-fzf:
 	fi
 	$(FZF_DIR)/install --bin
 #---------------------------------------------------------------------------
-install-ls-ccls:
-	rm -rf $(CCLS_REPO_DIR) $(CCLS_BUILD_DIR)
-	git clone --recursive https://github.com/MaskRay/ccls $(CCLS_REPO_DIR)
-	cd $(CCLS_REPO_DIR) && git checkout $(CCLS_VERSION)
-	mkdir -p $(CCLS_INSTALL_PREFIX) $(CCLS_BUILD_DIR)
-	cd $(CCLS_BUILD_DIR) && cmake -DCMAKE_FIND_PACKAGE_SORT_ORDER=NATURAL -DCMAKE_FIND_PACKAGE_SORT_DIRECTION=DEC -DCLANG_LINK_CLANG_DYLIB=on -DCMAKE_BUILD_TYPE=Release -DCMAKE_INSTALL_PREFIX=$(CCLS_INSTALL_PREFIX) $(CCLS_REPO_DIR)
-	cd $(CCLS_BUILD_DIR) && make -j8
-	cd $(CCLS_BUILD_DIR) && make install
-#---------------------------------------------------------------------------
 install-ls-general:
 	# pip3 install neovim python-language-server compiledb
 #---------------------------------------------------------------------------
@@ -73,7 +64,7 @@ install-symlinks:
 	@cp -a ${MAKEFILE_DIR}nvim/* ~/.config/nvim/
 	@cp ${MAKEFILE_DIR}.shell_prompt.sh ~/
 #---------------------------------------------------------------------------
-install-ls: install-ls-general install-ls-ccls
+install-ls: install-ls-general
 #---------------------------------------------------------------------------
 install: install-minimal install-fzf install-symlinks install-ls
 #---------------------------------------------------------------------------
