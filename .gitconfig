@@ -1,0 +1,5 @@
+[user]
+	email = dominik.durner@tum.de
+    name = Dominik Durner
+[core]
+        editor = nvim

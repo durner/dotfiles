@@ -7,7 +7,8 @@ capabilities.clang.offset_encoding = "utf-8"
 
 require 'lspconfig'.clangd.setup {
     root_dir = function(fname)
-        return require("lspconfig.util").root_pattern(
+        return  require("lspconfig.util").root_pattern("compile_commands.json", "compile_flags.txt")(fname)
+            or require("lspconfig.util").root_pattern(
                 "Makefile",
                 "configure.ac",
                 "configure.in",
@@ -16,7 +17,6 @@ require 'lspconfig'.clangd.setup {
                 "meson_options.txt",
                 "build.ninja"
             )(fname)
-            or require("lspconfig.util").root_pattern("compile_commands.json", "compile_flags.txt")(fname)
             or require("lspconfig.util").find_git_ancestor(fname)
     end,
     capabilities = capabilities,
@@ -27,8 +27,6 @@ require 'lspconfig'.clangd.setup {
         "--header-insertion=iwyu",
         "--completion-style=detailed",
         "--function-arg-placeholders",
-        "--fallback-style=llvm",
-        "--path-mappings=/data/=/home/"
     },
     init_options = {
         usePlaceholders = true,
