@@ -4,17 +4,19 @@ MAKEFILE_DIR := $(dir ${MAKEFILE_PATH})
 #---------------------------------------------------------------------------
 REPO_DIR := ~/.repos/
 FZF_DIR := $(REPO_DIR)fzf
-CCLS_VERSION := master
-CCLS_REPO_DIR := $(REPO_DIR)ccls/repo
-CCLS_BUILD_DIR := $(REPO_DIR)ccls/build
-CCLS_INSTALL_PREFIX := ~/.local
-SCALA_METALS := org.scalameta:metals_2.12:0.9.8
 #---------------------------------------------------------------------------
 install-minimal:
-	@sh -c "[ -f /etc/arch-release ] && yay -Syyu --needed curl neovim wl-clipboard clang llvm lldb gcc python python-pip cmake tmux git ccache ninja cgdb rr npm ufw || echo 'OS is not Arch';"
-	@sh -c "[ -f /etc/lsb-release ] && sudo apt install curl neovim wl-clipboard clang llvm llvm-dev gcc python3 python3-pip cmake tmux cmake-curses-gui git ninja-build ccache cgdb libclang-dev lld liburing-dev npm tree-sitter-cli|| echo 'OS is not Ubuntu';"
+	@sh -c "[ -f /etc/arch-release ] && yay -Syyu --needed curl neovim wl-clipboard clang llvm lldb gcc python python-pip cmake tmux git ccache ninja cgdb rr npm ufw zsh || echo 'OS is not Arch';"
+	@sh -c "[ -f /etc/lsb-release ] && sudo apt install curl neovim wl-clipboard clang clangd llvm llvm-dev gcc python3 python3-pip cmake tmux cmake-curses-gui git ninja-build ccache cgdb libclang-dev lld liburing-dev npm ufw zsh tree-sitter-cli language-pack-en || echo 'OS is not Ubuntu';"
+	@sh -c "curl -O https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh; chmod +x install.sh; ./install.sh --unattended; rm -f install.sh;"
 	#yay -Syyu nvm
 	#nvm install node
+#---------------------------------------------------------------------------
+install-firewall:
+	sudo systemctl enable ufw
+	sudo ufw default deny
+	sudo ufw limit ssh
+	sudo ufw enable
 #---------------------------------------------------------------------------
 install-desktop:
 	@sh -c "[ -f /etc/arch-release ] && yay -Syyu --needed vlc inkscape gimp thunderbird chromium texlive-core texlive-bibtexextra texlive-latex texlive-latexextra texlive-fontsextra texlive-mathscience biber libreoffice aspell-de aspell-en hunspell-de hunspell-en_us borg butt || echo 'OS is not Arch';"
@@ -51,6 +53,7 @@ install-vscode:
 install-symlinks:
 	@mkdir -p ~/.local
 	@sh -c "rm -f ~/.bashrc;"
+	@sh -c "rm -f ~/.zshrc;"
 	@sh -c "rm -f ~/.clang-format;"
 	@sh -c "rm -rf ~/.tmux;"
 	@sh -c "rm -f ~/.tmux.conf;"
@@ -58,6 +61,7 @@ install-symlinks:
 	@sh -c "rm -f ~/.shell_prompt.sh;"
 	@mkdir -p ~/.config/nvim
 	@cp ${MAKEFILE_DIR}.bashrc ~/
+	@cp ${MAKEFILE_DIR}.zshrc ~/
 	@cp ${MAKEFILE_DIR}.clang-format ~/
 	@cp -a ${MAKEFILE_DIR}.tmux ~/
 	@cp ${MAKEFILE_DIR}.tmux.conf ~/
@@ -66,6 +70,8 @@ install-symlinks:
 #---------------------------------------------------------------------------
 install-ls: install-ls-general
 #---------------------------------------------------------------------------
-install: install-minimal install-fzf install-symlinks install-ls
+install: install-docker install-firewall
 #---------------------------------------------------------------------------
-install-gui: install install-desktop install-laptop
+install-docker: install-minimal install-fzf install-symlinks install-ls
+#---------------------------------------------------------------------------
+install-gui: install install-desktop install-laptop install-firewall
