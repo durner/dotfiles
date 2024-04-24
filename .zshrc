@@ -120,4 +120,7 @@ alias open="xdg-open 2>/dev/null"
 alias "["="open"
 alias gdb=cgdb
 alias tmux="tmux -2 -u"
+alias docker-run="docker run -it -d --network host -e XDG_RUNTIME_DIR=/tmp -e WAYLAND_DISPLAY=$WAYLAND_DISPLAY  -v $XDG_RUNTIME_DIR/$WAYLAND_DISPLAY:/tmp/$WAYLAND_DISPLAY"
+alias docker-run-priv="docker run -it --privileged -d --network host -e XDG_RUNTIME_DIR=/tmp -e WAYLAND_DISPLAY=$WAYLAND_DISPLAY  -v $XDG_RUNTIME_DIR/$WAYLAND_DISPLAY:/tmp/$WAYLAND_DISPLAY"
+alias docker-attach="docker exec -it -u durner -w /home/durner/"
 
