@@ -201,7 +201,15 @@ return require("lazy").setup({
                         else
                             fallback()
                         end
-                    end, { "i", "s" })
+                    end, { "i", "s" }),
+                    ['<Down>'] = cmp.mapping(function(fallback)
+	                    cmp.close()
+	                    fallback()
+	                end, { "i" }),
+                    ['<Up>'] = cmp.mapping(function(fallback)
+	                    cmp.close()
+	                    fallback()
+	                end, { "i" }),
                 }),
                 snippet = {
                     expand = function(args)
