@@ -9,6 +9,8 @@ install-minimal:
 	@sh -c "[ -f /etc/arch-release ] && yay -Syyu --needed curl neovim wl-clipboard clang llvm lldb gcc python python-pip cmake tmux git ccache ninja cgdb rr npm ufw zsh || echo 'OS is not Arch';"
 	@sh -c "[ -f /etc/lsb-release ] && sudo apt install curl neovim wl-clipboard clang clangd llvm llvm-dev gcc python3 python3-pip cmake tmux cmake-curses-gui git ninja-build ccache cgdb libclang-dev lld liburing-dev npm ufw zsh tree-sitter-cli language-pack-en || echo 'OS is not Ubuntu';"
 	@sh -c "curl -O https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh; chmod +x install.sh; ./install.sh --unattended; rm -f install.sh;"
+	sudo chsh -s /bin/zsh durner
+	sudo chsh -s /bin/zsh root
 	#yay -Syyu nvm
 	#nvm install node
 #---------------------------------------------------------------------------
@@ -54,6 +56,7 @@ install-symlinks:
 	@mkdir -p ~/.local
 	@sh -c "rm -f ~/.bashrc;"
 	@sh -c "rm -f ~/.zshrc;"
+	@sh -c "rm -f ~/.gitconfig;"
 	@sh -c "rm -f ~/.clang-format;"
 	@sh -c "rm -rf ~/.tmux;"
 	@sh -c "rm -f ~/.tmux.conf;"
@@ -61,6 +64,7 @@ install-symlinks:
 	@sh -c "rm -f ~/.shell_prompt.sh;"
 	@mkdir -p ~/.config/nvim
 	@cp ${MAKEFILE_DIR}.bashrc ~/
+	@cp ${MAKEFILE_DIR}.gitconfig ~/
 	@cp ${MAKEFILE_DIR}.zshrc ~/
 	@cp ${MAKEFILE_DIR}.clang-format ~/
 	@cp -a ${MAKEFILE_DIR}.tmux ~/
