@@ -56,6 +56,7 @@ install-symlinks:
 	@mkdir -p ~/.local
 	@sh -c "rm -f ~/.bashrc;"
 	@sh -c "rm -f ~/.zshrc;"
+	@sh -c "rm -f ~/.gdbinit;"
 	@sh -c "rm -f ~/.gitconfig;"
 	@sh -c "rm -f ~/.clang-format;"
 	@sh -c "rm -rf ~/.tmux;"
@@ -66,6 +67,7 @@ install-symlinks:
 	@cp ${MAKEFILE_DIR}.bashrc ~/
 	@cp ${MAKEFILE_DIR}.gitconfig ~/
 	@cp ${MAKEFILE_DIR}.zshrc ~/
+	@cp ${MAKEFILE_DIR}.gdbinit ~/
 	@cp ${MAKEFILE_DIR}.clang-format ~/
 	@cp -a ${MAKEFILE_DIR}.tmux ~/
 	@cp ${MAKEFILE_DIR}.tmux.conf ~/
