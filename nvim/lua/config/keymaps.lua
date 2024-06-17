@@ -44,9 +44,9 @@ wk.register({
     ["<F5>"] = { "<cmd>bp!<cr>", "Previous buffer", mode = { "i", "n" } },
     ["<F6>"] = { "<cmd>bn!<cr>", "Next buffer", mode = { "i", "n" } },
     ["<F7>"] = { "<cmd>NvimTreeToggle<cr>", "Toggle NvimTree", mode = { "i", "n" } },
-    ["<F8>"] = { dap.continue, "Dap continue", mode = { "i", "n" } },
-    ["<F9>"] = { dap.step_over, "Dap next" },
-    ["<F10>"] = { dap.step_into, "Dap step into" },
+    ["<F8>"] = { dap.step_over, "Dap next", mode = { "i", "n" } },
+    ["<F9>"] = { dap.step_into, "Dap step into", mode = { "i", "n" } },
+    ["<F10>"] = { dap.step_out, "Dap step out", mode = { "i", "n" } },
     ["<F12>"] = { "<cmd>noh<cr>", "Disable highlighting", mode = { "i", "n" } },
     ["//"] = { 'y/<C-R>"<cr>', "Highlight underlying word", mode = { "v", "n" } }
 }, { nowait = true })
