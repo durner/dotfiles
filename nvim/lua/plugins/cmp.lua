@@ -19,6 +19,19 @@ return {
 
         local cmp = require("cmp")
         local luasnip = require("luasnip")
+        local kind_icons = require("config.icons").kind
+
+        local formatting_style = {
+            fields = { "kind", "abbr", "menu" },
+
+            format = function(_, item)
+                local icon = (kind_icons[item.kind]) or ""
+                icon = " " .. icon .. " "
+                item.menu = "   (" .. item.kind .. ")"
+                item.kind = icon
+                return item
+            end,
+        }
 
         cmp.setup({
             mapping = cmp.mapping.preset.insert({
@@ -43,11 +56,11 @@ return {
                         fallback()
                     end
                 end, { "i", "s" }),
-                ['<Down>'] = cmp.mapping(function(fallback)
+                ["<Down>"] = cmp.mapping(function(fallback)
                     cmp.close()
                     fallback()
                 end, { "i" }),
-                ['<Up>'] = cmp.mapping(function(fallback)
+                ["<Up>"] = cmp.mapping(function(fallback)
                     cmp.close()
                     fallback()
                 end, { "i" }),
@@ -57,6 +70,7 @@ return {
                     require("luasnip").lsp_expand(args.body)
                 end
             },
+            formatting = formatting_style,
             sources = cmp.config.sources({
                 { name = "nvim_lsp",   group_index = 2 },
                 { name = "copilot",    group_index = 2 },
@@ -67,12 +81,12 @@ return {
             }),
             window = {
                 documentation = {
-                    border = { '╭', '─', '╮', '│', '╯', '─', '╰', '│' },
-                    winhighlight = 'Normal:Pmenu,FloatBorder:Pmenu,CursorLine:PmenuSel,Search:None',
+                    border = { "╭", "─", "╮", "│", "╯", "─", "╰", "│" },
+                    winhighlight = "Normal:Pmenu,FloatBorder:Pmenu,CursorLine:PmenuSel,Search:None",
                 },
                 completion = {
-                    border = { '┌', '─', '┐', '│', '┘', '─', '└', '│' },
-                    winhighlight = 'Normal:Pmenu,FloatBorder:Pmenu,CursorLine:PmenuSel,Search:None',
+                    border = { "┌", "─", "┐", "│", "┘", "─", "└", "│" },
+                    winhighlight = "Normal:Pmenu,FloatBorder:Pmenu,CursorLine:PmenuSel,Search:None",
                 }
             },
         })

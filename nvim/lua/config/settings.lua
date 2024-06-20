@@ -5,9 +5,9 @@ capabilities.clang = {}
 capabilities.clang.offsetEncoding = "utf-8"
 capabilities.clang.offset_encoding = "utf-8"
 
-require 'lspconfig'.clangd.setup {
+require "lspconfig".clangd.setup {
     root_dir = function(fname)
-        return  require("lspconfig.util").root_pattern("compile_commands.json", "compile_flags.txt")(fname)
+        return require("lspconfig.util").root_pattern("compile_commands.json", "compile_flags.txt")(fname)
             or require("lspconfig.util").root_pattern(
                 "Makefile",
                 "configure.ac",
@@ -61,4 +61,7 @@ hi SpellBad ctermfg=red guifg=red
 
 "Large File Handling
 autocmd BufWinEnter * if line2byte(line("$") + 1) > 1000000 | syntax clear | endif
+
+"Close dap hover window with q
+autocmd FileType dap-float nnoremap <buffer><silent> q <cmd>close!<CR>
 ]]

@@ -69,6 +69,7 @@ install-vscode:
 install-symlinks:
 	@mkdir -p ~/.local
 	@sh -c "rm -f ~/.bashrc;"
+	@sh -c "rm -f ~/.clangd;"
 	@sh -c "rm -f ~/.zshrc;"
 	@sh -c "rm -f ~/.gdbinit;"
 	@sh -c "rm -f ~/.gitconfig;"
@@ -79,6 +80,7 @@ install-symlinks:
 	@sh -c "rm -f ~/.shell_prompt.sh;"
 	@mkdir -p ~/.config/nvim
 	@cp ${MAKEFILE_DIR}.bashrc ~/
+	@cp ${MAKEFILE_DIR}.clangd ~/
 	@cp ${MAKEFILE_DIR}.gitconfig ~/
 	@cp ${MAKEFILE_DIR}.zshrc ~/
 	@cp ${MAKEFILE_DIR}.gdbinit ~/
