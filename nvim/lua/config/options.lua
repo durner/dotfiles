@@ -64,7 +64,7 @@ opt.wildmenu = true
 opt.hidden = true
 opt.backspace = "2"
 opt.backspace = "indent,eol,start"
-vim.opt.signcolumn = "yes"
+opt.signcolumn = "yes"
 opt.timeoutlen = 400
 opt.updatetime = 250
 

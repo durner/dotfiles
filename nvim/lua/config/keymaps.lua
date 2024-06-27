@@ -14,7 +14,7 @@ wk.register({
         p = { require('fzf-lua').lsp_code_actions, "Code actions" },
         c = { require('fzf-lua').lsp_incoming_calls, "Incoming calls hierarchy" },
         o = { require('fzf-lua').lsp_outgoing_calls, "Outgoing calls hierarchy" },
-        t = { "<cmd>lua require('fzf-lua').buffers()<cr>", "Buffers" },
+        q = { "<cmd>lua require('fzf-lua').buffers()<cr>", "Buffers" },
         f = { "<cmd>lua require('fzf-lua').files()<cr>", "Files" },
         g = {
             "<cmd>lua require('fzf-lua').live_grep({ cmd = 'git grep -i --line-number --column --color=always' })<cr>",
@@ -28,9 +28,13 @@ wk.register({
             f = { require('dap').step_out, "Finish" },
             c = { require('dap').continue, "Continue" },
             y = { require("dap.ui.widgets").hover, "Hover" },
-            x = { require('dap').disconnect, "Terminate" },
+            x = { function()
+                require('dap').disconnect()
+                require("dapui").close()
+            end, "Terminate" },
             u = { require('dap').up, "Up" },
             d = { require('dap').down, "Down" },
+            p = { require('dap').pause, "Pause" },
             v = { "<cmd>lua require('fzf-lua').dap_variables()<cr>", "Variables" },
             s = { "<cmd>lua require('fzf-lua').dap_frames()<cr>", "Strack Trace" },
             t = { dap.toggle_breakpoint, "Toggle Breakpoint" },
@@ -52,13 +56,18 @@ wk.register({
                 vim.cmd([[CMakeStopExecutor]])
             end, "Stop CMake" }
         },
+        t = {
+            name = "ToggleTerm menu",
+            t = { "<cmd>ToggleTerm<cr>", "Regular Term" },
+            f = { "<cmd>ToggleTerm direction=float<cr>", "Float Term" },
+        },
         e = { vim.diagnostic.goto_next, "Next Diagnostic" },
         ["-"] = { "i//<Esc>75a-<ESC><cr>", "Insert separator" },
     },
     ["jk"] = { "<Esc>", "Go to normal", mode = { "i" } },
     ["<Esc>"] = { ":noh <CR>", "Disable highligting" },
     ["<C-LeftMouse>"] = { "<cmd>lua require('fzf-lua').lsp_definitions({ jump_to_single_result = true })<cr>", "Jump to definition", mode = { "i", "n" } },
-    ["<C-P>"] = { "<cmd>lua require('fzf-lua').files()<cr>", "Find Files", mode = { "i", "n" } },
+    ["<C-P>"] = { "<cmd>lua require('fzf-lua').git_files()<cr>", "Find Files", mode = { "i", "n" } },
     ["<C-h>"] = { "<C-w>h", "Window left", mode = { "i", "n" } },
     ["<C-l>"] = { "<C-w>l", "Window right", mode = { "i", "n" } },
     ["<C-j>"] = { "<C-w>j", "Window down", mode = { "i", "n" } },
@@ -75,6 +84,20 @@ wk.register({
     ["<F12>"] = { "<cmd>noh<cr>", "Disable highlighting", mode = { "i", "n" } },
     ["//"] = { 'y/<C-R>"<cr>', "Highlight underlying word", mode = { "v", "n" } }
 }, { nowait = true })
+
+-- Terminal mode keymaps
+
+
+function _G.set_terminal_keymaps()
+    vim.keymap.set('t', '<Esc>', [[<C-\><C-n>]], opts)
+    vim.keymap.set('t', 'jk', [[<C-\><C-n>]], opts)
+    vim.keymap.set('t', '<C-h>', [[<cmd>wincmd h<cr>]], opts)
+    vim.keymap.set('t', '<C-j>', [[<cmd>wincmd j<cr>]], opts)
+    vim.keymap.set('t', '<C-k>', [[<cmd>wincmd k<cr>]], opts)
+    vim.keymap.set('t', '<C-l>', [[<cmd>wincmd l<cr>]], opts)
+end
+
+vim.cmd('autocmd! TermOpen term://* lua set_terminal_keymaps()')
 
 vim.cmd [[
 " R

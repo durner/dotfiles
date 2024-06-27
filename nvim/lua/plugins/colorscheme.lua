@@ -11,10 +11,15 @@ return {
                 nvimtree = true,
                 treesitter = true,
                 barbar = true,
-                dap = {
-                    enabled = true,
-                    enable_ui = true,
-                }
+                dap = true,
+                dap_ui = true,
+            },
+            highlight_overrides = {
+                all = function(colors)
+                    return {
+                        CursorLineNr = { style = { "bold" } }
+                    }
+                end
             }
         })
         vim.cmd.colorscheme "catppuccin"

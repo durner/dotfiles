@@ -33,7 +33,7 @@ return {
             { text = icons.ui.CircleWithGap, texthl = "DapBreakpointCondition", linehl = "", numhl = "" })
         vim.fn.sign_define("DapLogPoint", { text = icons.ui.LogPoint, texthl = "DapLogPoint", linehl = "", numhl = "" })
         vim.fn.sign_define("DapStopped",
-            { text = icons.ui.ChevronRight, texthl = "Error", linehl = "DapStoppedLinehl", numhl = "" })
+            { text = icons.kind.Event, texthl = "Error", linehl = "DapStoppedLinehl", numhl = "" })
         vim.fn.sign_define("DapBreakpointRejected",
             { text = icons.diagnostics.Error, texthl = "Error", linehl = "", numhl = "" })
 

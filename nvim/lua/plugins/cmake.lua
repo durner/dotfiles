@@ -6,6 +6,7 @@ return {
     config = function()
         require("cmake-tools").setup {
             cmake_generate_options = { "-DCMAKE_EXPORT_COMPILE_COMMANDS=1" },
+            cmake_build_options = { "-j 16" },
             cmake_build_directory = function()
                 return "build/${variant:buildType}"
             end,
@@ -18,7 +19,22 @@ return {
                 console = "integratedTerminal",
             },
             cmake_executor = {
-                name = "quickfix",
+                name = "toggleterm",
+                opts = {
+                    direction = "horizontal",
+                    close_on_exit = true,
+                    auto_scroll = true,
+                    singleton = true
+                }
+            },
+            cmake_runner = {
+                name = "toggleterm",
+                opts = {
+                    direction = "horizontal",
+                    close_on_exit = true,
+                    auto_scroll = true,
+                    singleton = true
+                }
             },
             cmake_virtual_text_support = false
         }
