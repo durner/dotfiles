@@ -1,4 +1,5 @@
 return {
     "ibhagwan/fzf-lua",
-    config = function() require("fzf-lua").setup({ "telescope" }) end
+    dependencies = { "nvim-tree/nvim-web-devicons" },
+    config = function() require("fzf-lua").setup({ "default-title" }) end
 }
