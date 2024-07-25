@@ -78,6 +78,7 @@ if vim.fn.has("unnamedplus") == 1 then
     opt.clipboard:append("unnamedplus")
 end
 opt.mouse = "a"
+opt.mousemoveevent = true
 
 -- Diagnostics
 opt.shortmess:append("c")

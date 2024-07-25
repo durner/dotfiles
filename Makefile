@@ -34,7 +34,7 @@ install-desktop:
 	sudo ufw enable
 #---------------------------------------------------------------------------
 install-laptop:
-	@sh -c "[ -f /etc/arch-release ] && yay -Syyu --needed laptop-mode-tools ntfs-3g ttf-dejavu-nerd mattermost-desktop whatsapp-nativefier || echo 'OS is not Arch';"
+	@sh -c "[ -f /etc/arch-release ] && yay -Syyu --needed laptop-mode-tools ntfs-3g ttf-dejavu-nerd ttf-jetbrains-mono-nerd mattermost-desktop whatsapp-nativefier || echo 'OS is not Arch';"
 	@sh -c "[ -f /etc/lsb-release ] && sudo apt install laptop-mode-tools ntfs-3g mattermost-desktop || echo 'OS is not Ubuntu';"
 	sudo systemctl enable laptop-mode
 	sudo systemctl enable bluetooth
