@@ -169,8 +169,9 @@ gpasswd -a durner wheel
 nvim /etc/sudoers
 ```
 
-Enable systemctl services
+Enable systemctl services and trim
 ```
+cryptsetup --allow-discards --persistent refresh main
 systemctl enable --now fstrim.timer
 systemctl enable avahi-daemon
 systemctl enable acpid
