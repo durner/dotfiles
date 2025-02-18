@@ -1,0 +1,39 @@
+import = [
+   "~/.config/alacritty/catppuccin-macchiato.toml",
+]
+
+live_config_reload = true
+
+[env]
+TERM = "xterm-256color"
+
+[window]
+decorations = "buttonless"
+padding = {x = 5, y = 0}
+
+[terminal]
+osc52 = "CopyPaste"
+
+[font]
+size = 12
+offset = {x = 0, y = 2}
+glyph_offset = {x = 0, y = 2}
+
+[font.bold]
+family = "JetBrainsMonoNL Nerd Font"
+style = "Heavy"
+
+[font.bold_italic]
+family = "JetBrainsMonoNL Nerd Font"
+style = "Heavy Italic"
+
+[font.italic]
+family = "JetBrainsMonoNL Nerd Font"
+style = "Medium Italic"
+
+[font.normal]
+family = "JetBrainsMonoNL Nerd Font"
+style = "Medium"
+
+[selection]
+save_to_clipboard = true
