@@ -74,6 +74,7 @@ install-symlinks:
 	@sh -c "rm -f ~/.gdbinit;"
 	@sh -c "rm -f ~/.gitconfig;"
 	@sh -c "rm -f ~/.clang-format;"
+	@sh -c "rm -f ~/.clang-tidy;"
 	@sh -c "rm -rf ~/.tmux;"
 	@sh -c "rm -f ~/.tmux.conf;"
 	@sh -c "rm -rf ~/.config/nvim;"
@@ -85,6 +86,7 @@ install-symlinks:
 	@cp ${MAKEFILE_DIR}.zshrc ~/
 	@cp ${MAKEFILE_DIR}.gdbinit ~/
 	@cp ${MAKEFILE_DIR}.clang-format ~/
+	@cp ${MAKEFILE_DIR}.clang-tidy ~/
 	@cp -a ${MAKEFILE_DIR}.tmux ~/
 	@cp ${MAKEFILE_DIR}.tmux.conf ~/
 	@cp -a ${MAKEFILE_DIR}nvim/* ~/.config/nvim/

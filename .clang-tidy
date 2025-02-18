@@ -1,0 +1,2 @@
+Checks: "modernize-*, performance-*, bugprone-*, misc-*, cppcoreguidelines-*"
+WarningsAsErrors: "*"
