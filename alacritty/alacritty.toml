@@ -34,8 +34,12 @@ style = "Medium"
 save_to_clipboard = true
 
 [general]
-
 live_config_reload = true
 import = [
    "~/.config/alacritty/catppuccin-macchiato.toml",
 ]
+
+[[keyboard.bindings]]
+key = "NumpadEnter"
+mods = "None"
+action = "ReceiveChar"

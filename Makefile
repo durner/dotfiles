@@ -18,6 +18,11 @@ install-minimal:
 	#yay -Syyu nvm
 	#nvm install node
 #---------------------------------------------------------------------------
+install-docker:
+	@sh -c "[ -f /etc/arch-release ] && yay -Syyu --needed docker docker-compose containerd runc && sudo systemctl enable docker.service || echo 'OS is not Arch';"
+	@sh -c "[ -f /etc/lsb-release ] && sudo apt install docker.io docker-doc docker-compose docker-compose-v2 podman-docker containerd runc || echo 'OS is not Ubuntu';"
+	sudo usermod -aG docker durner
+#---------------------------------------------------------------------------
 install-firewall:
 	sudo systemctl enable ufw
 	sudo ufw default deny
@@ -97,8 +102,8 @@ install-symlinks:
 #---------------------------------------------------------------------------
 install-ls: install-ls-general
 #---------------------------------------------------------------------------
-install: install-docker install-firewall
+install: install-virtual install-firewall
 #---------------------------------------------------------------------------
-install-docker: install-minimal install-fzf install-symlinks install-ls
+install-virtual: install-minimal install-fzf install-symlinks install-ls
 #---------------------------------------------------------------------------
 install-gui: install install-desktop install-laptop install-firewall
