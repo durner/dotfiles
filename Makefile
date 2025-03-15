@@ -81,6 +81,7 @@ install-symlinks:
 	@sh -c "rm -rf ~/.config/alacritty;"
 	@sh -c "rm -f ~/.shell_prompt.sh;"
 	@mkdir -p ~/.config/nvim
+	@mkdir -p ~/.config/alacritty
 	@cp ${MAKEFILE_DIR}.bashrc ~/
 	@cp ${MAKEFILE_DIR}.clangd ~/
 	@cp ${MAKEFILE_DIR}.gitconfig ~/
@@ -91,7 +92,7 @@ install-symlinks:
 	@cp -a ${MAKEFILE_DIR}.tmux ~/
 	@cp ${MAKEFILE_DIR}.tmux.conf ~/
 	@cp -a ${MAKEFILE_DIR}nvim/* ~/.config/nvim/
-	@cp -a ${MAKEFILE_DIR}nvim/* ~/.config/alacritty/
+	@cp -a ${MAKEFILE_DIR}alacritty/* ~/.config/alacritty/
 	@cp ${MAKEFILE_DIR}.shell_prompt.sh ~/
 #---------------------------------------------------------------------------
 install-ls: install-ls-general

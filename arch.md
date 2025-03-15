@@ -128,7 +128,7 @@ mkinitcpio -p linux
 Update /etc/default/grub for encrypted disk (and pstate); use blkid for getting UUID of /dev/nvme0n1p6
 ```
 GRUB_ENABLE_CRYPTODISK=y
-GRUB_CMDLINE_LINUX_DEFAULT="amd_pstate=passive"
+GRUB_CMDLINE_LINUX_DEFAULT="amd_pstate=active"
 GRUB_CMDLINE_LINUX="cryptdevice=UUID=:main root=/dev/main/root"
 ```
 
