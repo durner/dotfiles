@@ -1,0 +1,8 @@
+<application>
+  <component name="LafManager">
+    <laf themeId="com.github.catppuccin.macchiato.jetbrains" />
+    <lafs-to-previous-schemes>
+      <laf-to-scheme laf="com.github.catppuccin.mocha.jetbrains" scheme="_@user_Catppuccin Macchiato (no italics)" />
+    </lafs-to-previous-schemes>
+  </component>
+</application>

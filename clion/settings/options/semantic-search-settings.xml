@@ -1,0 +1,6 @@
+<application>
+  <component name="SearchEverywhereMlSettings">
+    <option name="ml_ranking_in_all_tab_enabled_state" value="true" />
+    <option name="ml_ranking_in_all_tab_experiment_state" value="CHANGED_BY_EXPERIMENT" />
+  </component>
+</application>

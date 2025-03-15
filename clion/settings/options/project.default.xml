@@ -1,0 +1,84 @@
+<application>
+  <component name="ProjectManager">
+    <defaultProject>
+      <component name="AutoImportSettings">
+        <option name="autoReloadType" value="SELECTIVE" />
+      </component>
+      <component name="CMakePythonSetting">
+        <option name="pythonIntegrationState" value="YES" />
+      </component>
+      <component name="CMakeSettings">
+        <configurations>
+          <configuration PROFILE_NAME="Debug" ENABLED="true" CONFIG_NAME="Debug" TOOLCHAIN_NAME="Default" GENERATION_OPTIONS="-G Ninja -DCMAKE_EXPORT_COMPILE_COMNMANDS=1" />
+          <configuration PROFILE_NAME="Release" ENABLED="true" CONFIG_NAME="Release" TOOLCHAIN_NAME="Default" GENERATION_OPTIONS="-G Ninja -DCMAKE_EXPORT_COMPILE_COMNMANDS=1" />
+          <configuration PROFILE_NAME="RelWithDebInfo" ENABLED="true" CONFIG_NAME="RelWithDebInfo" TOOLCHAIN_NAME="Default" GENERATION_OPTIONS="-G Ninja -DCMAKE_EXPORT_COMPILE_COMNMANDS=1" />
+        </configurations>
+      </component>
+      <component name="FormatOnSaveOptions">
+        <option name="myRunOnSave" value="true" />
+      </component>
+      <component name="OptimizeOnSaveOptions">
+        <option name="myRunOnSave" value="true" />
+      </component>
+      <component name="ProjectInspectionProfilesVisibleTreeState">
+        <entry key="Project Default">
+          <profile-state>
+            <selected-state>
+              <State>
+                <id>User defined</id>
+              </State>
+            </selected-state>
+          </profile-state>
+        </entry>
+      </component>
+      <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
+    &quot;settings.editor.selected.configurable&quot;: &quot;advanced.settings&quot;
+  }
+}</component>
+      <component name="VcsDirectoryMappings" defaultProject="true" />
+      <component name="WindowStateProjectService">
+        <state x="2845" y="376" key="#SSH_Configurations" timestamp="1738769608635">
+          <screen x="2845" y="0" width="1920" height="1080" />
+        </state>
+        <state x="2845" y="376" key="#SSH_Configurations/2845.0.1920.1080/0.0.1920.1080" timestamp="1738769608635" />
+        <state x="2845" y="90" key="FileChooserDialogImpl" timestamp="1737726920220">
+          <screen x="2845" y="0" width="1920" height="1080" />
+        </state>
+        <state x="2845" y="90" key="FileChooserDialogImpl/0.0.1920.1080/2845.0.1920.1080" timestamp="1737726920220" />
+        <state x="2845" y="350" width="1195" height="730" key="SettingsEditor" timestamp="1737727112510">
+          <screen x="2845" y="0" width="1920" height="1080" />
+        </state>
+        <state x="2845" y="350" width="1195" height="730" key="SettingsEditor/0.0.1920.1080/2845.0.1920.1080" timestamp="1737727112510" />
+      </component>
+      <component name="masterDetails">
+        <states>
+          <state key="Copyright.UI">
+            <settings>
+              <last-edited>CedarDB</last-edited>
+              <splitter-proportions>
+                <option name="proportions">
+                  <list>
+                    <option value="0.2" />
+                  </list>
+                </option>
+              </splitter-proportions>
+            </settings>
+          </state>
+          <state key="ScopeChooserConfigurable.UI">
+            <settings>
+              <splitter-proportions>
+                <option name="proportions">
+                  <list>
+                    <option value="0.2" />
+                  </list>
+                </option>
+              </splitter-proportions>
+            </settings>
+          </state>
+        </states>
+      </component>
+    </defaultProject>
+  </component>
+</application>

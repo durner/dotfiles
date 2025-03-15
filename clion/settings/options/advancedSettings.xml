@@ -1,0 +1,11 @@
+<application>
+  <component name="AdvancedSettings">
+    <option name="settings">
+      <map>
+        <entry key="clangd.keep.obsolete.ast" value="true" />
+        <entry key="clangd.use.indexer" value="true" />
+        <entry key="clion.use.radler" value="true" />
+      </map>
+    </option>
+  </component>
+</application>

@@ -1,0 +1,126 @@
+" leader
+let mapleader = ','
+let g:mapleader = ','
+
+" encoding
+set encoding=utf8
+set enc=utf-8
+set fileencoding=utf-8
+
+" Reload files modified outside of Vim "
+set autoread
+
+" Replace tabs with spaces "
+set expandtab
+
+" Make tabs 4 spaces wide "
+set tabstop=4
+set shiftwidth=4
+set softtabstop=4
+
+" indent
+set display=lastline
+set autoindent
+set smartindent
+
+" wrap
+set wrap
+set linebreak
+" only linebreak at some characters (reduced from default)
+set breakat-=-
+
+" wrap indention
+set breakindent
+set breakindentopt=shift:2
+
+" Clipboard
+set clipboard=unnamedplus
+
+" Show line numbers "
+set number
+
+" Highlight all occurrences of a search "
+set hlsearch
+
+" search case insensitive if term is all lowercase "
+set ignorecase
+set smartcase
+set colorcolumn=0
+
+" misc settings
+set nocompatible
+set noequalalways
+set showmatch
+set wildmode=longest:full
+set wildmenu
+set hidden
+set backspace=2
+set backspace=indent,eol,start
+
+" Diagnostics
+set cursorline
+
+" no bells
+set visualbell
+set noerrorbells
+
+map <leader>j <Action>(GotoDeclaration)
+map <leader>k <Action>(GotoImplementation)
+map <leader>r <Action>(FindUsages)
+map <leader>n <Action>(RenameElement)
+map <leader>g <Action>(FindInPath)
+map <leader>p <Action>(ShowIntentionActions)
+map <leader>h <Action>(GotoSuperMethod)
+map <leader>o <Action>(CallHierarchy)
+map <leader>e <Action>(GotoNextError)
+map <leader>- i//<Esc>75a-<ESC><cr>
+map <leader>y <Action>(ShowHoverInfo)
+map <leader>x <Action>(Refactorings.QuickListPopupAction)
+map <leader>s <Action>(SurroundWith)
+map <F4> <Action>(SwitchHeaderSource)
+map <F3> <Action>(GotoDeclaration)
+map <F5> <Action>(PreviousTab)
+map <F6> <Action>(NextTab)
+map <ESC> :noh<CR>
+map // y/<C-R>"<cr>
+map n nzz
+map N Nzz
+
+imap <F4> <Action>(SwitchHeaderSource)
+imap <F3> <Action>(GotoDeclaration)
+imap <F5> <Action>(PreviousTab)
+imap <F6> <Action>(NextTab)
+imap jk  <ESC>
+
+" normal copy/paste
+vmap <C-c> "+yi
+vmap <C-x> "+c
+vmap <C-v> "_dP
+imap <c-v> <ESC>"+pA
+
+" whichkey
+set which-key
+set notimeout
+
+" set handlers
+sethandler <S-CR> a:ide
+sethandler <S-Left> a:vim
+sethandler <C-Left> a:vim
+sethandler <S-Right> a:vim
+sethandler <C-Right> a:vim
+sethandler <C-Down> a:vim
+sethandler <C-A> a:vim
+sethandler <C-C> a:vim
+sethandler <C-D> a:vim
+sethandler <C-F> a:ide
+sethandler <C-O> a:vim
+sethandler <C-P> a:ide
+sethandler <C-R> a:vim
+sethandler <C-V> a:vim
+sethandler <C-W> a:vim
+sethandler <C-X> a:vim
+sethandler <F3> a:vim
+sethandler <F4> a:vim
+sethandler <F5> a:vim
+sethandler <F6> a:vim
+

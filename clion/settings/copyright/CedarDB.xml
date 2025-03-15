@@ -1,0 +1,7 @@
+<component name="CopyrightManager">
+  <copyright>
+    <option name="keyword" value="// (c)" />
+    <option name="notice" value="//---------------------------------------------------------------------------&#10;// CedarDB&#10;// (c) &amp;#36;originalComment.match(&quot;Copyright \(c\) (\d+)&quot;, 1, &quot;-&quot;, &quot;&amp;#36;today.year&quot;)&amp;#36;today.year Dominik Durner&#10;//--------------------------------------------------------------------------- " />
+    <option name="myName" value="CedarDB" />
+  </copyright>
+</component>

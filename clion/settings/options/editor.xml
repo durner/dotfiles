@@ -1,0 +1,40 @@
+<application>
+  <component name="BackendCodeEditorApplicationSettings">
+    <option name="/Default/Environment/InlayHints/CppParameterNameHintsOptions2/ShowParameterNameHintsInMacroCalls/@EntryValue" value="Default" type="string" />
+  </component>
+  <component name="CodeInsightSettings">
+    <option name="AUTO_POPUP_JAVADOC_INFO" value="true" />
+  </component>
+  <component name="DeclarativeInlayHintsSettings">
+    <option name="providerIdToEnabled">
+      <map>
+        <entry key="js.chain.hints" value="true" />
+        <entry key="js.type.hints" value="true" />
+        <entry key="oc.type.hints" value="true" />
+        <entry key="qodana.yaml.inspection.descriptions" value="true" />
+        <entry key="sql.column.names.inlay.hints" value="true" />
+        <entry key="sql.join.cardinality.hints" value="true" />
+        <entry key="ts.chain.hints" value="true" />
+        <entry key="ts.enum.hints" value="true" />
+        <entry key="ts.type.hints" value="true" />
+      </map>
+    </option>
+  </component>
+  <component name="EditorSettings">
+    <option name="languageBreadcrumbsMap">
+      <map>
+        <entry key="C++" value="true" />
+      </map>
+    </option>
+    <option name="STRIP_TRAILING_SPACES" value="Whole" />
+    <option name="IS_ENSURE_NEWLINE_AT_EOF" value="true" />
+    <option name="SHOW_BREADCRUMBS_ABOVE" value="true" />
+    <option name="SHOW_STICKY_LINES" value="false" />
+  </component>
+  <component name="InlayHintsSettings">
+    <option name="lastViewedProviderKeyId" value="" />
+  </component>
+  <component name="InlineCompletionOnboarding">
+    <option name="onboardingFinished" value="true" />
+  </component>
+</application>

@@ -85,6 +85,7 @@ install-symlinks:
 	@sh -c "rm -rf ~/.config/nvim;"
 	@sh -c "rm -rf ~/.config/alacritty;"
 	@sh -c "rm -f ~/.shell_prompt.sh;"
+	@sh -c "rm -f ~/.ideavimrc;"
 	@mkdir -p ~/.config/nvim
 	@mkdir -p ~/.config/alacritty
 	@cp ${MAKEFILE_DIR}.bashrc ~/
@@ -99,6 +100,7 @@ install-symlinks:
 	@cp -a ${MAKEFILE_DIR}nvim/* ~/.config/nvim/
 	@cp -a ${MAKEFILE_DIR}alacritty/* ~/.config/alacritty/
 	@cp ${MAKEFILE_DIR}.shell_prompt.sh ~/
+	@cp ${MAKEFILE_DIR}clion/ideavimrc ~/.ideavimrc
 #---------------------------------------------------------------------------
 install-ls: install-ls-general
 #---------------------------------------------------------------------------

@@ -1,0 +1,24 @@
+<keymap version="1" name="VSCode DDD" parent="VSCode">
+  <action id="Back">
+    <keyboard-shortcut first-keystroke="alt left" />
+    <mouse-shortcut keystroke="button4" />
+    <keyboard-shortcut first-keystroke="ctrl o" />
+  </action>
+  <action id="CloseActiveTab">
+    <keyboard-shortcut first-keystroke="shift ctrl f4" />
+    <keyboard-shortcut first-keystroke="escape" />
+  </action>
+  <action id="EditorChooseLookupItemReplace">
+    <keyboard-shortcut first-keystroke="enter" />
+  </action>
+  <action id="EditorLookupSelectionDown">
+    <keyboard-shortcut first-keystroke="tab" />
+  </action>
+  <action id="EditorLookupSelectionUp">
+    <keyboard-shortcut first-keystroke="shift tab" />
+  </action>
+  <action id="InsertInlineCompletionAction">
+    <keyboard-shortcut first-keystroke="shift enter" />
+  </action>
+  <action id="OpenFile" />
+</keymap>
