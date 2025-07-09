@@ -72,12 +72,14 @@ return {
             },
             formatting = formatting_style,
             sources = cmp.config.sources({
-                { name = "nvim_lsp",   group_index = 1 },
-                { name = "copilot",    group_index = 1 },
-                { name = "luasnip",    group_index = 1 },
-                { name = "buffer",     group_index = 1, keyword_length = 4 },
-                { name = "cmp_nvim_r", group_index = 1 },
-                { name = "path",       goup_index = 1 }
+                { name = "nvim_lsp",      group_index = 1 },
+                { name = "copilot",       group_index = 1 },
+                { name = "codecompanion", group_index = 1 },
+                { name = "luasnip",       group_index = 1 },
+                { name = "buffer",        group_index = 1, keyword_length = 4 },
+                { name = "cmp_nvim_r",    group_index = 1 },
+                { name = "path",          goup_index = 1 }
+
             }),
             window = {
                 documentation = {

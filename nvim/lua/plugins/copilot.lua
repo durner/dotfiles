@@ -2,8 +2,10 @@ return {
     "zbirenbaum/copilot.lua",
     event = "InsertEnter",
     config = function()
-        require("copilot").setup({ suggestion = { enable = true }, panel = { enable = false } })
-    end
+        require("copilot").setup(
+            { suggestion = { enable = true }, panel = { enable = false } }
+        )
+    end,
     dependencies = {
         {
             "zbirenbaum/copilot-cmp",

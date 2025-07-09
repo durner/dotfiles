@@ -26,7 +26,7 @@ require "lspconfig".clangd.setup {
         "--clang-tidy",
         "--header-insertion=iwyu",
         "--completion-style=detailed",
-        "--function-arg-placeholders",
+        "--function-arg-placeholders=1",
     },
     init_options = {
         usePlaceholders = true,

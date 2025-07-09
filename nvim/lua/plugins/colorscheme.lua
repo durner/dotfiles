@@ -2,8 +2,8 @@ return {
     "catppuccin/nvim",
     config = function()
         require("catppuccin").setup({
-            -- flavour = "macchiato",
-            flavour = "latte",
+            -- flavour = "latte",
+            flavour = "frappe",
             no_bold = false,
             integrations = {
                 cmp = true,

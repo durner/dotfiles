@@ -27,7 +27,6 @@ wk.add({
         { "<leader>a", "<cmd>lua vim.lsp.buf.format()<cr>", desc = "Format" },
         { "<leader>e", vim.diagnostic.goto_next,            desc = "Next Diagnostic" },
         { "<leader>-", "i//<Esc>75a-<ESC><cr>",             desc = "Insert separator" },
-
     },
     {
         desc = "Debug menu",
@@ -77,6 +76,12 @@ wk.add({
             end,
             desc = "Stop CMake"
         }
+    },
+    {
+        desc = "CodeCompanion menu",
+        group = "CodeCompanion",
+        { "<leader>wc", "<cmd>CodeCompanionChat<cr>", desc = "CodeCompanion Chat" },
+        { "<leader>ww", "<cmd>CodeCompanion<cr>",     desc = "CodeCompanion",     mode = { "v", "i" } },
     },
     {
         desc = "ToggleTerm menu",
@@ -139,5 +144,5 @@ augroup end
 vmap <C-c> "+yi
 vmap <C-x> "+c
 vmap <C-v> "_dP
-imap <C-v> <C-r><C-o>+
+imap <c-v> <ESC>"+pA
 ]]
