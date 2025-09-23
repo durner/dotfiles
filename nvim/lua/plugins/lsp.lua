@@ -1,26 +1,28 @@
 return {
     "mason-org/mason-lspconfig.nvim",
-    event = { "BufReadPost", "BufNewFile" },
     dependencies = {
         "mason-org/mason.nvim",
         "neovim/nvim-lspconfig",
     },
     config = function()
         require("mason").setup()
+        -- Define default servers to install
         require("mason-lspconfig").setup({
             ensure_installed = { "bashls", "pyright", "texlab", "grammarly", "lua_ls" }
         })
+        -- Setup dap
         require('mason-nvim-dap').setup({
             ensure_installed = { "python", "codelldb" },
             handlers = {}
         })
+        -- Enable all mason language servers
         require("mason-lspconfig").setup_handlers({
             function(server_name)
-                require("lspconfig")[server_name].setup({
-                    capabilities = require("cmp_nvim_lsp").default_capabilities()
-                })
+                vim.lsp.enable(server_name)
             end
         })
+        -- Enable clangd
+        vim.lsp.enable('clangd')
         -- Diagnostics: new API (no vim.fn.sign_define)
         local icons = require("config.icons")
         vim.diagnostic.config({
