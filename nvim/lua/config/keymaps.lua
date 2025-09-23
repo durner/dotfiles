@@ -9,16 +9,16 @@ wk.add({
     {
         group = "Completion",
         desc = "Completion",
-        { "<leader>y", vim.lsp.buf.hover,                                                                   desc = "Hover", },
-        { "<leader>j", "<cmd>lua require('fzf-lua').lsp_definitions({ jump_to_single_result = true })<cr>", desc = "Jump to definition" },
-        { "<leader>k", require('fzf-lua').lsp_implementations,                                              desc = "Jump to implementation" },
-        { "<leader>r", require('fzf-lua').lsp_references,                                                   desc = "Jump to references" },
-        { "<leader>n", vim.lsp.buf.rename,                                                                  desc = "Rename" },
-        { "<leader>p", require('fzf-lua').lsp_code_actions,                                                 desc = "Code actions" },
-        { "<leader>i", require('fzf-lua').lsp_incoming_calls,                                               desc = "Incoming calls hierarchy" },
-        { "<leader>o", require('fzf-lua').lsp_outgoing_calls,                                               desc = "Outgoing calls hierarchy" },
-        { "<leader>q", "<cmd>lua require('fzf-lua').buffers()<cr>",                                         desc = "Buffers" },
-        { "<leader>f", "<cmd>lua require('fzf-lua').files()<cr>",                                           desc = "Files" },
+        { "<leader>y", vim.lsp.buf.hover,                                                   desc = "Hover", },
+        { "<leader>j", "<cmd>lua require('fzf-lua').lsp_definitions({ jump1 = true })<cr>", desc = "Jump to definition" },
+        { "<leader>k", require('fzf-lua').lsp_implementations,                              desc = "Jump to implementation" },
+        { "<leader>r", require('fzf-lua').lsp_references,                                   desc = "Jump to references" },
+        { "<leader>n", vim.lsp.buf.rename,                                                  desc = "Rename" },
+        { "<leader>p", require('fzf-lua').lsp_code_actions,                                 desc = "Code actions" },
+        { "<leader>i", require('fzf-lua').lsp_incoming_calls,                               desc = "Incoming calls hierarchy" },
+        { "<leader>o", require('fzf-lua').lsp_outgoing_calls,                               desc = "Outgoing calls hierarchy" },
+        { "<leader>q", "<cmd>lua require('fzf-lua').buffers()<cr>",                         desc = "Buffers" },
+        { "<leader>f", "<cmd>lua require('fzf-lua').files()<cr>",                           desc = "Files" },
         {
             "<leader>g",
             "<cmd>lua require('fzf-lua').live_grep({ cmd = 'git grep -i --line-number --column --color=always' })<cr>",
@@ -92,25 +92,25 @@ wk.add({
     {
         group = "General",
         desc = "General",
-        { "jk",            "<Esc>",                                                                             desc = "Go to normal",              mode = { "i" } },
-        { "<Esc>",         ":noh <CR>",                                                                         desc = "Disable highligting" },
-        { "<C-LeftMouse>", "<cmd>lua require('fzf-lua').lsp_definitions({ jump_to_single_result = true })<cr>", desc = "Jump to definition",        mode = { "i", "n" } },
-        { "<C-P>",         "<cmd>lua require('fzf-lua').git_files()<cr>",                                       desc = "Find Files",                mode = { "i", "n" } },
-        { "<C-h>",         "<C-w>h",                                                                            desc = "Window left",               mode = { "i", "n" } },
-        { "<C-l>",         "<C-w>l",                                                                            desc = "Window right",              mode = { "i", "n" } },
-        { "<C-j>",         "<C-w>j",                                                                            desc = "Window down",               mode = { "i", "n" } },
-        { "<C-k>",         "<C-w>k",                                                                            desc = "Window up",                 mode = { "i", "n" } },
-        { "<F2>",          "<cmd>setlocal spell! spelllang=en_us<cr>",                                          desc = "Spell Check",               mode = { "i", "n" } },
-        { "<F3>",          "<cmd>lua require('fzf-lua').lsp_definitions({ jump_to_single_result = true })<cr>", desc = "Jump to definition",        mode = { "i", "n" } },
-        { "<F4>",          "<cmd>ClangdSwitchSourceHeader<cr>",                                                 desc = "Switch Header / Source",    mode = { "i", "n" } },
-        { "<F5>",          "<cmd>bp!<cr>",                                                                      desc = "Previous buffer",           mode = { "i", "n" } },
-        { "<F6>",          "<cmd>bn!<cr>",                                                                      desc = "Next buffer",               mode = { "i", "n" } },
-        { "<F7>",          "<cmd>NvimTreeToggle<cr>",                                                           desc = "Toggle NvimTree",           mode = { "i", "n" } },
-        { "<F8>",          require('dap').step_over,                                                            desc = "Dap next",                  mode = { "i", "n" } },
-        { "<F9>",          require('dap').step_into,                                                            desc = "Dap step into",             mode = { "i", "n" } },
-        { "<F10>",         require('dap').step_out,                                                             desc = "Dap step out",              mode = { "i", "n" } },
-        { "<F12>",         "<cmd>noh<cr>",                                                                      desc = "Disable highlighting",      mode = { "i", "n" } },
-        { "//",            'y/<C-R>"<cr>',                                                                      desc = "Highlight underlying word", mode = { "v", "n" } }
+        { "jk",            "<Esc>",                                                             desc = "Go to normal",              mode = { "i" } },
+        { "<Esc>",         ":noh <CR>",                                                         desc = "Disable highligting" },
+        { "<C-LeftMouse>", "<cmd>lua require('fzf-lua').lsp_definitions({ jump1 = true })<cr>", desc = "Jump to definition",        mode = { "i", "n" } },
+        { "<C-P>",         "<cmd>lua require('fzf-lua').git_files()<cr>",                       desc = "Find Files",                mode = { "i", "n" } },
+        { "<C-h>",         "<C-w>h",                                                            desc = "Window left",               mode = { "i", "n" } },
+        { "<C-l>",         "<C-w>l",                                                            desc = "Window right",              mode = { "i", "n" } },
+        { "<C-j>",         "<C-w>j",                                                            desc = "Window down",               mode = { "i", "n" } },
+        { "<C-k>",         "<C-w>k",                                                            desc = "Window up",                 mode = { "i", "n" } },
+        { "<F2>",          "<cmd>setlocal spell! spelllang=en_us<cr>",                          desc = "Spell Check",               mode = { "i", "n" } },
+        { "<F3>",          "<cmd>lua require('fzf-lua').lsp_definitions({ jump1 = true })<cr>", desc = "Jump to definition",        mode = { "i", "n" } },
+        { "<F4>",          "<cmd>ClangdSwitchSourceHeader<cr>",                                 desc = "Switch Header / Source",    mode = { "i", "n" } },
+        { "<F5>",          "<cmd>bp!<cr>",                                                      desc = "Previous buffer",           mode = { "i", "n" } },
+        { "<F6>",          "<cmd>bn!<cr>",                                                      desc = "Next buffer",               mode = { "i", "n" } },
+        { "<F7>",          "<cmd>NvimTreeToggle<cr>",                                           desc = "Toggle NvimTree",           mode = { "i", "n" } },
+        { "<F8>",          require('dap').step_over,                                            desc = "Dap next",                  mode = { "i", "n" } },
+        { "<F9>",          require('dap').step_into,                                            desc = "Dap step into",             mode = { "i", "n" } },
+        { "<F10>",         require('dap').step_out,                                             desc = "Dap step out",              mode = { "i", "n" } },
+        { "<F12>",         "<cmd>noh<cr>",                                                      desc = "Disable highlighting",      mode = { "i", "n" } },
+        { "//",            'y/<C-R>"<cr>',                                                      desc = "Highlight underlying word", mode = { "v", "n" } }
     }
 })
 
@@ -128,6 +128,11 @@ end
 
 vim.cmd('autocmd! TermOpen term://* lua set_terminal_keymaps()')
 
+
+-- Find and center
+vim.keymap.set('n', 'n', 'nzzzv', opts)
+vim.keymap.set('n', 'N', 'Nzzzv', opts)
+
 vim.cmd [[
 " R
 function! s:customNvimRMappings()
@@ -141,8 +146,8 @@ augroup myNvimR
 augroup end
 
 " normal copy/paste
-vmap <C-c> "+yi
+vmap <C-c> "+y
 vmap <C-x> "+c
 vmap <C-v> "_dP
-imap <c-v> <ESC>"+pA
+imap <C-v> <C-r>+
 ]]
