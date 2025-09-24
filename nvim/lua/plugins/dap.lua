@@ -5,7 +5,16 @@ return {
         "mfussenegger/nvim-dap",
         "rcarriga/nvim-dap-ui",
     },
+    cmd = { "DapContinue", "DapToggleBreakpoint", "DapStepOver", "DapStepInto", "DapStepOut" },
+    keys = { "<F8>", "<F9>", "<F10>", "<leader>dc", "<leader>dt" },
     config = function()
+        -- Setup mason-nvim-dap (keep here since you intended mason config)
+        require('mason-nvim-dap').setup({
+            ensure_installed = { "python", "codelldb" },
+            handlers = {}
+        })
+
+        -- require dap modules after lazy load
         local dap = require "dap"
         local dapui = require "dapui"
         dapui.setup({
@@ -26,7 +35,6 @@ return {
         })
 
         local icons = require("config.icons")
-
         vim.fn.sign_define("DapBreakpoint",
             { text = icons.ui.TinyCircle, texthl = "DapBreakpoint", linehl = "", numhl = "" })
         vim.fn.sign_define("DapBreakpointCondition",

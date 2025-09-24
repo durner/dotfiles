@@ -10,11 +10,6 @@ return {
         require("mason-lspconfig").setup({
             ensure_installed = { "bashls", "pyright", "texlab", "grammarly", "lua_ls" }
         })
-        -- Setup dap
-        require('mason-nvim-dap').setup({
-            ensure_installed = { "python", "codelldb" },
-            handlers = {}
-        })
         -- Enable all mason language servers
         require("mason-lspconfig").setup_handlers({
             function(server_name)

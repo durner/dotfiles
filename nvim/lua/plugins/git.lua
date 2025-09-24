@@ -6,7 +6,7 @@ return {
             cmd = { "DiffviewFileHistory" }
         }
     },
-    event = "VeryLazy",
+    event = "BufReadPost",
     config = function()
         require("gitsigns").setup({ current_line_blame = true })
     end

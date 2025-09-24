@@ -7,10 +7,10 @@ return {
         "jalvesaq/cmp-nvim-r",
         "saadparwaiz1/cmp_luasnip",
     },
-    event = "VeryLazy",
+    event = "InsertEnter",
     config = function()
         local has_words_before = function()
-            unpack = unpack or table.unpack
+            local unpack = unpack or table.unpack
             local line, col = unpack(vim.api.nvim_win_get_cursor(0))
             return col ~= 0 and
                 vim.api.nvim_buf_get_lines(0, line - 1, line, true)[1]:sub(
@@ -78,7 +78,7 @@ return {
                 { name = "luasnip",       group_index = 1 },
                 { name = "buffer",        group_index = 1, keyword_length = 4 },
                 { name = "cmp_nvim_r",    group_index = 1 },
-                { name = "path",          goup_index = 1 }
+                { name = "path",          group_index = 1 }
 
             }),
             window = {

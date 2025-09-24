@@ -22,16 +22,28 @@ autocmd({ "CursorHold" }, {
     end
 })
 
--- Remove whitespace on save
+-- Trim trailing whitespace and format only for LSP-managed buffers
 autocmd("BufWritePre", {
-    pattern = "",
-    command = ":%s/\\s\\+$//e"
-})
+    pattern = "*",
+    callback = function(event)
+        local bufnr = event.buf
+        -- only run if there are active LSP clients for this buffer
+        if next(vim.lsp.get_active_clients({ bufnr = bufnr })) == nil then
+            return
+        end
 
--- Auto format on save
-autocmd("BufWritePre", {
-    pattern = "",
-    command = ":silent lua vim.lsp.buf.format()"
+        -- Trim trailing whitespace safely (preserve view)
+        vim.api.nvim_buf_call(bufnr, function()
+            local view = vim.fn.winsaveview()
+            vim.cmd([[%s/\s\+$//e]])
+            vim.fn.winrestview(view)
+        end)
+
+        -- Format via LSP (safe)
+        pcall(function()
+            vim.lsp.buf.format({ bufnr = bufnr })
+        end)
+    end,
 })
 
 -- Don't auto comment new lines

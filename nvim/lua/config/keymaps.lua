@@ -1,6 +1,6 @@
 local wk = require("which-key")
 vim.keymap.set("", ",", "<Nop>", { silent = true })
-local opts = { noremap = true, silent = true, buffer = bufnr }
+local opts = { noremap = true, silent = true }
 local dap = require "dap"
 
 -- Auto Completion
@@ -102,7 +102,7 @@ wk.add({
         { "<C-k>",         "<C-w>k",                                                            desc = "Window up",                 mode = { "i", "n" } },
         { "<F2>",          "<cmd>setlocal spell! spelllang=en_us<cr>",                          desc = "Spell Check",               mode = { "i", "n" } },
         { "<F3>",          "<cmd>lua require('fzf-lua').lsp_definitions({ jump1 = true })<cr>", desc = "Jump to definition",        mode = { "i", "n" } },
-        { "<F4>",          "<cmd>ClangdSwitchSourceHeader<cr>",                                 desc = "Switch Header / Source",    mode = { "i", "n" } },
+        { "<F4>",          "<cmd>LspClangdSwitchSourceHeader<cr>",                              desc = "Switch Header / Source",    mode = { "i", "n" } },
         { "<F5>",          "<cmd>bp!<cr>",                                                      desc = "Previous buffer",           mode = { "i", "n" } },
         { "<F6>",          "<cmd>bn!<cr>",                                                      desc = "Next buffer",               mode = { "i", "n" } },
         { "<F7>",          "<cmd>NvimTreeToggle<cr>",                                           desc = "Toggle NvimTree",           mode = { "i", "n" } },
