@@ -6,7 +6,7 @@ return {
             options = {
                 globalstatus = true,
                 icons_enabled = true,
-                theme = "catppuccin"
+                theme = "nord"
             },
             sections = { lualine_a = { { 'filename', path = 1 } } }
         })
