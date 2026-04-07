@@ -24,7 +24,18 @@ wk.add({
             "<cmd>lua require('fzf-lua').live_grep({ cmd = 'git grep -i --line-number --column --color=always' })<cr>",
             desc = "Git grep"
         },
-        { "<leader>a", "<cmd>lua vim.lsp.buf.format()<cr>", desc = "Format" },
+        {
+            "<leader>a",
+            function()
+                local has_conform, conform = pcall(require, "conform")
+                if has_conform then
+                    conform.format({ async = true, lsp_format = "fallback" })
+                    return
+                end
+                vim.lsp.buf.format()
+            end,
+            desc = "Format"
+        },
         { "<leader>e", vim.diagnostic.goto_next,            desc = "Next Diagnostic" },
         { "<leader>-", "i//<Esc>75a-<ESC><cr>",             desc = "Insert separator" },
     },

@@ -9,9 +9,9 @@
       </component>
       <component name="CMakeSettings">
         <configurations>
-          <configuration PROFILE_NAME="Debug" ENABLED="true" CONFIG_NAME="Debug" TOOLCHAIN_NAME="Default" GENERATION_OPTIONS="-G Ninja -DCMAKE_EXPORT_COMPILE_COMNMANDS=1" />
-          <configuration PROFILE_NAME="Release" ENABLED="true" CONFIG_NAME="Release" TOOLCHAIN_NAME="Default" GENERATION_OPTIONS="-G Ninja -DCMAKE_EXPORT_COMPILE_COMNMANDS=1" />
-          <configuration PROFILE_NAME="RelWithDebInfo" ENABLED="true" CONFIG_NAME="RelWithDebInfo" TOOLCHAIN_NAME="Default" GENERATION_OPTIONS="-G Ninja -DCMAKE_EXPORT_COMPILE_COMNMANDS=1" />
+          <configuration PROFILE_NAME="Debug" ENABLED="true" CONFIG_NAME="Debug" TOOLCHAIN_NAME="Default" GENERATION_OPTIONS='-G Ninja -DCMAKE_EXPORT_COMPILE_COMMANDS=1 -DCMAKE_C_COMPILER_LAUNCHER=ccache -DCMAKE_CXX_FLAGS="-ffile-prefix-map=$ProjectFileDir$=.. -ffile-prefix-map=$ProjectFileDir$/cmake-build-debug=." -DCMAKE_C_FLAGS="-ffile-prefix-map=$ProjectFileDir$=.. -ffile-prefix-map=$ProjectFileDir$/cmake-build-debug=."' />
+          <configuration PROFILE_NAME="Release" ENABLED="true" CONFIG_NAME="Release" TOOLCHAIN_NAME="Default" GENERATION_OPTIONS='-G Ninja -DCMAKE_EXPORT_COMPILE_COMMANDS=1 -DCMAKE_C_COMPILER_LAUNCHER=ccache -DCMAKE_CXX_COMPILER_LAUNCHER=ccache  -DCMAKE_CXX_FLAGS="-ffile-prefix-map=$ProjectFileDir$=.. -ffile-prefix-map=$ProjectFileDir$/cmake-build-release=." -DCMAKE_C_FLAGS="-ffile-prefix-map=$ProjectFileDir$=.. -ffile-prefix-map=$ProjectFileDir$/cmake-build-release=."' />
+          <configuration PROFILE_NAME="RelWithDebInfo" ENABLED="true" CONFIG_NAME="RelWithDebInfo" TOOLCHAIN_NAME="Default" GENERATION_OPTIONS='-G Ninja -DCMAKE_EXPORT_COMPILE_COMMANDS=1 -DCMAKE_C_COMPILER_LAUNCHER=ccache -DCMAKE_CXX_COMPILER_LAUNCHER=ccache  -DCMAKE_CXX_FLAGS="-ffile-prefix-map=$ProjectFileDir$=.. -ffile-prefix-map=$ProjectFileDir$/cmake-build-relwithdebinfo=." -DCMAKE_C_FLAGS="-ffile-prefix-map=$ProjectFileDir$=.. -ffile-prefix-map=$ProjectFileDir$/cmake-build-relwithdebinfo=."' />
         </configurations>
       </component>
       <component name="FormatOnSaveOptions">

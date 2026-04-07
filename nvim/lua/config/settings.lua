@@ -22,15 +22,11 @@ autocmd({ "CursorHold" }, {
     end
 })
 
--- Trim trailing whitespace and format only for LSP-managed buffers
+-- Trim trailing whitespace and format on save
 autocmd("BufWritePre", {
     pattern = "*",
     callback = function(event)
         local bufnr = event.buf
-        -- only run if there are active LSP clients for this buffer
-        if next(vim.lsp.get_active_clients({ bufnr = bufnr })) == nil then
-            return
-        end
 
         -- Trim trailing whitespace safely (preserve view)
         vim.api.nvim_buf_call(bufnr, function()
@@ -39,7 +35,25 @@ autocmd("BufWritePre", {
             vim.fn.winrestview(view)
         end)
 
-        -- Format via LSP (safe)
+        -- Prefer external formatters (e.g. Prettier) and fall back to LSP
+        local has_conform, conform = pcall(require, "conform")
+        if has_conform then
+            pcall(function()
+                conform.format({
+                    bufnr = bufnr,
+                    async = false,
+                    timeout_ms = 1000,
+                    lsp_format = "fallback",
+                })
+            end)
+            return
+        end
+
+        -- Fallback path if conform is unavailable
+        if next(vim.lsp.get_active_clients({ bufnr = bufnr })) == nil then
+            return
+        end
+
         pcall(function()
             vim.lsp.buf.format({ bufnr = bufnr })
         end)

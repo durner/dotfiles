@@ -3,18 +3,22 @@ return {
     dependencies = {
         "mason-org/mason.nvim",
         "neovim/nvim-lspconfig",
+        'kosayoda/nvim-lightbulb',
     },
     config = function()
         require("mason").setup()
         -- Define default servers to install
         require("mason-lspconfig").setup({
-            ensure_installed = { "bashls", "pyright", "texlab", "grammarly", "lua_ls" }
+            ensure_installed = { "bashls", "pyright", "texlab", "ts_ls", "eslint", "lua_ls" }
         })
         -- Enable all mason language servers
         require("mason-lspconfig").setup_handlers({
             function(server_name)
                 vim.lsp.enable(server_name)
             end
+        })
+        require("nvim-lightbulb").setup({
+            autocmd = { enabled = true }
         })
         -- Enable clangd
         vim.lsp.enable('clangd')
