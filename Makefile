@@ -50,6 +50,13 @@ install-fzf:
 	fi
 	$(FZF_DIR)/install --bin
 #---------------------------------------------------------------------------
+install-llm:
+	@sh -c "[ -f /etc/arch-release ] && yay -Syyu --needed go|| echo 'OS is not Arch';"
+	@sh -c "[ -f /etc/lsb-release ] && snap install --classic go || echo 'OS is not Ubuntu';"
+	go install github.com/Warashi/cage@latest
+	curl -fsSL https://claude.ai/install.sh | bash
+	npm i -g @openai/codex
+#---------------------------------------------------------------------------
 install-ls-ccls:
 	rm -rf $(CCLS_REPO_DIR) $(CCLS_BUILD_DIR)
 	git clone --recursive https://github.com/MaskRay/ccls $(CCLS_REPO_DIR)
@@ -106,6 +113,6 @@ install-ls: install-ls-general
 #---------------------------------------------------------------------------
 install: install-virtual install-firewall
 #---------------------------------------------------------------------------
-install-virtual: install-minimal install-fzf install-symlinks install-ls
+install-virtual: install-minimal install-fzf install-symlinks install-ls install-llm
 #---------------------------------------------------------------------------
 install-gui: install install-desktop install-laptop install-firewall

@@ -84,6 +84,34 @@ export EDITOR='nvim'
 # ASAN option
 ASAN_OPTIONS=abort_on_error=1
 
+
+# set PATH so it includes user's private bin if it exists
+if [ -d "$HOME/bin" ] ; then
+        PATH="$HOME/bin:$PATH"
+fi
+if [ -d "$HOME/.local/bin" ] ; then
+        PATH="$HOME/.local/bin:$PATH"
+fi
+if [ -d "$HOME/.cargo/bin" ] ; then
+        PATH="$HOME/.cargo/bin:$PATH"
+fi
+if [ -d "$HOME/go/bin" ] ; then
+        PATH="$HOME/go/bin:$PATH"
+fi
+if [ -d "$HOME/.repos/fzf/bin" ] ; then
+        PATH="$HOME/.repos/fzf/bin:$PATH"
+        source ~/.repos/fzf/shell/key-bindings.zsh
+        source ~/.repos/fzf/shell/completion.zsh
+fi
+
+# colored GCC warnings and errors
+export GCC_COLORS='error=01;31:warning=01;35:note=01;36:caret=01;32:locus=01:quote=01'
+
+# some more ls aliases
+alias ll='ls -alF'
+alias la='ls -A'
+alias l='ls -CF'
+
 # General aliases
 alias nmake='cmake -GNinja'
 alias nnmake='ccmake -GNinja'
@@ -124,7 +152,9 @@ alias docker-run="docker run -it -d --network host -e XDG_RUNTIME_DIR=/tmp -e WA
 alias docker-run-priv="docker run -it --privileged -d --network host -e XDG_RUNTIME_DIR=/tmp -e WAYLAND_DISPLAY=$WAYLAND_DISPLAY  -v $XDG_RUNTIME_DIR/$WAYLAND_DISPLAY:/tmp/$WAYLAND_DISPLAY"
 alias docker-attach="docker exec -it -u durner -w /home/durner/"
 alias gwtc="gwta -2 -u"
-
+alias cage='cage -allow . -allow /tmp -allow $HOME/.npm -allow "$(git rev-parse --git-common-dir)"'
+alias claude='cage -allow $HOME/.claude -allow $HOME/.claude.json claude'
+alias codex='cage -allow $HOME/.codex codex'
 
 gwtnew() {
   local dir="$1"
@@ -155,31 +185,3 @@ gwtdel() {
   gwtrm "$wt"
 }
 
-# set PATH so it includes user's private bin if it exists
-if [ -d "$HOME/bin" ] ; then
-    PATH="$HOME/bin:$PATH"
-fi
-if [ -d "$HOME/.local/bin" ] ; then
-    PATH="$HOME/.local/bin:$PATH"
-fi
-if [ -d "$HOME/.cargo/bin" ] ; then
-    PATH="$HOME/.cargo/bin:$PATH"
-fi
-if [ -d "$HOME/.repos/fzf/bin" ] ; then
-    PATH="$HOME/.repos/fzf/bin:$PATH"
-    source ~/.repos/fzf/shell/key-bindings.zsh
-    source ~/.repos/fzf/shell/completion.zsh
-fi
-
-# colored GCC warnings and errors
-export GCC_COLORS='error=01;31:warning=01;35:note=01;36:caret=01;32:locus=01:quote=01'
-
-# some more ls aliases
-alias ll='ls -alF'
-alias la='ls -A'
-alias l='ls -CF'
-
-
-
-# opencode
-export PATH=/home/durner/.opencode/bin:$PATH
