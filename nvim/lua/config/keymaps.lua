@@ -3,6 +3,37 @@ vim.keymap.set("", ",", "<Nop>", { silent = true })
 local opts = { noremap = true, silent = true }
 local dap = require "dap"
 
+-- fzf no git alternatives
+local fzf = require("fzf-lua")
+
+local function in_git_worktree()
+    local result = vim.system(
+        { "git", "rev-parse", "--is-inside-work-tree" },
+        { text = true }
+    ):wait()
+
+    return result.code == 0 and vim.trim(result.stdout) == "true"
+end
+
+local function find_files()
+    if in_git_worktree() then
+        fzf.git_files({ resume = true })
+    else
+        fzf.files({ resume = true })
+    end
+end
+
+local function grep_project()
+    if in_git_worktree() then
+        fzf.live_grep({
+            cmd = "git grep -i --line-number --column --color=always",
+            resume = true
+        })
+    else
+        fzf.live_grep({ resume = true })
+    end
+end
+
 -- Auto Completion
 wk.add({
     nowait = true,
@@ -11,19 +42,18 @@ wk.add({
         desc = "Completion",
         { "<leader>y", vim.lsp.buf.hover,                                                   desc = "Hover", },
         { "<leader>j", "<cmd>lua require('fzf-lua').lsp_definitions({ jump1 = true })<cr>", desc = "Jump to definition" },
-        { "<leader>k", require('fzf-lua').lsp_implementations,                              desc = "Jump to implementation" },
-        { "<leader>r", require('fzf-lua').lsp_references,                                   desc = "Jump to references" },
+        { "<leader>k", fzf.lsp_implementations,                                             desc = "Jump to implementation" },
+        { "<leader>r", fzf.lsp_references,                                                  desc = "Jump to references" },
         { "<leader>n", vim.lsp.buf.rename,                                                  desc = "Rename" },
-        { "<leader>p", require('fzf-lua').lsp_code_actions,                                 desc = "Code actions" },
-        { "<leader>i", require('fzf-lua').lsp_incoming_calls,                               desc = "Incoming calls hierarchy" },
-        { "<leader>o", require('fzf-lua').lsp_outgoing_calls,                               desc = "Outgoing calls hierarchy" },
-        { "<leader>q", "<cmd>lua require('fzf-lua').buffers()<cr>",                         desc = "Buffers" },
-        { "<leader>f", "<cmd>lua require('fzf-lua').files()<cr>",                           desc = "Files" },
-        {
-            "<leader>g",
-            "<cmd>lua require('fzf-lua').live_grep({ cmd = 'git grep -i --line-number --column --color=always' })<cr>",
-            desc = "Git grep"
-        },
+        { "<leader>p", fzf.lsp_code_actions,                                                desc = "Code actions" },
+        { "<leader>i", fzf.lsp_incoming_calls,                                              desc = "Incoming calls hierarchy" },
+        { "<leader>o", fzf.lsp_outgoing_calls,                                              desc = "Outgoing calls hierarchy" },
+        { "<leader>h", fzf.lsp_type_sub,                                                    desc = "Derived Types" },
+        { "<leader>b", fzf.lsp_type_super,                                                  desc = "Base Types" },
+        { "<leader>q", "<cmd>lua require('fzf-lua').buffers({ resume = true })<cr>",        desc = "Buffers" },
+        { "<leader>c", fzf.git_bcommits,                                                    desc = "Commits of this file" },
+        { "<leader>f", find_files,                                                          desc = "Files" },
+        { "<leader>g", grep_project,                                                        desc = "Git grep" },
         {
             "<leader>a",
             function()
@@ -36,8 +66,8 @@ wk.add({
             end,
             desc = "Format"
         },
-        { "<leader>e", vim.diagnostic.goto_next,            desc = "Next Diagnostic" },
-        { "<leader>-", "i//<Esc>75a-<ESC><cr>",             desc = "Insert separator" },
+        { "<leader>e", vim.diagnostic.goto_next, desc = "Next Diagnostic" },
+        { "<leader>-", "i//<Esc>75a-<ESC><cr>",  desc = "Insert separator" },
     },
     {
         desc = "Debug menu",
@@ -55,12 +85,12 @@ wk.add({
             end,
             desc = "Terminate"
         },
-        { "<leader>du", require('dap').up,                                 desc = "Up" },
-        { "<leader>dd", require('dap').down,                               desc = "Down" },
-        { "<leader>dp", require('dap').pause,                              desc = "Pause" },
-        { "<leader>dv", "<cmd>lua require('fzf-lua').dap_variables()<cr>", desc = "Variables" },
-        { "<leader>ds", "<cmd>lua require('fzf-lua').dap_frames()<cr>",    desc = "Strack Trace" },
-        { "<leader>dt", dap.toggle_breakpoint,                             desc = "Toggle Breakpoint" },
+        { "<leader>du", require('dap').up,                  desc = "Up" },
+        { "<leader>dd", require('dap').down,                desc = "Down" },
+        { "<leader>dp", require('dap').pause,               desc = "Pause" },
+        { "<leader>dv", "<cmd>lua fzf.dap_variables()<cr>", desc = "Variables" },
+        { "<leader>ds", "<cmd>lua fzf.dap_frames()<cr>",    desc = "Strack Trace" },
+        { "<leader>dt", dap.toggle_breakpoint,              desc = "Toggle Breakpoint" },
         {
             "<leader>db",
             function()
@@ -106,7 +136,7 @@ wk.add({
         { "jk",            "<Esc>",                                                             desc = "Go to normal",              mode = { "i" } },
         { "<Esc>",         ":noh <CR>",                                                         desc = "Disable highligting" },
         { "<C-LeftMouse>", "<cmd>lua require('fzf-lua').lsp_definitions({ jump1 = true })<cr>", desc = "Jump to definition",        mode = { "i", "n" } },
-        { "<C-P>",         "<cmd>lua require('fzf-lua').git_files()<cr>",                       desc = "Find Files",                mode = { "i", "n" } },
+        { "<C-P>",         find_files,                                                          desc = "Find Files",                mode = { "i", "n" } },
         { "<C-h>",         "<C-w>h",                                                            desc = "Window left",               mode = { "i", "n" } },
         { "<C-l>",         "<C-w>l",                                                            desc = "Window right",              mode = { "i", "n" } },
         { "<C-j>",         "<C-w>j",                                                            desc = "Window down",               mode = { "i", "n" } },

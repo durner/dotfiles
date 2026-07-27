@@ -2467,28 +2467,6 @@ Syntax: stepoh
 end
 
 
-# FIXME: ARM
-define skip
-	x/2i $pc
-	set $instruction_size = (int)($_ - $pc)
-	set $pc = $pc + $instruction_size
-	if ($SKIPEXECUTE == 1)
-		if ($SKIPSTEP == 1)
-			stepo
-		else
-			stepi
-		end
-	else
-		context
-	end
-end
-document skip
-Syntax: skip
-| Skip over the instruction located at EIP/RIP. By default, the instruction will not be executed!
-| Some configurable options are available on top of gdbinit to override this.
-end
-
-
 # _______________eflags commands______________
 # conditional flags are
 # negative/less than (N), bit 31 of CPSR
@@ -4707,3 +4685,5 @@ printf "type help user to see the customized commands\n"
 printf "Program start address is: "
 shell ps -uxw 2> /dev/null | grep -w gdb | grep -v grep | sed 's/.*gdb//' | sed 's/^ *//' | sed 's/.* //' | grep -v // | tail -n 1 | xargs objdump -f 2> /dev/null | grep -i "^start " | sed 's/.* 0x/0x/'
 printf "\n"
+
+set auto-load safe-path /

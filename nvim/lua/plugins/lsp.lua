@@ -9,13 +9,8 @@ return {
         require("mason").setup()
         -- Define default servers to install
         require("mason-lspconfig").setup({
-            ensure_installed = { "bashls", "pyright", "texlab", "ts_ls", "eslint", "lua_ls" }
-        })
-        -- Enable all mason language servers
-        require("mason-lspconfig").setup_handlers({
-            function(server_name)
-                vim.lsp.enable(server_name)
-            end
+            ensure_installed = { "bashls", "pyright", "texlab", "ts_ls", "eslint", "lua_ls" },
+            automatic_enable = true,
         })
         require("nvim-lightbulb").setup({
             autocmd = { enabled = true }

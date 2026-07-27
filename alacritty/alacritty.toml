@@ -40,5 +40,5 @@ action = "ReceiveChar"
 [general]
 live_config_reload = true
 import = [
-   "~/.config/alacritty/nordic.toml",
+   "~/.config/alacritty/nord.toml",
 ]
